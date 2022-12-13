@@ -17,7 +17,7 @@ import visualizer from 'rollup-plugin-visualizer';
 const packageJson = require("./package.json");
 
 export default {
-    input: "src/index.js",
+    input: "src/index.ts",
     output: {
         file: packageJson.umd,
         format: "iife",
@@ -43,16 +43,18 @@ export default {
         nodeResolve({
             browser: true
         }),
-        babel({
-            babelHelpers: 'bundled',
-            presets: ["@babel/preset-react"],
-            babelrc: true,
-            exclude: 'node_modules/**'
-        }),
+        typescript({sourceMap:true}),
+        // babel({
+        //     babelHelpers: 'bundled',
+        //     presets: ["@babel/preset-react"],
+        //     babelrc: true,
+        //     exclude: 'node_modules/**',
+        //     sourceMaps: true
+        // }),
         json(),
-        terser(),
-        sizes(),
-        visualizer(),
+        terser({sourceMap: true}),
+        // sizes(),
+        // visualizer(),
 
         serve({
             open: false,
