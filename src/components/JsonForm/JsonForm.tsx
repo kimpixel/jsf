@@ -1,37 +1,34 @@
 import React from "react";
-import {JsonForms} from "@jsonforms/react";
-import {createAjv, JsonSchema4} from '@jsonforms/core';
-import {
-    materialRenderers,
-    materialCells
-} from "@jsonforms/material-renderers";
+import { JsonForms } from "@jsonforms/react";
+import { createAjv } from '@jsonforms/core';
+import { materialCells, materialRenderers } from "@jsonforms/material-renderers";
 import CssBaseline from '@mui/material/CssBaseline';
-// import { JsonFormsInitStateProps, JsonFormsReactProps } from "@jsonforms/react/src/JsonForms";
 
+import SelectS3FileControl, { SelectS3FileControlTester, } from './SelectS3FileControl';
+import DebugControl, { DebugControlTester } from "./DebugControl";
 
-import MaterialNumberControl, {
-    materialNumberControlTester,
-} from './MaterialNumberControl';
-//
 const renderers = [
     ...materialRenderers,
     // register custom renderers
-    // { tester: ratingControlTester, renderer: RatingControl },
     {
-        tester: materialNumberControlTester,
-        renderer: MaterialNumberControl,
+        tester: SelectS3FileControlTester,
+        renderer: SelectS3FileControl,
+    },
+    {
+        tester: DebugControlTester,
+        renderer: DebugControl,
     },
 ];
 
 
 const JsonForm = (props: any) => {
 
-    const handleDefaultsAjv = createAjv({useDefaults: true});
-
+    const handleDefaultsAjv = createAjv({useDefaults: true, verbose: true, });
 
     return <React.Fragment>
         <CssBaseline/>
         <JsonForms
+            config={props.config}
             schema={props.schema}
             uischema={props.uischema}
             data={props.data}

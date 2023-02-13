@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="11c66625-51d3-4c77-bbfd-813618a225f2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/umd/lib.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/umd/lib.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Button/Button.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Button/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/JsonForm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stats.html" beforeDir="false" afterPath="$PROJECT_DIR$/stats.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/JsonForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/JsonForm/JsonForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/MaterialNumberControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/JsonForm/SelectS3FileControl.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +42,12 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "true",
     "last_opened_file_path": "C:/webdev/template-react-component-library/src/components/JsonForm",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\kim.lang\\AppData\\Local\\JetBrains\\Toolbox\\apps\\PhpStorm\\ch-0\\223.7571.212\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "ts.external.directory.path": "C:\\webdev\\template-react-component-library\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -54,6 +55,10 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\webdev\template-react-component-library\src\components\JsonForm" />
       <recent name="C:\webdev\template-react-component-library" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\webdev\template-react-component-library\src" />
+      <recent name="C:\webdev\template-react-component-library\public" />
     </key>
   </component>
   <component name="RunManager">
@@ -83,6 +88,12 @@
       <updated>1670285460437</updated>
       <workItem from="1670285461766" duration="51171000" />
       <workItem from="1670496048949" duration="134000" />
+      <workItem from="1670897416974" duration="1828000" />
+      <workItem from="1671379831247" duration="9258000" />
+      <workItem from="1673915185840" duration="3080000" />
+      <workItem from="1674132707325" duration="84000" />
+      <workItem from="1675126525636" duration="11607000" />
+      <workItem from="1676293606830" duration="20141000" />
     </task>
     <servers />
   </component>

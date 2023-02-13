@@ -24,26 +24,37 @@
 */
 import React from 'react';
 import {
-  ControlProps,
-  isNumberControl,
-  RankedTester,
-  rankWith
+    ControlProps, EnumCellProps,
+    OwnPropsOfEnum,
+    RankedTester,
+    rankWith,
+    schemaMatches, WithClassname
 } from '@jsonforms/core';
-// import { MuiInputNumber } from 'mui-controls/MuiInputNumber';
+
 // import { MaterialInputControl } from './MaterialInputControl';
-import { withJsonFormsControlProps } from '@jsonforms/react';
-import { MuiInputNumber,  MaterialInputControl } from "@jsonforms/material-renderers";
+import { TranslateProps, withJsonFormsControlProps, withTranslateProps } from '@jsonforms/react';
+import { MaterialInputControl, MuiSelect } from "@jsonforms/material-renderers";
 
-export const MaterialNumberControl = (props: ControlProps) => (
-  <div>
-    hallo welt
-    <MaterialInputControl {...props} input={MuiInputNumber} />
-  </div>
+
+export const SelectS3FileControl = (props: ControlProps & EnumCellProps & WithClassname & TranslateProps) => {
+
+    // console.log('props', props);
+
+    let props_new: ControlProps & EnumCellProps & TranslateProps = {
+        options: props.config.s3Files.map(file => ({label: file, value: file})),
+        ...props
+    }
+    // console.log('props_new', props_new);
+
+    return <MaterialInputControl
+                {...props_new}
+                input={MuiSelect}
+            />
+};
+
+export const SelectS3FileControlTester: RankedTester = rankWith(
+    20,
+    schemaMatches(schema => schema.title == "Additionallogourl")
 );
 
-export const materialNumberControlTester: RankedTester = rankWith(
-  20,
-  isNumberControl
-);
-
-export default withJsonFormsControlProps(MaterialNumberControl);
+export default withJsonFormsControlProps(withTranslateProps(SelectS3FileControl));

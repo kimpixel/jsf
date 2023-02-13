@@ -17,8 +17,8 @@
     "@babel/preset-typescript": "^7.16.0",
     "@emotion/react": "11.10.5",
     "@emotion/styled": "11.10.5",
-    "@jsonforms/material-renderers": "^3.0.0",
-    "@jsonforms/react": "^3.0.0",
+    "@jsonforms/material-renderers": "^3.1.0-alpha.0",
+    "@jsonforms/react": "^3.1.0-alpha.0",
     "@mdx-js/react": "^2.1.2",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^21.0.1",
@@ -61,7 +61,9 @@
   ],
   "types": "dist/index.d.ts",
   "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^9.1.0",
     "@types/lodash": "^4.14.191",
+    "json-schema-deref-sync": "^0.14.0",
     "rollup-plugin-node-polyfills": "^0.2.1"
   }
 }
