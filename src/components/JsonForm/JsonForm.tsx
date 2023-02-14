@@ -2,7 +2,8 @@ import React from "react";
 import { JsonForms } from "@jsonforms/react";
 import { createAjv } from '@jsonforms/core';
 import { materialCells, materialRenderers } from "@jsonforms/material-renderers";
-import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+
 
 import SelectS3FileControl, { SelectS3FileControlTester, } from './SelectS3FileControl';
 import DebugControl, { DebugControlTester } from "./DebugControl";
@@ -14,19 +15,44 @@ const renderers = [
         tester: SelectS3FileControlTester,
         renderer: SelectS3FileControl,
     },
-    {
-        tester: DebugControlTester,
-        renderer: DebugControl,
-    },
+    // {
+    //     tester: DebugControlTester,
+    //     renderer: DebugControl,
+    // },
 ];
+
+
+/**
+ * Customize form so each control has more space
+ */
+const theme = createTheme({
+    components: {
+        MuiTab: {
+            styleOverrides: {
+                root: {
+                    textTransform: 'initial',
+                    flexShrink: 1,
+                    wordBreak: "break-all"
+                }
+            }
+        },
+        MuiFormControl: {
+            styleOverrides: {
+                root: {
+                    margin: '0.8em 0',
+                },
+            }
+        },
+    },
+});
 
 
 const JsonForm = (props: any) => {
 
     const handleDefaultsAjv = createAjv({useDefaults: true, verbose: true, });
 
-    return <React.Fragment>
-        <CssBaseline/>
+    return <ThemeProvider theme={theme}>
+        <CssBaseline />
         <JsonForms
             config={props.config}
             schema={props.schema}
@@ -37,7 +63,7 @@ const JsonForm = (props: any) => {
             onChange={props.onChange}
             ajv={handleDefaultsAjv}
         />
-    </React.Fragment>;
+    </ThemeProvider>
 }
 
 export default JsonForm;
