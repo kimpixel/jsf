@@ -6,7 +6,8 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 
 
 import SelectS3FileControl, { SelectS3FileControlTester, } from './SelectS3FileControl';
-import DebugControl, { DebugControlTester } from "./DebugControl";
+// import DebugControl, { DebugControlTester } from "./DebugControl";
+import StepperLayoutRenderer, { StepperLayoutTester } from "./StepperLayout";
 
 const renderers = [
     ...materialRenderers,
@@ -14,6 +15,10 @@ const renderers = [
     {
         tester: SelectS3FileControlTester,
         renderer: SelectS3FileControl,
+    },
+    {
+        tester: StepperLayoutTester,
+        renderer: StepperLayoutRenderer,
     },
     // {
     //     tester: DebugControlTester,
