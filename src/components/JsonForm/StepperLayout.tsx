@@ -66,7 +66,9 @@ const createCombinatorRenderInfos = (
     });
 
 const StepperLayoutRenderer = (props) => {
-    // console.log('props', props);
+    console.log('props', props);
+
+
     const {rootSchema, schema, path, visible} = props;
     const renderInfos = createCombinatorRenderInfos(
         Object.entries(schema.properties),

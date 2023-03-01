@@ -5,9 +5,10 @@ import { materialCells, materialRenderers } from "@jsonforms/material-renderers"
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 
 
-import SelectS3FileControl, { SelectS3FileControlTester, } from './SelectS3FileControl';
+import SelectS3FileControl, { SelectS3FileControlTester, } from './controlls/SelectS3FileControl';
 // import DebugControl, { DebugControlTester } from "./DebugControl";
 import StepperLayoutRenderer, { StepperLayoutTester } from "./StepperLayout";
+import SelectLinearIconsControl , { SelectLinearIconsControlTester } from "./controlls/SelectLinearIconsControl";
 
 const renderers = [
     ...materialRenderers,
@@ -19,6 +20,10 @@ const renderers = [
     {
         tester: StepperLayoutTester,
         renderer: StepperLayoutRenderer,
+    },
+    {
+        tester: SelectLinearIconsControlTester,
+        renderer: SelectLinearIconsControl,
     },
     // {
     //     tester: DebugControlTester,
@@ -37,7 +42,7 @@ const theme = createTheme({
                 root: {
                     textTransform: 'initial',
                     flexShrink: 1,
-                    wordBreak: "break-all"
+                    wordBreak: "break-word"
                 }
             }
         },
@@ -48,6 +53,14 @@ const theme = createTheme({
                 },
             }
         },
+        MuiTableCell: {
+            styleOverrides: {
+                root: {
+                    wordBreak: "break-word",
+                    minWidth: "65px"
+                }
+            }
+        }
     },
 });
 

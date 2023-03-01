@@ -1,15 +1,11 @@
 import React from 'react';
-import {
-    ControlProps, EnumCellProps,
-    RankedTester,
-    rankWith,
-    schemaMatches, WithClassname
-} from '@jsonforms/core';
+import { ControlProps, EnumCellProps, RankedTester, rankWith, WithClassname } from '@jsonforms/core';
 import prettyBytes from 'pretty-bytes';
 
 import { TranslateProps, withJsonFormsControlProps, withTranslateProps } from '@jsonforms/react';
 import { MaterialInputControl } from "@jsonforms/material-renderers";
-import { MuiS3FileSelect } from "./MuiS3FileSelect";
+import { MuiS3FileSelect } from "../mui-controls/MuiS3FileSelect";
+import { parentSchemaMatches } from "../testers/ParentSchemaMatches";
 import * as path from "path";
 
 
@@ -33,9 +29,14 @@ export const SelectS3FileControl = (props: ControlProps & EnumCellProps & WithCl
             />
 };
 
+
+
 export const SelectS3FileControlTester: RankedTester = rankWith(
     20,
-    schemaMatches(schema => schema.title == "Additionallogourl")
+    parentSchemaMatches((schema, currentDataSchema) => {
+        return (schema.title == "CustomerSpecificIcon" && currentDataSchema.title == "Url")
+            || (schema.title == "AceReportIntro" && currentDataSchema.title == "Additionallogourl");
+    })
 );
 
 export default withJsonFormsControlProps(withTranslateProps(SelectS3FileControl));

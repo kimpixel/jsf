@@ -1,13 +1,10 @@
 import React from 'react';
-import {
-    ControlProps, EnumCellProps,
-    RankedTester,
-    rankWith,
-    schemaMatches, WithClassname
-} from '@jsonforms/core';
+import { ControlProps, EnumCellProps, RankedTester, rankWith, WithClassname } from '@jsonforms/core';
 
 import { TranslateProps, withJsonFormsControlProps, withTranslateProps } from '@jsonforms/react';
-import { MaterialInputControl, MuiSelect } from "@jsonforms/material-renderers";
+import { MaterialInputControl } from "@jsonforms/material-renderers";
+import { parentSchemaMatches } from "../testers/ParentSchemaMatches";
+import { MuiIconSelect } from "../mui-controls/MuiIconSelect";
 
 const linearIconKeys = [
     "home",
@@ -195,13 +192,15 @@ export const SelectLinearIconsControl = (props: ControlProps & EnumCellProps & W
     }
     return <MaterialInputControl
                 {...props_new}
-                input={MuiSelect}
+                input={MuiIconSelect}
             />
 };
 
 export const SelectLinearIconsControlTester: RankedTester = rankWith(
     20,
-    schemaMatches(schema => schema.title == "Additionallogourl")
+    parentSchemaMatches((schema, currentDataSchema) => {
+        return (schema.title == "LinearIcon" && currentDataSchema.title == "Name");
+    })
 );
 
 export default withJsonFormsControlProps(withTranslateProps(SelectLinearIconsControl));
