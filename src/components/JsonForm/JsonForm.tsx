@@ -56,8 +56,15 @@ const theme = createTheme({
         MuiTableCell: {
             styleOverrides: {
                 root: {
-                    wordBreak: "break-word",
-                    minWidth: "65px"
+                    wordBreak: 'break-word',
+                    minWidth: '65px'
+                }
+            }
+        },
+        MuiInput: {
+            styleOverrides: {
+                root: {
+                    maxWidth: '400px',
                 }
             }
         }
