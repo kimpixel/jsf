@@ -7,8 +7,13 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 
 import SelectS3FileControl, { SelectS3FileControlTester, } from './controlls/SelectS3FileControl';
 // import DebugControl, { DebugControlTester } from "./DebugControl";
-import StepperLayoutRenderer, { StepperLayoutTester } from "./StepperLayout";
-import SelectLinearIconsControl , { SelectLinearIconsControlTester } from "./controlls/SelectLinearIconsControl";
+import TabsLayoutRenderer, { TabsLayoutTester } from "./layout/TabsLayoutRenderer";
+import MaterialOneOfRenderer, { materialOneOfControlTester } from "./complex/MaterialOneOfRenderer";
+import SelectLinearIconsControl, { SelectLinearIconsControlTester } from "./controlls/SelectLinearIconsControl";
+
+import MaterialArrayLayoutRenderer, { materialArrayLayoutTester } from "./layout/MaterialArrayLayoutRenderer";
+import MaterialOneOfEnumControl, { materialOneOfEnumControlTester } from "./controlls/MaterialOneOfEnumControl";
+import MaterialEnumControl, { materialEnumControlTester } from "./controlls/MaterialEnumControl";
 
 const renderers = [
     ...materialRenderers,
@@ -18,12 +23,24 @@ const renderers = [
         renderer: SelectS3FileControl,
     },
     {
-        tester: StepperLayoutTester,
-        renderer: StepperLayoutRenderer,
+        tester: TabsLayoutTester,
+        renderer: TabsLayoutRenderer,
+    },
+    // {
+    //     tester: SelectLinearIconsControlTester,
+    //     renderer: SelectLinearIconsControl,
+    // },
+    {
+        tester: materialArrayLayoutTester,
+        renderer: MaterialArrayLayoutRenderer,
     },
     {
-        tester: SelectLinearIconsControlTester,
-        renderer: SelectLinearIconsControl,
+        tester: materialOneOfControlTester,
+        renderer: MaterialOneOfRenderer,
+    },
+    {
+        tester: materialEnumControlTester,
+        renderer: MaterialEnumControl,
     },
     // {
     //     tester: DebugControlTester,
@@ -32,9 +49,6 @@ const renderers = [
 ];
 
 
-/**
- * Customize form so each control has more space
- */
 const theme = createTheme({
     components: {
         MuiTab: {
@@ -42,7 +56,14 @@ const theme = createTheme({
                 root: {
                     textTransform: 'initial',
                     flexShrink: 1,
-                    wordBreak: "break-word"
+                    // wordBreak: "break-word"
+                }
+            }
+        },
+        MuiTabs: {
+            styleOverrides: {
+                root: {
+                    marginBottom: '0.8em'
                 }
             }
         },
@@ -53,6 +74,21 @@ const theme = createTheme({
                 },
             }
         },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    margin: '1.8em 0',
+                },
+            }
+        },
+        MuiCardHeader: {
+            styleOverrides: {
+                root: {
+                    // backgroundColor: '#283273'
+                }
+            }
+        },
+
         MuiTableCell: {
             styleOverrides: {
                 root: {
@@ -67,6 +103,36 @@ const theme = createTheme({
                     maxWidth: '400px',
                 }
             }
+        },
+        MuiInputLabel: {
+            defaultProps: {
+                shrink: true,
+                // variant: 'filled'
+            }
+        },
+        MuiPaper: {
+            defaultProps: {
+                elevation: 2
+            }
+        },
+        MuiAccordion: {
+            defaultProps: {
+                disableGutters: true
+            },
+        },
+        MuiAccordionSummary: {
+            defaultProps: {
+                sx: {
+                    backgroundColor: '#f5f5f5'
+                }
+            },
+            // styleOverrides: {
+            //     root: {
+            //         "&.Mui-expanded": {
+            //             backgroundColor: "#ddd"
+            //         }
+            //     }
+            // }
         }
     },
 });
@@ -74,10 +140,10 @@ const theme = createTheme({
 
 const JsonForm = (props: any) => {
 
-    const handleDefaultsAjv = createAjv({useDefaults: true, verbose: true, });
+    const handleDefaultsAjv = createAjv({useDefaults: true, verbose: true,});
 
     return <ThemeProvider theme={theme}>
-        <CssBaseline />
+        <CssBaseline/>
         <JsonForms
             config={props.config}
             schema={props.schema}

@@ -1,7 +1,7 @@
 /*
   The MIT License
 
-  Copyright (c) 2018-2019 EclipseSource Munich
+  Copyright (c) 2017-2019 EclipseSource Munich
   https://github.com/eclipsesource/jsonforms
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,28 +23,35 @@
   THE SOFTWARE.
 */
 import React from 'react';
-import { ControlProps, RankedTester, rankWith, schemaMatches } from '@jsonforms/core';
 
-import { withJsonFormsControlProps, withTranslateProps } from '@jsonforms/react';
-import { MaterialInputControl, MuiInputText } from "@jsonforms/material-renderers";
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import {
+  Badge,
+  Tooltip,
+  styled
+} from '@mui/material';
 
+const StyledBadge = styled(Badge)(({ theme }: any) => ({
+  color: theme.palette.error.main
+}));
 
-export const DebugControl = (props: ControlProps) => {
+export interface ValidationProps {
+  errorMessages: string;
+  id: string;
+}
 
-    // console.log('props', props);
-
-    return <MaterialInputControl
-                {...props}
-                input={MuiInputText}
-            />
+const ValidationIcon: React.FC<ValidationProps> =
+  ({ errorMessages, id }) => {
+    return (
+      <Tooltip
+        id={id}
+        title={errorMessages}
+      >
+        <StyledBadge badgeContent={errorMessages.split('\n').length}>
+          <ErrorOutlineIcon color='inherit'/>
+        </StyledBadge>
+      </Tooltip>
+    );
 };
 
-export const DebugControlTester: RankedTester = rankWith(
-    20,
-    schemaMatches(schema => {
-        console.log('schema', schema);
-        return schema.title == "Titlex";
-    })
-);
-
-export default withJsonFormsControlProps(DebugControl);
+export default ValidationIcon;
