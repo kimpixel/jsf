@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="11c66625-51d3-4c77-bbfd-813618a225f2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/umd/lib.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/umd/lib.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/CombinatorProperties.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/JsonForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/JsonForm/JsonForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/StepperLayout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/controlls/DebugControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/JsonForm/controlls/DebugControl.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/layout/TabsLayoutRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/JsonForm/layout/TabsLayoutRenderer.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +105,7 @@
       <workItem from="1676626892115" duration="807000" />
       <workItem from="1677464085735" duration="30679000" />
       <workItem from="1685580059393" duration="86163000" />
-      <workItem from="1686519859979" duration="18081000" />
+      <workItem from="1686519859979" duration="18693000" />
     </task>
     <servers />
   </component>

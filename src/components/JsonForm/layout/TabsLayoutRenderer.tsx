@@ -40,7 +40,7 @@ function getIcon(name) {
       return <AssessmentIcon/>
     case 'Category':
       return <CategoryIcon/>
-    case 'ScoreForm':
+    case 'Score':
       return <ScoreIcon/>
     case 'Insights':
       return <InsightsIcon/>
