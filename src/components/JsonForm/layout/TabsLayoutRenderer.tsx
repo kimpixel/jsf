@@ -94,8 +94,12 @@ const createCombinatorRenderInfos = (
   propertyKey: string;
   label: string;
   uiSchema: any;
-}[] =>
-  combinatorSubSchemas.map((subSchema) => {
+}[] => {
+  const sortTemplate = uiSchema.elements.map(element => element.scope.replace('#/properties/', ''));
+  combinatorSubSchemas.sort((a, b) =>
+    sortTemplate.indexOf(a[0]) - sortTemplate.indexOf(b[0]));
+
+  return combinatorSubSchemas.map((subSchema) => {
     const schema = subSchema[1].$ref ? Resolve.schema(rootSchema, subSchema[1].$ref, rootSchema) : subSchema[1];
     return {
       schema,
@@ -104,6 +108,7 @@ const createCombinatorRenderInfos = (
       uiSchema: uiSchema.elements.find((element) => element.scope == "#/properties/" + subSchema[0])
     }
   });
+};
 
 const TabsLayoutRenderer = (props) => {
 
