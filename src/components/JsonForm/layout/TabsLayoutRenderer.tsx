@@ -19,6 +19,7 @@ import InsightsIcon from '@mui/icons-material/Insights';
 import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AspectRatioIcon from '@mui/icons-material/AspectRatio';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
 
 
 interface TabPanelProps {
@@ -48,6 +49,8 @@ function getIcon(name) {
       return <ViewCarouselIcon/>
     case 'AspectRatio':
       return <AspectRatioIcon/>
+    case 'AccountTree':
+      return <AccountTreeIcon/>
     default:
       return <SettingsIcon/>
   }
