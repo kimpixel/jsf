@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="11c66625-51d3-4c77-bbfd-813618a225f2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/umd/components/JsonForm/JsonForm.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/umd/components/JsonForm/JsonForm.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/umd/lib.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/umd/lib.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/JsonForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/JsonForm/JsonForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/controlls/MaterialEnumControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/JsonForm/controlls/MaterialEnumControl.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/controlls/MaterialOneOfEnumControl.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/JsonForm/layout/TabsLayoutRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/JsonForm/layout/TabsLayoutRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/mui-controls/MuiAutocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/JsonForm/mui-controls/MuiAutocomplete.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,34 +39,34 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/webdev/template-react-component-library/src/components/JsonForm/controlls&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.TypeScript&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\webdev\\template-react-component-library\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/webdev/template-react-component-library/src/components/JsonForm/layout",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.sourceCode.TypeScript",
+    "ts.external.directory.path": "C:\\webdev\\template-react-component-library\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;JSON&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "JSON"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\webdev\template-react-component-library\src\components\JsonForm\layout" />
       <recent name="C:\webdev\template-react-component-library\src\components\JsonForm\controlls" />
       <recent name="C:\webdev\template-react-component-library\src\components\JsonForm\mui-controls" />
       <recent name="C:\webdev\template-react-component-library\src\components\JsonForm\complex" />
-      <recent name="C:\webdev\template-react-component-library\src\components\JsonForm\layout" />
       <recent name="C:\webdev\template-react-component-library\src\components\JsonForm" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -105,7 +112,7 @@
       <workItem from="1676626892115" duration="807000" />
       <workItem from="1677464085735" duration="30679000" />
       <workItem from="1685580059393" duration="86163000" />
-      <workItem from="1686519859979" duration="18693000" />
+      <workItem from="1686519859979" duration="39098000" />
     </task>
     <servers />
   </component>
