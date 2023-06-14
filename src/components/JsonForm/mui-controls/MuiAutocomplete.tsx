@@ -84,13 +84,16 @@ export const MuiAutocomplete = (props: ControlProps & EnumCellProps & WithClassn
     : null;
   const secondFormHelperText = showDescription && !isValid ? errors : null;
 
+  // todo: remove ts-ignore / resolve types
   return (
     <Hidden xsUp={!visible}>
       <Autocomplete
         className={className}
         id={id}
         disabled={!enabled}
+        // @ts-ignore
         value={findOption}
+        // @ts-ignore
         onChange={(_event: any, newValue: EnumOption | null) => {
           handleChange(path, newValue?.value);
         }}
