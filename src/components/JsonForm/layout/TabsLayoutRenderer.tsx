@@ -123,7 +123,7 @@ const TabsLayoutRenderer = (props) => {
             key={oneOfRenderInfo.label}
             label={oneOfRenderInfo.label} {...a11yProps(index)}
             icon={getIcon(oneOfRenderInfo.uiSchema?.icon)}
-            iconPosition={"start"}
+            iconPosition={'top'}
             title={oneOfRenderInfo.schema.description}
           />
         )}
