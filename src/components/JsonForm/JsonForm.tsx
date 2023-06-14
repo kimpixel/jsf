@@ -9,10 +9,11 @@ import SelectS3FileControl, { SelectS3FileControlTester, } from './controlls/Sel
 // import DebugControl, { DebugControlTester } from "./DebugControl";
 import TabsLayoutRenderer, { TabsLayoutTester } from "./layout/TabsLayoutRenderer";
 import MaterialOneOfRenderer, { materialOneOfControlTester } from "./complex/MaterialOneOfRenderer";
-import SelectLinearIconsControl, { SelectLinearIconsControlTester } from "./controlls/SelectLinearIconsControl";
+//import SelectLinearIconsControl, { SelectLinearIconsControlTester } from "./controlls/SelectLinearIconsControl";
 
 import MaterialArrayLayoutRenderer, { materialArrayLayoutTester } from "./layout/MaterialArrayLayoutRenderer";
-import MaterialOneOfEnumControl, { materialOneOfEnumControlTester } from "./controlls/MaterialOneOfEnumControl";
+import MaterializedGroupLayoutRenderer, { materialGroupTester } from "./layout/MaterialGroupLayout";
+//import MaterialOneOfEnumControl, { materialOneOfEnumControlTester } from "./controlls/MaterialOneOfEnumControl";
 import MaterialEnumControl, { materialEnumControlTester } from "./controlls/MaterialEnumControl";
 
 const renderers = [
@@ -33,6 +34,10 @@ const renderers = [
     {
         tester: materialArrayLayoutTester,
         renderer: MaterialArrayLayoutRenderer,
+    },
+    {
+        tester: materialGroupTester,
+        renderer: MaterializedGroupLayoutRenderer,
     },
     {
         tester: materialOneOfControlTester,
