@@ -15,6 +15,7 @@ import MaterialArrayLayoutRenderer, { materialArrayLayoutTester } from "./layout
 import MaterializedGroupLayoutRenderer, { materialGroupTester } from "./layout/MaterialGroupLayout";
 //import MaterialOneOfEnumControl, { materialOneOfEnumControlTester } from "./controlls/MaterialOneOfEnumControl";
 import MaterialEnumControl, { materialEnumControlTester } from "./controlls/MaterialEnumControl";
+import MultiSelectControl, {MultiSelectControlTester} from "./controlls/MultiSelectControl";
 
 const renderers = [
     ...materialRenderers,
@@ -46,6 +47,10 @@ const renderers = [
     {
         tester: materialEnumControlTester,
         renderer: MaterialEnumControl,
+    },
+    {
+        tester: MultiSelectControlTester,
+        renderer: MultiSelectControl,
     },
     // {
     //     tester: DebugControlTester,

@@ -54,12 +54,12 @@ const style: { [x: string]: any } = { marginBottom: '10px' };
 const GroupComponent = React.memo(({ visible, enabled, uischema, label, ...props }: MaterialLabelableLayoutRendererProps) => {
   const groupLayout = uischema as GroupLayout;
 
-  console.group('Group');
-  console.log('schema', props.schema);
-  console.log('uischema', uischema);
-
-  console.log('description', groupLayout.description);
-  console.groupEnd();
+  // console.group('Group');
+  // console.log('schema', props.schema);
+  // console.log('uischema', uischema);
+  //
+  // console.log('description', groupLayout.description);
+  // console.groupEnd();
 
   let description: string;
   if(groupLayout.label == undefined) label = props.schema.title??'';
