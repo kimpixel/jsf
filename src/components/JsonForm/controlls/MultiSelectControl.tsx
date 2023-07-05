@@ -17,8 +17,6 @@ import {JsonSchema7} from "@jsonforms/core/src/models/jsonSchema7";
 
 export const MultiSelectControl = (props: ControlProps & EnumCellProps & WithClassname & TranslateProps) => {
 
-  console.log('props', props);
-
   let props_new: ControlProps & EnumCellProps & TranslateProps = {
     options: (props.schema.items as JsonSchema7).anyOf.map(value => ({
       label: value.enum.at(0),

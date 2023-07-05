@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="11c66625-51d3-4c77-bbfd-813618a225f2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/umd/lib.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/umd/lib.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/JsonForm/JsonForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/JsonForm/JsonForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/layout/MaterialGroupLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/JsonForm/layout/MaterialGroupLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/JsonForm/controlls/MultiSelectControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/JsonForm/controlls/MultiSelectControl.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +41,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/webdev/template-react-component-library/src/components/JsonForm/mui-controls",
+    "last_opened_file_path": "C:/webdev/template-react-component-library/src/components/JsonForm/controlls",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -58,8 +59,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\webdev\template-react-component-library\src\components\JsonForm\mui-controls" />
       <recent name="C:\webdev\template-react-component-library\src\components\JsonForm\controlls" />
+      <recent name="C:\webdev\template-react-component-library\src\components\JsonForm\mui-controls" />
       <recent name="C:\webdev\template-react-component-library\src\components\JsonForm\layout" />
       <recent name="C:\webdev\template-react-component-library\src\components\JsonForm\complex" />
       <recent name="C:\webdev\template-react-component-library\src\components\JsonForm" />
@@ -109,7 +110,7 @@
       <workItem from="1685580059393" duration="86163000" />
       <workItem from="1686519859979" duration="39886000" />
       <workItem from="1687822892430" duration="600000" />
-      <workItem from="1687878714582" duration="7254000" />
+      <workItem from="1687878714582" duration="9332000" />
     </task>
     <servers />
   </component>
