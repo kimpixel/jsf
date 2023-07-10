@@ -20,6 +20,7 @@ import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AspectRatioIcon from '@mui/icons-material/AspectRatio';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import {Typography} from "@mui/material";
 
 
 interface TabPanelProps {
@@ -139,8 +140,12 @@ const TabsLayoutRenderer = (props) => {
       {
         renderInfos.map((renderInfo, index) =>
           <TabPanel key={index} index={index} value={value}>
-            <h1>{renderInfo.label}</h1>
-            <p>{renderInfo.schema.description}</p>
+            <Typography style={{marginBottom: 0}} variant="h4" gutterBottom>
+              {renderInfo.label}
+            </Typography>
+            <Typography style={{marginBottom: '1em'}} variant="subtitle1" gutterBottom>
+              {renderInfo.schema.description}
+            </Typography>
             <MaterialLayoutRenderer {...props} visible={visible} elements={[
               {
                 ...renderInfo.uiSchema ?? {},

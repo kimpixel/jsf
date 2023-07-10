@@ -78,9 +78,27 @@ const theme = createTheme({
         MuiTabs: {
             styleOverrides: {
                 root: {
-                    marginBottom: '0.8em'
+                    marginBottom: '0.8em',
+                    '.MuiAppBar-root > &': {
+                        marginBottom: '0',
+                    }
+                },
+                indicator: {
+                    '.MuiAppBar-root &':{
+                        backgroundColor: "#666"
+                    }
                 }
             }
+        },
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#dfdfdf',
+                    marginBottom: '-5px',
+                    color: '#666',
+                    boxShadow: 'none'
+                },
+            },
         },
         MuiFormControl: {
             styleOverrides: {
@@ -93,6 +111,9 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     margin: '1.8em 0',
+                    '.MuiGrid-root &':{
+                        margin: "0"
+                    }
                 },
             }
         },
@@ -116,6 +137,9 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     maxWidth: '400px',
+                    '&.MuiInputBase-multiline': {
+                        maxWidth: '100%',
+                    }
                 }
             }
         },

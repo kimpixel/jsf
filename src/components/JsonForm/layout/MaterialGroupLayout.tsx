@@ -69,12 +69,9 @@ const GroupComponent = React.memo(({ visible, enabled, uischema, label, ...props
     <Hidden xsUp={!visible}>
       <Card style={style}>
         {!isEmpty(label) && (
-          <CardHeader title={label} />
+          <CardHeader title={label} subheader={description} />
         )}
         <CardContent>
-          {!isEmpty(description) && (
-            <div>{description}</div>
-          )}
           <MaterialLayoutRenderer {...props} visible={visible} enabled={enabled} elements={groupLayout.elements} />
         </CardContent>
       </Card>
