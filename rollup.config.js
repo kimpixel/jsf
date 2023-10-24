@@ -12,7 +12,7 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import babel from '@rollup/plugin-babel';
 import nodePolyfills from 'rollup-plugin-node-polyfills';
 import visualizer from 'rollup-plugin-visualizer';
-
+import sourcemaps from "rollup-plugin-sourcemaps";
 
 const packageJson = require("./package.json");
 
@@ -43,7 +43,8 @@ export default {
         nodeResolve({
             browser: true
         }),
-        typescript({sourceMap:true}),
+        typescript({sourceMap:true, inlineSources: true, tsconfig: "./tsconfig.json"}),
+        sourcemaps(),
         // babel({
         //     babelHelpers: 'bundled',
         //     presets: ["@babel/preset-react"],
@@ -52,7 +53,8 @@ export default {
         //     sourceMaps: true
         // }),
         json(),
-        terser({sourceMap: true}),
+        // terser({sourceMap: true}),
+
         // sizes(),
         // visualizer(),
 
