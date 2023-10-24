@@ -15,13 +15,12 @@ import {JsonSchema7} from "@jsonforms/core/src/models/jsonSchema7";
 
 export const SelectControl = (props: ControlProps & EnumCellProps & WithClassname & TranslateProps) => {
 
-  console.log('propsxx', props);
 
   let props_new: ControlProps & EnumCellProps & TranslateProps = {
-    options: props.schema.anyOf.map(value => ({
+    options: props.schema.anyOf?.map(value => ({
       label: value.enum.at(0),
       value: value.enum.at(0)
-    })),
+    }))??[],
 
     ...props
   }
