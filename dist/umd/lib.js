@@ -74929,7 +74929,7 @@ Please use another name.` );
         var _b = React.useState(false), open = _b[0], setOpen = _b[1];
         var _c = React.useState(indexOfFittingSchema || 0), selectedIndex = _c[0], setSelectedIndex = _c[1];
         React.useEffect(function () {
-            if (!indexOfFittingSchema) {
+            if (indexOfFittingSchema === undefined) {
                 return;
             }
             setSelectedIndex(indexOfFittingSchema);
