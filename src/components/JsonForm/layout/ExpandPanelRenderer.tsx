@@ -149,6 +149,7 @@ const ExpandPanelRendererComponent = (props: ExpandPanelProps) => {
                   direction='row'
                   justifyContent='center'
                   alignItems='center'
+                  wrap={"nowrap"}
                 >
                   {showSortButtons ? (
                     <Fragment>
