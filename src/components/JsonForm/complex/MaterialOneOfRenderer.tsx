@@ -63,7 +63,7 @@ export const MaterialOneOfRenderer =
     const [selectedIndex, setSelectedIndex] = useState(indexOfFittingSchema || 0);
 
     useEffect(() => {
-      if (!indexOfFittingSchema) {
+      if (indexOfFittingSchema === undefined) {
         return;
       }
       setSelectedIndex(indexOfFittingSchema);
