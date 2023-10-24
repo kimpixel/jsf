@@ -22,7 +22,7 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
 */
-import React, { useCallback, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import isEmpty from 'lodash/isEmpty';
 
 import {
@@ -61,6 +61,14 @@ export const MaterialOneOfRenderer =
   ({ handleChange, schema, path, renderers, cells, rootSchema, id, visible, indexOfFittingSchema, uischema, uischemas, data }: CombinatorRendererProps) => {
     const [open, setOpen] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(indexOfFittingSchema || 0);
+
+    useEffect(() => {
+      if (!indexOfFittingSchema) {
+        return;
+      }
+      setSelectedIndex(indexOfFittingSchema);
+    });
+
     const [newSelectedIndex, setNewSelectedIndex] = useState(0);
     const handleClose = useCallback(() => setOpen(false), [setOpen]);
     const cancel = useCallback(() => {
