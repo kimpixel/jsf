@@ -111,7 +111,7 @@ export const MuiAutocomplete = (props: ControlProps & EnumCellProps & WithClassn
         renderInput={params => { 
           return(
           <TextField
-            label={label} 
+            label={label}
             variant={'standard'}
             type='text'
             inputProps={params.inputProps}

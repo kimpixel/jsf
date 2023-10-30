@@ -6,4 +6,4 @@ export interface ArrayLayoutToolbarProps {
     addItem(path: string, data: any): () => void;
     createDefault(): any;
 }
-export declare const ArrayLayoutToolbar: React.MemoExoticComponent<({ label, errors, addItem, path, createDefault }: ArrayLayoutToolbarProps) => JSX.Element>;
+export declare const ArrayLayoutToolbar: React.MemoExoticComponent<({ label, errors, addItem, path, createDefault, }: ArrayLayoutToolbarProps) => JSX.Element>;

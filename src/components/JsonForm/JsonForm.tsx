@@ -1,22 +1,44 @@
-import React from "react";
-import { JsonForms } from "@jsonforms/react";
-import { createAjv } from '@jsonforms/core';
-import { materialCells, materialRenderers } from "@jsonforms/material-renderers";
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import React from 'react'
+import { JsonForms } from '@jsonforms/react'
+import { createAjv } from '@jsonforms/core'
+import { materialCells, materialRenderers } from '@jsonforms/material-renderers'
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 
-
-import SelectS3FileControl, { SelectS3FileControlTester, } from './controlls/SelectS3FileControl';
+import SelectS3FileControl, {
+    SelectS3FileControlTester,
+} from './controlls/SelectS3FileControl'
 // import DebugControl, { DebugControlTester } from "./DebugControl";
-import TabsLayoutRenderer, { TabsLayoutTester } from "./layout/TabsLayoutRenderer";
-import MaterialOneOfRenderer, { materialOneOfControlTester } from "./complex/MaterialOneOfRenderer";
+import TabsLayoutRenderer, {
+    TabsLayoutTester,
+} from './layout/TabsLayoutRenderer'
+import MaterialOneOfRenderer, {
+    materialOneOfControlTester,
+} from './complex/MaterialOneOfRenderer'
 //import SelectLinearIconsControl, { SelectLinearIconsControlTester } from "./controlls/SelectLinearIconsControl";
 
-import MaterialArrayLayoutRenderer, { materialArrayLayoutTester } from "./layout/MaterialArrayLayoutRenderer";
-import MaterializedGroupLayoutRenderer, { materialGroupTester } from "./layout/MaterialGroupLayout";
+import MaterialArrayLayoutRenderer, {
+    materialArrayLayoutTester,
+} from './layout/MaterialArrayLayoutRenderer'
+import MaterializedGroupLayoutRenderer, {
+    materialGroupTester,
+} from './layout/MaterialGroupLayout'
 //import MaterialOneOfEnumControl, { materialOneOfEnumControlTester } from "./controlls/MaterialOneOfEnumControl";
-import MaterialEnumControl, { materialEnumControlTester } from "./controlls/MaterialEnumControl";
-import MultiSelectControl, {MultiSelectControlTester} from "./controlls/MultiSelectControl";
-import SelectControl, {SelectControlTester} from "./controlls/SelectControl";
+import MaterialEnumControl, {
+    materialEnumControlTester,
+} from './controlls/MaterialEnumControl'
+import MultiSelectControl, {
+    MultiSelectControlTester,
+} from './controlls/MultiSelectControl'
+import SelectControl, { SelectControlTester } from './controlls/SelectControl'
+import MultiSelectTagControl, {
+    MultiSelectTagControlTester,
+} from './controlls/MultiSelectTagControl'
+import SelectKpiControl, {
+    SelectKpiControlTester,
+} from './controlls/SelectKpiControl'
+import KpisLayoutRenderer, {
+    kpisLayoutTester,
+} from './layout/KpisLayoutRenderer'
 
 const renderers = [
     ...materialRenderers,
@@ -54,6 +76,18 @@ const renderers = [
         renderer: MultiSelectControl,
     },
     {
+        tester: MultiSelectTagControlTester,
+        renderer: MultiSelectTagControl,
+    },
+    {
+        tester: SelectKpiControlTester,
+        renderer: SelectKpiControl,
+    },
+    {
+        tester: kpisLayoutTester,
+        renderer: KpisLayoutRenderer,
+    },
+    {
         tester: SelectControlTester,
         renderer: SelectControl,
     },
@@ -61,8 +95,7 @@ const renderers = [
     //     tester: DebugControlTester,
     //     renderer: DebugControl,
     // },
-];
-
+]
 
 const theme = createTheme({
     components: {
@@ -72,8 +105,8 @@ const theme = createTheme({
                     textTransform: 'initial',
                     flexShrink: 1,
                     // wordBreak: "break-word"
-                }
-            }
+                },
+            },
         },
         MuiTabs: {
             styleOverrides: {
@@ -81,22 +114,22 @@ const theme = createTheme({
                     marginBottom: '0.8em',
                     '.MuiAppBar-root > &': {
                         marginBottom: '0',
-                    }
+                    },
                 },
                 indicator: {
-                    '.MuiAppBar-root &':{
-                        backgroundColor: "#666"
-                    }
-                }
-            }
+                    '.MuiAppBar-root &': {
+                        backgroundColor: '#666',
+                    },
+                },
+            },
         },
         MuiAppBar: {
             styleOverrides: {
                 root: {
                     backgroundColor: '#dfdfdf',
-                    marginBottom: '-5px',
+                    marginBottom: '-7px',
                     color: '#666',
-                    boxShadow: 'none'
+                    boxShadow: 'none',
                 },
             },
         },
@@ -105,33 +138,33 @@ const theme = createTheme({
                 root: {
                     margin: '0.8em 0',
                 },
-            }
+            },
         },
         MuiCard: {
             styleOverrides: {
                 root: {
                     margin: '1.8em 0',
-                    '.MuiGrid-root &':{
-                        margin: "0"
-                    }
+                    '.MuiGrid-root &': {
+                        margin: '0',
+                    },
                 },
-            }
+            },
         },
         MuiCardHeader: {
             styleOverrides: {
                 root: {
                     // backgroundColor: '#283273'
-                }
-            }
+                },
+            },
         },
 
         MuiTableCell: {
             styleOverrides: {
                 root: {
                     wordBreak: 'break-word',
-                    minWidth: '65px'
-                }
-            }
+                    minWidth: '65px',
+                },
+            },
         },
         MuiInput: {
             styleOverrides: {
@@ -139,31 +172,37 @@ const theme = createTheme({
                     maxWidth: '400px',
                     '&.MuiInputBase-multiline': {
                         maxWidth: '100%',
-                    }
-                }
-            }
+                    },
+                    '.tag-list &': {
+                        maxWidth: 'none',
+                    },
+                },
+            },
+        },
+        MuiSelect: {
+            styleOverrides: {},
         },
         MuiInputLabel: {
             defaultProps: {
                 shrink: true,
                 // variant: 'filled'
-            }
+            },
         },
         MuiPaper: {
             defaultProps: {
-                elevation: 2
-            }
+                elevation: 2,
+            },
         },
         MuiAccordion: {
             defaultProps: {
-                disableGutters: true
+                disableGutters: true,
             },
         },
         MuiAccordionSummary: {
             defaultProps: {
                 sx: {
-                    backgroundColor: '#f5f5f5'
-                }
+                    backgroundColor: '#f5f5f5',
+                },
             },
             // styleOverrides: {
             //     root: {
@@ -172,28 +211,28 @@ const theme = createTheme({
             //         }
             //     }
             // }
-        }
+        },
     },
-});
-
+})
 
 const JsonForm = (props: any) => {
+    const handleDefaultsAjv = createAjv({ useDefaults: true, verbose: true })
 
-    const handleDefaultsAjv = createAjv({useDefaults: true, verbose: true,});
-
-    return <ThemeProvider theme={theme}>
-        <CssBaseline/>
-        <JsonForms
-            config={props.config}
-            schema={props.schema}
-            uischema={props.uischema}
-            data={props.data}
-            renderers={renderers}
-            cells={materialCells}
-            onChange={props.onChange}
-            ajv={handleDefaultsAjv}
-        />
-    </ThemeProvider>
+    return (
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <JsonForms
+                config={props.config}
+                schema={props.schema}
+                uischema={props.uischema}
+                data={props.data}
+                renderers={renderers}
+                cells={materialCells}
+                onChange={props.onChange}
+                ajv={handleDefaultsAjv}
+            />
+        </ThemeProvider>
+    )
 }
 
-export default JsonForm;
+export default JsonForm

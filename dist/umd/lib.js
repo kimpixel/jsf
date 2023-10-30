@@ -1194,19 +1194,19 @@ var Foo = (function (exports, React, ReactDOM) {
      * @constructor
      * @param {Array} [entries] The key-value pairs to cache.
      */
-    function Stack$4(entries) {
+    function Stack$6(entries) {
       var data = this.__data__ = new ListCache(entries);
       this.size = data.size;
     }
 
     // Add methods to `Stack`.
-    Stack$4.prototype.clear = stackClear;
-    Stack$4.prototype['delete'] = stackDelete;
-    Stack$4.prototype.get = stackGet;
-    Stack$4.prototype.has = stackHas;
-    Stack$4.prototype.set = stackSet;
+    Stack$6.prototype.clear = stackClear;
+    Stack$6.prototype['delete'] = stackDelete;
+    Stack$6.prototype.get = stackGet;
+    Stack$6.prototype.has = stackHas;
+    Stack$6.prototype.set = stackSet;
 
-    var _Stack = Stack$4;
+    var _Stack = Stack$6;
 
     /** Used to stand-in for `undefined` hash values. */
 
@@ -2453,7 +2453,7 @@ var Foo = (function (exports, React, ReactDOM) {
 
     var _getTag = getTag$7;
 
-    var Stack$3 = _Stack,
+    var Stack$5 = _Stack,
         equalArrays = _equalArrays,
         equalByTag = _equalByTag,
         equalObjects = _equalObjects,
@@ -2511,7 +2511,7 @@ var Foo = (function (exports, React, ReactDOM) {
         objIsObj = false;
       }
       if (isSameTag && !objIsObj) {
-        stack || (stack = new Stack$3);
+        stack || (stack = new Stack$5);
         return (objIsArr || isTypedArray$2(object))
           ? equalArrays(object, other, bitmask, customizer, equalFunc, stack)
           : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
@@ -2524,14 +2524,14 @@ var Foo = (function (exports, React, ReactDOM) {
           var objUnwrapped = objIsWrapped ? object.value() : object,
               othUnwrapped = othIsWrapped ? other.value() : other;
 
-          stack || (stack = new Stack$3);
+          stack || (stack = new Stack$5);
           return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
         }
       }
       if (!isSameTag) {
         return false;
       }
-      stack || (stack = new Stack$3);
+      stack || (stack = new Stack$5);
       return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
     }
 
@@ -2566,7 +2566,7 @@ var Foo = (function (exports, React, ReactDOM) {
 
     var _baseIsEqual = baseIsEqual$3;
 
-    var Stack$2 = _Stack,
+    var Stack$4 = _Stack,
         baseIsEqual$2 = _baseIsEqual;
 
     /** Used to compose bitmasks for value comparisons. */
@@ -2612,7 +2612,7 @@ var Foo = (function (exports, React, ReactDOM) {
             return false;
           }
         } else {
-          var stack = new Stack$2;
+          var stack = new Stack$4;
           if (customizer) {
             var result = customizer(objValue, srcValue, key, object, source, stack);
           }
@@ -5168,7 +5168,7 @@ var Foo = (function (exports, React, ReactDOM) {
 
     var _baseMergeDeep = baseMergeDeep$1;
 
-    var Stack$1 = _Stack,
+    var Stack$3 = _Stack,
         assignMergeValue = _assignMergeValue,
         baseFor$1 = _baseFor,
         baseMergeDeep = _baseMergeDeep,
@@ -5192,7 +5192,7 @@ var Foo = (function (exports, React, ReactDOM) {
         return;
       }
       baseFor$1(source, function(srcValue, key) {
-        stack || (stack = new Stack$1);
+        stack || (stack = new Stack$3);
         if (isObject$6(srcValue)) {
           baseMergeDeep(object, source, key, srcIndex, baseMerge$1, customizer, stack);
         }
@@ -5713,7 +5713,7 @@ var Foo = (function (exports, React, ReactDOM) {
 
     var isSet_1 = isSet$1;
 
-    var Stack = _Stack,
+    var Stack$2 = _Stack,
         arrayEach$1 = _arrayEach,
         assignValue$1 = _assignValue,
         baseAssign = _baseAssign,
@@ -5845,7 +5845,7 @@ var Foo = (function (exports, React, ReactDOM) {
         }
       }
       // Check for circular references and return its corresponding clone.
-      stack || (stack = new Stack);
+      stack || (stack = new Stack$2);
       var stacked = stack.get(value);
       if (stacked) {
         return stacked;
@@ -31419,6 +31419,11 @@ var Foo = (function (exports, React, ReactDOM) {
         return acc;
       }, style);
     }
+    function mergeBreakpointsInOrder(breakpointsInput, ...styles) {
+      const emptyBreakpoints = createEmptyBreakpointObject(breakpointsInput);
+      const mergedOutput = [emptyBreakpoints, ...styles].reduce((prev, next) => deepmerge(prev, next), {});
+      return removeUnusedBreakpoints(Object.keys(emptyBreakpoints), mergedOutput);
+    }
 
     // compute base for responsive values; e.g.,
     // [1,2,3] => {xs: true, sm: true, md: true}
@@ -31503,7 +31508,7 @@ var Foo = (function (exports, React, ReactDOM) {
       }
       return value;
     }
-    function style$3(options) {
+    function style$4(options) {
       const {
         prop,
         cssProperty = options.prop,
@@ -31681,7 +31686,7 @@ var Foo = (function (exports, React, ReactDOM) {
       const propValue = props[prop];
       return handleBreakpoints(props, propValue, styleFromPropValue);
     }
-    function style$2(props, keys) {
+    function style$3(props, keys) {
       const transformer = createUnarySpacing(props.theme);
       return Object.keys(props).map(prop => resolveCssProperty(props, keys, prop, transformer)).reduce(merge, {});
     }
@@ -31694,7 +31699,7 @@ var Foo = (function (exports, React, ReactDOM) {
       return obj;
     }, {}) ;
     function spacing(props) {
-      return style$2(props, spacingKeys);
+      return style$3(props, spacingKeys);
     }
     spacing.propTypes = spacingKeys.reduce((obj, key) => {
       obj[key] = responsivePropType$1;
@@ -31708,48 +31713,48 @@ var Foo = (function (exports, React, ReactDOM) {
       }
       return `${value}px solid`;
     }
-    const border = style$3({
+    const border = style$4({
       prop: 'border',
       themeKey: 'borders',
       transform: getBorder
     });
-    const borderTop = style$3({
+    const borderTop = style$4({
       prop: 'borderTop',
       themeKey: 'borders',
       transform: getBorder
     });
-    const borderRight = style$3({
+    const borderRight = style$4({
       prop: 'borderRight',
       themeKey: 'borders',
       transform: getBorder
     });
-    const borderBottom = style$3({
+    const borderBottom = style$4({
       prop: 'borderBottom',
       themeKey: 'borders',
       transform: getBorder
     });
-    const borderLeft = style$3({
+    const borderLeft = style$4({
       prop: 'borderLeft',
       themeKey: 'borders',
       transform: getBorder
     });
-    const borderColor = style$3({
+    const borderColor = style$4({
       prop: 'borderColor',
       themeKey: 'palette'
     });
-    const borderTopColor = style$3({
+    const borderTopColor = style$4({
       prop: 'borderTopColor',
       themeKey: 'palette'
     });
-    const borderRightColor = style$3({
+    const borderRightColor = style$4({
       prop: 'borderRightColor',
       themeKey: 'palette'
     });
-    const borderBottomColor = style$3({
+    const borderBottomColor = style$4({
       prop: 'borderBottomColor',
       themeKey: 'palette'
     });
-    const borderLeftColor = style$3({
+    const borderLeftColor = style$4({
       prop: 'borderLeftColor',
       themeKey: 'palette'
     });
@@ -31770,7 +31775,7 @@ var Foo = (function (exports, React, ReactDOM) {
     const borders = compose(border, borderTop, borderRight, borderBottom, borderLeft, borderColor, borderTopColor, borderRightColor, borderBottomColor, borderLeftColor, borderRadius);
     var borders$1 = borders;
 
-    const displayPrint = style$3({
+    const displayPrint = style$4({
       prop: 'displayPrint',
       cssProperty: false,
       transform: value => ({
@@ -31779,60 +31784,60 @@ var Foo = (function (exports, React, ReactDOM) {
         }
       })
     });
-    const displayRaw = style$3({
+    const displayRaw = style$4({
       prop: 'display'
     });
-    const overflow = style$3({
+    const overflow = style$4({
       prop: 'overflow'
     });
-    const textOverflow = style$3({
+    const textOverflow = style$4({
       prop: 'textOverflow'
     });
-    const visibility = style$3({
+    const visibility = style$4({
       prop: 'visibility'
     });
-    const whiteSpace = style$3({
+    const whiteSpace = style$4({
       prop: 'whiteSpace'
     });
     var display = compose(displayPrint, displayRaw, overflow, textOverflow, visibility, whiteSpace);
 
-    const flexBasis = style$3({
+    const flexBasis = style$4({
       prop: 'flexBasis'
     });
-    const flexDirection = style$3({
+    const flexDirection = style$4({
       prop: 'flexDirection'
     });
-    const flexWrap = style$3({
+    const flexWrap = style$4({
       prop: 'flexWrap'
     });
-    const justifyContent = style$3({
+    const justifyContent = style$4({
       prop: 'justifyContent'
     });
-    const alignItems = style$3({
+    const alignItems = style$4({
       prop: 'alignItems'
     });
-    const alignContent = style$3({
+    const alignContent = style$4({
       prop: 'alignContent'
     });
-    const order$1 = style$3({
+    const order$1 = style$4({
       prop: 'order'
     });
-    const flex = style$3({
+    const flex = style$4({
       prop: 'flex'
     });
-    const flexGrow = style$3({
+    const flexGrow = style$4({
       prop: 'flexGrow'
     });
-    const flexShrink = style$3({
+    const flexShrink = style$4({
       prop: 'flexShrink'
     });
-    const alignSelf = style$3({
+    const alignSelf = style$4({
       prop: 'alignSelf'
     });
-    const justifyItems = style$3({
+    const justifyItems = style$4({
       prop: 'justifyItems'
     });
-    const justifySelf = style$3({
+    const justifySelf = style$4({
       prop: 'justifySelf'
     });
     const flexbox = compose(flexBasis, flexDirection, flexWrap, justifyContent, alignItems, alignContent, order$1, flex, flexGrow, flexShrink, alignSelf, justifyItems, justifySelf);
@@ -31880,31 +31885,31 @@ var Foo = (function (exports, React, ReactDOM) {
       rowGap: responsivePropType$1
     } ;
     rowGap.filterProps = ['rowGap'];
-    const gridColumn = style$3({
+    const gridColumn = style$4({
       prop: 'gridColumn'
     });
-    const gridRow = style$3({
+    const gridRow = style$4({
       prop: 'gridRow'
     });
-    const gridAutoFlow = style$3({
+    const gridAutoFlow = style$4({
       prop: 'gridAutoFlow'
     });
-    const gridAutoColumns = style$3({
+    const gridAutoColumns = style$4({
       prop: 'gridAutoColumns'
     });
-    const gridAutoRows = style$3({
+    const gridAutoRows = style$4({
       prop: 'gridAutoRows'
     });
-    const gridTemplateColumns = style$3({
+    const gridTemplateColumns = style$4({
       prop: 'gridTemplateColumns'
     });
-    const gridTemplateRows = style$3({
+    const gridTemplateRows = style$4({
       prop: 'gridTemplateRows'
     });
-    const gridTemplateAreas = style$3({
+    const gridTemplateAreas = style$4({
       prop: 'gridTemplateAreas'
     });
-    const gridArea = style$3({
+    const gridArea = style$4({
       prop: 'gridArea'
     });
     const grid = compose(gap, columnGap, rowGap, gridColumn, gridRow, gridAutoFlow, gridAutoColumns, gridAutoRows, gridTemplateColumns, gridTemplateRows, gridTemplateAreas, gridArea);
@@ -31916,18 +31921,18 @@ var Foo = (function (exports, React, ReactDOM) {
       }
       return value;
     }
-    const color = style$3({
+    const color = style$4({
       prop: 'color',
       themeKey: 'palette',
       transform: transform$1
     });
-    const bgcolor = style$3({
+    const bgcolor = style$4({
       prop: 'bgcolor',
       cssProperty: 'backgroundColor',
       themeKey: 'palette',
       transform: transform$1
     });
-    const backgroundColor = style$3({
+    const backgroundColor = style$4({
       prop: 'backgroundColor',
       themeKey: 'palette',
       transform: transform$1
@@ -31935,28 +31940,28 @@ var Foo = (function (exports, React, ReactDOM) {
     const palette = compose(color, bgcolor, backgroundColor);
     var palette$1 = palette;
 
-    const position = style$3({
+    const position = style$4({
       prop: 'position'
     });
-    const zIndex$2 = style$3({
+    const zIndex$2 = style$4({
       prop: 'zIndex',
       themeKey: 'zIndex'
     });
-    const top$1 = style$3({
+    const top$1 = style$4({
       prop: 'top'
     });
-    const right$1 = style$3({
+    const right$1 = style$4({
       prop: 'right'
     });
-    const bottom$1 = style$3({
+    const bottom$1 = style$4({
       prop: 'bottom'
     });
-    const left$1 = style$3({
+    const left$1 = style$4({
       prop: 'left'
     });
     var positions = compose(position, zIndex$2, top$1, right$1, bottom$1, left$1);
 
-    const boxShadow = style$3({
+    const boxShadow = style$4({
       prop: 'boxShadow',
       themeKey: 'shadows'
     });
@@ -31965,7 +31970,7 @@ var Foo = (function (exports, React, ReactDOM) {
     function transform(value) {
       return value <= 1 && value !== 0 ? `${value * 100}%` : value;
     }
-    const width = style$3({
+    const width = style$4({
       prop: 'width',
       transform
     });
@@ -31983,67 +31988,67 @@ var Foo = (function (exports, React, ReactDOM) {
       return null;
     };
     maxWidth.filterProps = ['maxWidth'];
-    const minWidth = style$3({
+    const minWidth = style$4({
       prop: 'minWidth',
       transform
     });
-    const height = style$3({
+    const height = style$4({
       prop: 'height',
       transform
     });
-    const maxHeight = style$3({
+    const maxHeight = style$4({
       prop: 'maxHeight',
       transform
     });
-    const minHeight = style$3({
+    const minHeight = style$4({
       prop: 'minHeight',
       transform
     });
-    style$3({
+    style$4({
       prop: 'size',
       cssProperty: 'width',
       transform
     });
-    style$3({
+    style$4({
       prop: 'size',
       cssProperty: 'height',
       transform
     });
-    const boxSizing = style$3({
+    const boxSizing = style$4({
       prop: 'boxSizing'
     });
     const sizing = compose(width, maxWidth, minWidth, height, maxHeight, minHeight, boxSizing);
     var sizing$1 = sizing;
 
-    const fontFamily = style$3({
+    const fontFamily = style$4({
       prop: 'fontFamily',
       themeKey: 'typography'
     });
-    const fontSize = style$3({
+    const fontSize = style$4({
       prop: 'fontSize',
       themeKey: 'typography'
     });
-    const fontStyle = style$3({
+    const fontStyle = style$4({
       prop: 'fontStyle',
       themeKey: 'typography'
     });
-    const fontWeight = style$3({
+    const fontWeight = style$4({
       prop: 'fontWeight',
       themeKey: 'typography'
     });
-    const letterSpacing = style$3({
+    const letterSpacing = style$4({
       prop: 'letterSpacing'
     });
-    const textTransform = style$3({
+    const textTransform = style$4({
       prop: 'textTransform'
     });
-    const lineHeight = style$3({
+    const lineHeight = style$4({
       prop: 'lineHeight'
     });
-    const textAlign = style$3({
+    const textAlign = style$4({
       prop: 'textAlign'
     });
-    const typographyVariant = style$3({
+    const typographyVariant = style$4({
       prop: 'typography',
       cssProperty: false,
       themeKey: 'typography'
@@ -32173,7 +32178,7 @@ var Foo = (function (exports, React, ReactDOM) {
     styleFunctionSx.filterProps = ['sx'];
     var defaultStyleFunctionSx = styleFunctionSx;
 
-    const _excluded$1_ = ["sx"];
+    const _excluded$1$ = ["sx"];
     const splitProps = props => {
       const result = {
         systemProps: {},
@@ -32192,7 +32197,7 @@ var Foo = (function (exports, React, ReactDOM) {
       const {
           sx: inSx
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1_);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1$);
       const {
         systemProps,
         otherProps
@@ -32218,7 +32223,7 @@ var Foo = (function (exports, React, ReactDOM) {
 
     function r(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else if("object"==typeof e)if(Array.isArray(e))for(t=0;t<e.length;t++)e[t]&&(f=r(e[t]))&&(n&&(n+=" "),n+=f);else for(t in e)e[t]&&(n&&(n+=" "),n+=t);return n}function clsx(){for(var e,t,f=0,n="";f<arguments.length;)(e=arguments[f++])&&(t=r(e))&&(n&&(n+=" "),n+=t);return n}
 
-    const _excluded$1Z = ["values", "unit", "step"];
+    const _excluded$1_ = ["values", "unit", "step"];
     const sortBreakpointsValues = values => {
       const breakpointsAsArray = Object.keys(values).map(key => ({
         key,
@@ -32253,7 +32258,7 @@ var Foo = (function (exports, React, ReactDOM) {
           unit = 'px',
           step = 5
         } = breakpoints,
-        other = _objectWithoutPropertiesLoose(breakpoints, _excluded$1Z);
+        other = _objectWithoutPropertiesLoose(breakpoints, _excluded$1_);
       const sortedValues = sortBreakpointsValues(values);
       const keys = Object.keys(sortedValues);
       function up(key) {
@@ -32332,7 +32337,7 @@ var Foo = (function (exports, React, ReactDOM) {
       return spacing;
     }
 
-    const _excluded$1Y = ["breakpoints", "palette", "spacing", "shape"];
+    const _excluded$1Z = ["breakpoints", "palette", "spacing", "shape"];
     function createTheme$1(options = {}, ...args) {
       const {
           breakpoints: breakpointsInput = {},
@@ -32340,7 +32345,7 @@ var Foo = (function (exports, React, ReactDOM) {
           spacing: spacingInput,
           shape: shapeInput = {}
         } = options,
-        other = _objectWithoutPropertiesLoose(options, _excluded$1Y);
+        other = _objectWithoutPropertiesLoose(options, _excluded$1Z);
       const breakpoints = createBreakpoints(breakpointsInput);
       const spacing = createSpacing(spacingInput);
       let muiTheme = deepmerge({
@@ -32444,7 +32449,7 @@ var Foo = (function (exports, React, ReactDOM) {
       return useTheme$2(defaultTheme);
     }
 
-    const _excluded$1X = ["className", "component"];
+    const _excluded$1Y = ["className", "component"];
     function createBox(options = {}) {
       const {
         defaultTheme,
@@ -32462,7 +32467,7 @@ var Foo = (function (exports, React, ReactDOM) {
             className,
             component = 'div'
           } = _extendSxProp,
-          other = _objectWithoutPropertiesLoose(_extendSxProp, _excluded$1X);
+          other = _objectWithoutPropertiesLoose(_extendSxProp, _excluded$1Y);
         return /*#__PURE__*/jsxRuntime.exports.jsx(BoxRoot, _extends({
           as: component,
           ref: ref,
@@ -32473,7 +32478,7 @@ var Foo = (function (exports, React, ReactDOM) {
       return Box;
     }
 
-    const _excluded$1W = ["variant"];
+    const _excluded$1X = ["variant"];
     function isEmpty$3(string) {
       return string.length === 0;
     }
@@ -32487,7 +32492,7 @@ var Foo = (function (exports, React, ReactDOM) {
       const {
           variant
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1W);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1X);
       let classKey = variant || '';
       Object.keys(other).sort().forEach(key => {
         if (key === 'color') {
@@ -32499,7 +32504,7 @@ var Foo = (function (exports, React, ReactDOM) {
       return classKey;
     }
 
-    const _excluded$1V = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"],
+    const _excluded$1W = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"],
       _excluded2$4 = ["theme"],
       _excluded3 = ["theme"];
     function isEmpty$2(obj) {
@@ -32587,7 +32592,7 @@ var Foo = (function (exports, React, ReactDOM) {
             skipSx: inputSkipSx,
             overridesResolver
           } = inputOptions,
-          options = _objectWithoutPropertiesLoose(inputOptions, _excluded$1V);
+          options = _objectWithoutPropertiesLoose(inputOptions, _excluded$1W);
 
         // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
         const skipVariantsResolver = inputSkipVariantsResolver !== undefined ? inputSkipVariantsResolver : componentSlot && componentSlot !== 'Root' || false;
@@ -33019,7 +33024,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       }, mixins);
     }
 
-    const _excluded$1U = ["mode", "contrastThreshold", "tonalOffset"];
+    const _excluded$1V = ["mode", "contrastThreshold", "tonalOffset"];
     const light = {
       // The colors used to style the text.
       text: {
@@ -33188,7 +33193,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           contrastThreshold = 3,
           tonalOffset = 0.2
         } = palette,
-        other = _objectWithoutPropertiesLoose(palette, _excluded$1U);
+        other = _objectWithoutPropertiesLoose(palette, _excluded$1V);
       const primary = palette.primary || getDefaultPrimary(mode);
       const secondary = palette.secondary || getDefaultSecondary(mode);
       const error = palette.error || getDefaultError(mode);
@@ -33312,7 +33317,7 @@ const theme2 = createTheme({ palette: {
       return paletteOutput;
     }
 
-    const _excluded$1T = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
+    const _excluded$1U = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
     function round$2(value) {
       return Math.round(value * 1e5) / 1e5;
     }
@@ -33343,7 +33348,7 @@ const theme2 = createTheme({ palette: {
           allVariants,
           pxToRem: pxToRem2
         } = _ref,
-        other = _objectWithoutPropertiesLoose(_ref, _excluded$1T);
+        other = _objectWithoutPropertiesLoose(_ref, _excluded$1U);
       {
         if (typeof fontSize !== 'number') {
           console.error('MUI: `fontSize` is required to be a number.');
@@ -33403,7 +33408,7 @@ const theme2 = createTheme({ palette: {
     const shadows = ['none', createShadow(0, 2, 1, -1, 0, 1, 1, 0, 0, 1, 3, 0), createShadow(0, 3, 1, -2, 0, 2, 2, 0, 0, 1, 5, 0), createShadow(0, 3, 3, -2, 0, 3, 4, 0, 0, 1, 8, 0), createShadow(0, 2, 4, -1, 0, 4, 5, 0, 0, 1, 10, 0), createShadow(0, 3, 5, -1, 0, 5, 8, 0, 0, 1, 14, 0), createShadow(0, 3, 5, -1, 0, 6, 10, 0, 0, 1, 18, 0), createShadow(0, 4, 5, -2, 0, 7, 10, 1, 0, 2, 16, 1), createShadow(0, 5, 5, -3, 0, 8, 10, 1, 0, 3, 14, 2), createShadow(0, 5, 6, -3, 0, 9, 12, 1, 0, 3, 16, 2), createShadow(0, 6, 6, -3, 0, 10, 14, 1, 0, 4, 18, 3), createShadow(0, 6, 7, -4, 0, 11, 15, 1, 0, 4, 20, 3), createShadow(0, 7, 8, -4, 0, 12, 17, 2, 0, 5, 22, 4), createShadow(0, 7, 8, -4, 0, 13, 19, 2, 0, 5, 24, 4), createShadow(0, 7, 9, -4, 0, 14, 21, 2, 0, 5, 26, 4), createShadow(0, 8, 9, -5, 0, 15, 22, 2, 0, 6, 28, 5), createShadow(0, 8, 10, -5, 0, 16, 24, 2, 0, 6, 30, 5), createShadow(0, 8, 11, -5, 0, 17, 26, 2, 0, 6, 32, 5), createShadow(0, 9, 11, -5, 0, 18, 28, 2, 0, 7, 34, 6), createShadow(0, 9, 12, -6, 0, 19, 29, 2, 0, 7, 36, 6), createShadow(0, 10, 13, -6, 0, 20, 31, 3, 0, 8, 38, 7), createShadow(0, 10, 13, -6, 0, 21, 33, 3, 0, 8, 40, 7), createShadow(0, 10, 14, -6, 0, 22, 35, 3, 0, 8, 42, 7), createShadow(0, 11, 14, -7, 0, 23, 36, 3, 0, 9, 44, 8), createShadow(0, 11, 15, -7, 0, 24, 38, 3, 0, 9, 46, 8)];
     var shadows$1 = shadows;
 
-    const _excluded$1S = ["duration", "easing", "delay"];
+    const _excluded$1T = ["duration", "easing", "delay"];
     // Follow https://material.google.com/motion/duration-easing.html#duration-easing-natural-easing-curves
     // to learn the context in which each easing should be used.
     const easing = {
@@ -33454,7 +33459,7 @@ const theme2 = createTheme({ palette: {
             easing: easingOption = mergedEasing.easeInOut,
             delay = 0
           } = options,
-          other = _objectWithoutPropertiesLoose(options, _excluded$1S);
+          other = _objectWithoutPropertiesLoose(options, _excluded$1T);
         {
           const isString = value => typeof value === 'string';
           // IE11 support, replace with Number.isNaN
@@ -33501,7 +33506,7 @@ const theme2 = createTheme({ palette: {
     };
     var zIndex$1 = zIndex;
 
-    const _excluded$1R = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
+    const _excluded$1S = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
     function createTheme(options = {}, ...args) {
       const {
           mixins: mixinsInput = {},
@@ -33509,7 +33514,7 @@ const theme2 = createTheme({ palette: {
           transitions: transitionsInput = {},
           typography: typographyInput = {}
         } = options,
-        other = _objectWithoutPropertiesLoose(options, _excluded$1R);
+        other = _objectWithoutPropertiesLoose(options, _excluded$1S);
       if (options.vars) {
         throw new Error(`MUI: \`vars\` is a private field used for CSS variables support.
 Please use another name.` );
@@ -33744,7 +33749,7 @@ Please use another name.` );
       };
     }
 
-    const _excluded$1Q = ["elementType", "externalSlotProps", "ownerState"];
+    const _excluded$1R = ["elementType", "externalSlotProps", "ownerState"];
     /**
      * Builds the props to be passed into the slot of an unstyled component.
      * It merges the internal props of the component with the ones supplied by the user, allowing to customize the behavior.
@@ -33759,7 +33764,7 @@ Please use another name.` );
           externalSlotProps,
           ownerState
         } = parameters,
-        rest = _objectWithoutPropertiesLoose(parameters, _excluded$1Q);
+        rest = _objectWithoutPropertiesLoose(parameters, _excluded$1R);
       const resolvedComponentsProps = resolveComponentProps(externalSlotProps, ownerState);
       const {
         props: mergedProps,
@@ -34733,7 +34738,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiBadge', ['root', 'badge', 'invisible']);
 
-    const _excluded$1P = ["badgeContent", "component", "children", "invisible", "max", "slotProps", "slots", "showZero"];
+    const _excluded$1Q = ["badgeContent", "component", "children", "invisible", "max", "slotProps", "slots", "showZero"];
     const useUtilityClasses$1x = ownerState => {
       const {
         invisible
@@ -34763,7 +34768,7 @@ Please use another name.` );
           slots = {},
           showZero = false
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1P);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1Q);
       const {
         badgeContent,
         max,
@@ -37213,7 +37218,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiPopperUnstyled', ['root']);
 
-    const _excluded$1O = ["anchorEl", "children", "component", "direction", "disablePortal", "modifiers", "open", "ownerState", "placement", "popperOptions", "popperRef", "slotProps", "slots", "TransitionProps"],
+    const _excluded$1P = ["anchorEl", "children", "component", "direction", "disablePortal", "modifiers", "open", "ownerState", "placement", "popperOptions", "popperRef", "slotProps", "slots", "TransitionProps"],
       _excluded2$3 = ["anchorEl", "children", "container", "direction", "disablePortal", "keepMounted", "modifiers", "open", "placement", "popperOptions", "popperRef", "style", "transition"];
     function flipPlacement(placement, direction) {
       if (direction === 'ltr') {
@@ -37262,7 +37267,7 @@ Please use another name.` );
           slots = {},
           TransitionProps
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1O);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1P);
       const tooltipRef = React__namespace.useRef(null);
       const ownRef = useForkRef(tooltipRef, ref);
       const popperRef = React__namespace.useRef(null);
@@ -37769,7 +37774,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiModal', ['root', 'hidden']);
 
-    const _excluded$1N = ["children", "classes", "closeAfterTransition", "component", "container", "disableAutoFocus", "disableEnforceFocus", "disableEscapeKeyDown", "disablePortal", "disableRestoreFocus", "disableScrollLock", "hideBackdrop", "keepMounted", "manager", "onBackdropClick", "onClose", "onKeyDown", "open", "onTransitionEnter", "onTransitionExited", "slotProps", "slots"];
+    const _excluded$1O = ["children", "classes", "closeAfterTransition", "component", "container", "disableAutoFocus", "disableEnforceFocus", "disableEscapeKeyDown", "disablePortal", "disableRestoreFocus", "disableScrollLock", "hideBackdrop", "keepMounted", "manager", "onBackdropClick", "onClose", "onKeyDown", "open", "onTransitionEnter", "onTransitionExited", "slotProps", "slots"];
     const useUtilityClasses$1v = ownerState => {
       const {
         open,
@@ -37834,7 +37839,7 @@ Please use another name.` );
           slotProps = {},
           slots = {}
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1N);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1O);
       const [exited, setExited] = React__namespace.useState(true);
       const modal = React__namespace.useRef({});
       const mountNodeRef = React__namespace.useRef(null);
@@ -38777,7 +38782,7 @@ Please use another name.` );
       };
     }
 
-    const _excluded$1M = ["aria-label", "aria-valuetext", "aria-labelledby", "className", "component", "classes", "disableSwap", "disabled", "getAriaLabel", "getAriaValueText", "marks", "max", "min", "name", "onChange", "onChangeCommitted", "orientation", "scale", "step", "tabIndex", "track", "value", "valueLabelDisplay", "valueLabelFormat", "isRtl", "slotProps", "slots"];
+    const _excluded$1N = ["aria-label", "aria-valuetext", "aria-labelledby", "className", "component", "classes", "disableSwap", "disabled", "getAriaLabel", "getAriaValueText", "marks", "max", "min", "name", "onChange", "onChangeCommitted", "orientation", "scale", "step", "tabIndex", "track", "value", "valueLabelDisplay", "valueLabelFormat", "isRtl", "slotProps", "slots"];
     const Identity = x => x;
     const useUtilityClasses$1u = ownerState => {
       const {
@@ -38833,7 +38838,7 @@ Please use another name.` );
           slotProps = {},
           slots = {}
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1M);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1N);
 
       // all props with defaults
       // consider extracting to hook an reusing the lint rule for the variants
@@ -39215,7 +39220,7 @@ Please use another name.` );
     } ;
     var SliderUnstyled$1 = SliderUnstyled;
 
-    const _excluded$1L = ["onChange", "maxRows", "minRows", "style", "value"];
+    const _excluded$1M = ["onChange", "maxRows", "minRows", "style", "value"];
     function getStyleValue(computedStyle, property) {
       return parseInt(computedStyle[property], 10) || 0;
     }
@@ -39245,7 +39250,7 @@ Please use another name.` );
           style,
           value
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1L);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1M);
       const {
         current: isControlled
       } = React__namespace.useRef(value != null);
@@ -39456,7 +39461,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiSvgIcon', ['root', 'colorPrimary', 'colorSecondary', 'colorAction', 'colorError', 'colorDisabled', 'fontSizeInherit', 'fontSizeSmall', 'fontSizeMedium', 'fontSizeLarge']);
 
-    const _excluded$1K = ["children", "className", "color", "component", "fontSize", "htmlColor", "inheritViewBox", "titleAccess", "viewBox"];
+    const _excluded$1L = ["children", "className", "color", "component", "fontSize", "htmlColor", "inheritViewBox", "titleAccess", "viewBox"];
     const useUtilityClasses$1t = ownerState => {
       const {
         color,
@@ -39522,7 +39527,7 @@ Please use another name.` );
           titleAccess,
           viewBox = '0 0 24 24'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1K);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1L);
       const ownerState = _extends({}, props, {
         color,
         component,
@@ -41127,7 +41132,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiCollapse', ['root', 'horizontal', 'vertical', 'entered', 'hidden', 'wrapper', 'wrapperInner']);
 
-    const _excluded$1J = ["addEndListener", "children", "className", "collapsedSize", "component", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "orientation", "style", "timeout", "TransitionComponent"];
+    const _excluded$1K = ["addEndListener", "children", "className", "collapsedSize", "component", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "orientation", "style", "timeout", "TransitionComponent"];
     const useUtilityClasses$1s = ownerState => {
       const {
         orientation,
@@ -41227,7 +41232,7 @@ Please use another name.` );
           // eslint-disable-next-line react/prop-types
           TransitionComponent = Transition$1
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1J);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1K);
       const ownerState = _extends({}, props, {
         orientation,
         collapsedSize: collapsedSizeProp
@@ -41494,7 +41499,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiPaper', ['root', 'rounded', 'outlined', 'elevation', 'elevation0', 'elevation1', 'elevation2', 'elevation3', 'elevation4', 'elevation5', 'elevation6', 'elevation7', 'elevation8', 'elevation9', 'elevation10', 'elevation11', 'elevation12', 'elevation13', 'elevation14', 'elevation15', 'elevation16', 'elevation17', 'elevation18', 'elevation19', 'elevation20', 'elevation21', 'elevation22', 'elevation23', 'elevation24']);
 
-    const _excluded$1I = ["className", "component", "elevation", "square", "variant"];
+    const _excluded$1J = ["className", "component", "elevation", "square", "variant"];
     const useUtilityClasses$1r = ownerState => {
       const {
         square,
@@ -41549,7 +41554,7 @@ Please use another name.` );
           square = false,
           variant = 'elevation'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1I);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1J);
       const ownerState = _extends({}, props, {
         component,
         elevation,
@@ -41641,7 +41646,7 @@ Please use another name.` );
     const accordionClasses = generateUtilityClasses('MuiAccordion', ['root', 'rounded', 'expanded', 'disabled', 'gutters', 'region']);
     var accordionClasses$1 = accordionClasses;
 
-    const _excluded$1H = ["children", "className", "defaultExpanded", "disabled", "disableGutters", "expanded", "onChange", "square", "TransitionComponent", "TransitionProps"];
+    const _excluded$1I = ["children", "className", "defaultExpanded", "disabled", "disableGutters", "expanded", "onChange", "square", "TransitionComponent", "TransitionProps"];
     const useUtilityClasses$1q = ownerState => {
       const {
         classes,
@@ -41754,7 +41759,7 @@ Please use another name.` );
           TransitionComponent = Collapse$1,
           TransitionProps
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1H);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1I);
       const [expanded, setExpandedState] = useControlled({
         controlled: expandedProp,
         default: defaultExpanded,
@@ -41885,7 +41890,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiAccordionDetails', ['root']);
 
-    const _excluded$1G = ["className"];
+    const _excluded$1H = ["className"];
     const useUtilityClasses$1p = ownerState => {
       const {
         classes
@@ -41912,7 +41917,7 @@ Please use another name.` );
       const {
           className
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1G);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1H);
       const ownerState = props;
       const classes = useUtilityClasses$1p(ownerState);
       return /*#__PURE__*/jsxRuntime.exports.jsx(AccordionDetailsRoot, _extends({
@@ -42027,7 +42032,7 @@ Please use another name.` );
     const touchRippleClasses = generateUtilityClasses('MuiTouchRipple', ['root', 'ripple', 'rippleVisible', 'ripplePulsate', 'child', 'childLeaving', 'childPulsate']);
     var touchRippleClasses$1 = touchRippleClasses;
 
-    const _excluded$1F = ["center", "classes", "className"];
+    const _excluded$1G = ["center", "classes", "className"];
     let _ = t => t,
       _t,
       _t2,
@@ -42156,7 +42161,7 @@ Please use another name.` );
           classes = {},
           className
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1F);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1G);
       const [ripples, setRipples] = React__namespace.useState([]);
       const nextKey = React__namespace.useRef(0);
       const rippleCallback = React__namespace.useRef(null);
@@ -42357,7 +42362,7 @@ Please use another name.` );
     const buttonBaseClasses = generateUtilityClasses('MuiButtonBase', ['root', 'disabled', 'focusVisible']);
     var buttonBaseClasses$1 = buttonBaseClasses;
 
-    const _excluded$1E = ["action", "centerRipple", "children", "className", "component", "disabled", "disableRipple", "disableTouchRipple", "focusRipple", "focusVisibleClassName", "LinkComponent", "onBlur", "onClick", "onContextMenu", "onDragLeave", "onFocus", "onFocusVisible", "onKeyDown", "onKeyUp", "onMouseDown", "onMouseLeave", "onMouseUp", "onTouchEnd", "onTouchMove", "onTouchStart", "tabIndex", "TouchRippleProps", "touchRippleRef", "type"];
+    const _excluded$1F = ["action", "centerRipple", "children", "className", "component", "disabled", "disableRipple", "disableTouchRipple", "focusRipple", "focusVisibleClassName", "LinkComponent", "onBlur", "onClick", "onContextMenu", "onDragLeave", "onFocus", "onFocusVisible", "onKeyDown", "onKeyUp", "onMouseDown", "onMouseLeave", "onMouseUp", "onTouchEnd", "onTouchMove", "onTouchStart", "tabIndex", "TouchRippleProps", "touchRippleRef", "type"];
     const useUtilityClasses$1o = ownerState => {
       const {
         disabled,
@@ -42459,7 +42464,7 @@ Please use another name.` );
           touchRippleRef,
           type
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1E);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1F);
       const buttonRef = React__namespace.useRef(null);
       const rippleRef = React__namespace.useRef(null);
       const handleRippleRef = useForkRef(rippleRef, touchRippleRef);
@@ -42823,7 +42828,7 @@ Please use another name.` );
     const accordionSummaryClasses = generateUtilityClasses('MuiAccordionSummary', ['root', 'expanded', 'focusVisible', 'disabled', 'gutters', 'contentGutters', 'content', 'expandIconWrapper']);
     var accordionSummaryClasses$1 = accordionSummaryClasses;
 
-    const _excluded$1D = ["children", "className", "expandIcon", "focusVisibleClassName", "onClick"];
+    const _excluded$1E = ["children", "className", "expandIcon", "focusVisibleClassName", "onClick"];
     const useUtilityClasses$1n = ownerState => {
       const {
         classes,
@@ -42918,7 +42923,7 @@ Please use another name.` );
           focusVisibleClassName,
           onClick
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1D);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1E);
       const {
         disabled = false,
         disableGutters,
@@ -43009,7 +43014,7 @@ Please use another name.` );
     const iconButtonClasses = generateUtilityClasses('MuiIconButton', ['root', 'disabled', 'colorInherit', 'colorPrimary', 'colorSecondary', 'colorError', 'colorInfo', 'colorSuccess', 'colorWarning', 'edgeStart', 'edgeEnd', 'sizeSmall', 'sizeMedium', 'sizeLarge']);
     var iconButtonClasses$1 = iconButtonClasses;
 
-    const _excluded$1C = ["edge", "children", "className", "color", "disabled", "disableFocusRipple", "size"];
+    const _excluded$1D = ["edge", "children", "className", "color", "disabled", "disableFocusRipple", "size"];
     const useUtilityClasses$1m = ownerState => {
       const {
         classes,
@@ -43110,7 +43115,7 @@ Please use another name.` );
           disableFocusRipple = false,
           size = 'medium'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1C);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1D);
       const ownerState = _extends({}, props, {
         edge,
         color,
@@ -43208,7 +43213,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiTypography', ['root', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'inherit', 'button', 'caption', 'overline', 'alignLeft', 'alignRight', 'alignCenter', 'alignJustify', 'noWrap', 'gutterBottom', 'paragraph']);
 
-    const _excluded$1B = ["align", "className", "component", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"];
+    const _excluded$1C = ["align", "className", "component", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"];
     const useUtilityClasses$1l = ownerState => {
       const {
         align,
@@ -43292,7 +43297,7 @@ Please use another name.` );
           variant = 'body1',
           variantMapping = defaultVariantMapping
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1B);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1C);
       const ownerState = _extends({}, props, {
         align,
         color,
@@ -43395,7 +43400,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiAppBar', ['root', 'positionFixed', 'positionAbsolute', 'positionSticky', 'positionStatic', 'positionRelative', 'colorDefault', 'colorPrimary', 'colorSecondary', 'colorInherit', 'colorTransparent']);
 
-    const _excluded$1A = ["className", "color", "enableColorOnDark", "position"];
+    const _excluded$1B = ["className", "color", "enableColorOnDark", "position"];
     const useUtilityClasses$1k = ownerState => {
       const {
         color,
@@ -43501,7 +43506,7 @@ Please use another name.` );
           enableColorOnDark = false,
           position = 'fixed'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1A);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1B);
       const ownerState = _extends({}, props, {
         color,
         position,
@@ -43560,7 +43565,7 @@ Please use another name.` );
     } ;
     var AppBar$1 = AppBar;
 
-    const _excluded$1z = ["components", "componentsProps", "slots", "slotProps"];
+    const _excluded$1A = ["components", "componentsProps", "slots", "slotProps"];
     const PopperRoot = styled$1(PopperUnstyled$1, {
       name: 'MuiPopper',
       slot: 'Root',
@@ -43592,7 +43597,7 @@ Please use another name.` );
           slots,
           slotProps
         } = _useThemeProps,
-        other = _objectWithoutPropertiesLoose(_useThemeProps, _excluded$1z);
+        other = _objectWithoutPropertiesLoose(_useThemeProps, _excluded$1A);
       const RootComponent = (_slots$root = slots == null ? void 0 : slots.root) != null ? _slots$root : components == null ? void 0 : components.Root;
       return /*#__PURE__*/jsxRuntime.exports.jsx(PopperRoot, _extends({
         direction: theme == null ? void 0 : theme.direction,
@@ -43734,7 +43739,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiListSubheader', ['root', 'colorPrimary', 'colorInherit', 'gutters', 'inset', 'sticky']);
 
-    const _excluded$1y = ["className", "color", "component", "disableGutters", "disableSticky", "inset"];
+    const _excluded$1z = ["className", "color", "component", "disableGutters", "disableSticky", "inset"];
     const useUtilityClasses$1j = ownerState => {
       const {
         classes,
@@ -43796,7 +43801,7 @@ Please use another name.` );
           disableSticky = false,
           inset = false
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1y);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1z);
       const ownerState = _extends({}, props, {
         color,
         component,
@@ -43871,7 +43876,7 @@ Please use another name.` );
     const chipClasses = generateUtilityClasses('MuiChip', ['root', 'sizeSmall', 'sizeMedium', 'colorError', 'colorInfo', 'colorPrimary', 'colorSecondary', 'colorSuccess', 'colorWarning', 'disabled', 'clickable', 'clickableColorPrimary', 'clickableColorSecondary', 'deletable', 'deletableColorPrimary', 'deletableColorSecondary', 'outlined', 'filled', 'outlinedPrimary', 'outlinedSecondary', 'filledPrimary', 'filledSecondary', 'avatar', 'avatarSmall', 'avatarMedium', 'avatarColorPrimary', 'avatarColorSecondary', 'icon', 'iconSmall', 'iconMedium', 'iconColorPrimary', 'iconColorSecondary', 'label', 'labelSmall', 'labelMedium', 'deleteIcon', 'deleteIconSmall', 'deleteIconMedium', 'deleteIconColorPrimary', 'deleteIconColorSecondary', 'deleteIconOutlinedColorPrimary', 'deleteIconOutlinedColorSecondary', 'deleteIconFilledColorPrimary', 'deleteIconFilledColorSecondary', 'focusVisible']);
     var chipClasses$1 = chipClasses;
 
-    const _excluded$1x = ["avatar", "className", "clickable", "color", "component", "deleteIcon", "disabled", "icon", "label", "onClick", "onDelete", "onKeyDown", "onKeyUp", "size", "variant", "tabIndex", "skipFocusWhenDisabled"];
+    const _excluded$1y = ["avatar", "className", "clickable", "color", "component", "deleteIcon", "disabled", "icon", "label", "onClick", "onDelete", "onKeyDown", "onKeyUp", "size", "variant", "tabIndex", "skipFocusWhenDisabled"];
     const useUtilityClasses$1i = ownerState => {
       const {
         classes,
@@ -44152,7 +44157,7 @@ Please use another name.` );
           tabIndex,
           skipFocusWhenDisabled = false
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1x);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1y);
       const chipRef = React__namespace.useRef(null);
       const handleRef = useForkRef(chipRef, ref);
       const handleDeleteIconClick = event => {
@@ -44438,7 +44443,7 @@ Please use another name.` );
     const inputBaseClasses = generateUtilityClasses('MuiInputBase', ['root', 'formControl', 'focused', 'disabled', 'adornedStart', 'adornedEnd', 'error', 'sizeSmall', 'multiline', 'colorSecondary', 'fullWidth', 'hiddenLabel', 'readOnly', 'input', 'inputSizeSmall', 'inputMultiline', 'inputTypeSearch', 'inputAdornedStart', 'inputAdornedEnd', 'inputHiddenLabel']);
     var inputBaseClasses$1 = inputBaseClasses;
 
-    const _excluded$1w = ["aria-describedby", "autoComplete", "autoFocus", "className", "color", "components", "componentsProps", "defaultValue", "disabled", "disableInjectingGlobalStyles", "endAdornment", "error", "fullWidth", "id", "inputComponent", "inputProps", "inputRef", "margin", "maxRows", "minRows", "multiline", "name", "onBlur", "onChange", "onClick", "onFocus", "onKeyDown", "onKeyUp", "placeholder", "readOnly", "renderSuffix", "rows", "size", "slotProps", "slots", "startAdornment", "type", "value"];
+    const _excluded$1x = ["aria-describedby", "autoComplete", "autoFocus", "className", "color", "components", "componentsProps", "defaultValue", "disabled", "disableInjectingGlobalStyles", "endAdornment", "error", "fullWidth", "id", "inputComponent", "inputProps", "inputRef", "margin", "maxRows", "minRows", "multiline", "name", "onBlur", "onChange", "onClick", "onFocus", "onKeyDown", "onKeyUp", "placeholder", "readOnly", "renderSuffix", "rows", "size", "slotProps", "slots", "startAdornment", "type", "value"];
     const rootOverridesResolver = (props, styles) => {
       const {
         ownerState
@@ -44669,7 +44674,7 @@ Please use another name.` );
           type = 'text',
           value: valueProp
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1w);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1x);
       const value = inputPropsProp.value != null ? inputPropsProp.value : valueProp;
       const {
         current: isControlled
@@ -45154,7 +45159,7 @@ Please use another name.` );
     var autocompleteClasses$1 = autocompleteClasses;
 
     var _ClearIcon, _ArrowDropDownIcon;
-    const _excluded$1v = ["autoComplete", "autoHighlight", "autoSelect", "blurOnSelect", "ChipProps", "className", "clearIcon", "clearOnBlur", "clearOnEscape", "clearText", "closeText", "componentsProps", "defaultValue", "disableClearable", "disableCloseOnSelect", "disabled", "disabledItemsFocusable", "disableListWrap", "disablePortal", "filterOptions", "filterSelectedOptions", "forcePopupIcon", "freeSolo", "fullWidth", "getLimitTagsText", "getOptionDisabled", "getOptionLabel", "isOptionEqualToValue", "groupBy", "handleHomeEndKeys", "id", "includeInputInList", "inputValue", "limitTags", "ListboxComponent", "ListboxProps", "loading", "loadingText", "multiple", "noOptionsText", "onChange", "onClose", "onHighlightChange", "onInputChange", "onOpen", "open", "openOnFocus", "openText", "options", "PaperComponent", "PopperComponent", "popupIcon", "readOnly", "renderGroup", "renderInput", "renderOption", "renderTags", "selectOnFocus", "size", "slotProps", "value"];
+    const _excluded$1w = ["autoComplete", "autoHighlight", "autoSelect", "blurOnSelect", "ChipProps", "className", "clearIcon", "clearOnBlur", "clearOnEscape", "clearText", "closeText", "componentsProps", "defaultValue", "disableClearable", "disableCloseOnSelect", "disabled", "disabledItemsFocusable", "disableListWrap", "disablePortal", "filterOptions", "filterSelectedOptions", "forcePopupIcon", "freeSolo", "fullWidth", "getLimitTagsText", "getOptionDisabled", "getOptionLabel", "isOptionEqualToValue", "groupBy", "handleHomeEndKeys", "id", "includeInputInList", "inputValue", "limitTags", "ListboxComponent", "ListboxProps", "loading", "loadingText", "multiple", "noOptionsText", "onChange", "onClose", "onHighlightChange", "onInputChange", "onOpen", "open", "openOnFocus", "openText", "options", "PaperComponent", "PopperComponent", "popupIcon", "readOnly", "renderGroup", "renderInput", "renderOption", "renderTags", "selectOnFocus", "size", "slotProps", "value"];
     const useUtilityClasses$1g = ownerState => {
       const {
         classes,
@@ -45539,7 +45544,7 @@ Please use another name.` );
           size = 'medium',
           slotProps = {}
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1v);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1w);
       /* eslint-enable @typescript-eslint/no-unused-vars */
 
       const {
@@ -46154,7 +46159,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiAvatar', ['root', 'colorDefault', 'circular', 'rounded', 'square', 'img', 'fallback']);
 
-    const _excluded$1u = ["alt", "children", "className", "component", "imgProps", "sizes", "src", "srcSet", "variant"];
+    const _excluded$1v = ["alt", "children", "className", "component", "imgProps", "sizes", "src", "srcSet", "variant"];
     const useUtilityClasses$1f = ownerState => {
       const {
         classes,
@@ -46282,7 +46287,7 @@ Please use another name.` );
           srcSet,
           variant = 'circular'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1u);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1v);
       let children = null;
 
       // Use a hook instead of onError on the img element to support server-side rendering.
@@ -46383,7 +46388,7 @@ Please use another name.` );
     } ;
     var Avatar$1 = Avatar;
 
-    const _excluded$1t = ["addEndListener", "appear", "children", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "style", "timeout", "TransitionComponent"];
+    const _excluded$1u = ["addEndListener", "appear", "children", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "style", "timeout", "TransitionComponent"];
     const styles$4 = {
       entering: {
         opacity: 1
@@ -46420,7 +46425,7 @@ Please use another name.` );
           // eslint-disable-next-line react/prop-types
           TransitionComponent = Transition$1
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1t);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1u);
       const nodeRef = React__namespace.useRef(null);
       const handleRef = useForkRef(nodeRef, children.ref, ref);
       const normalizedTransitionCallback = callback => maybeIsAppearing => {
@@ -46581,7 +46586,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiBackdrop', ['root', 'invisible']);
 
-    const _excluded$1s = ["children", "component", "components", "componentsProps", "className", "invisible", "open", "slotProps", "slots", "transitionDuration", "TransitionComponent"];
+    const _excluded$1t = ["children", "component", "components", "componentsProps", "className", "invisible", "open", "slotProps", "slots", "transitionDuration", "TransitionComponent"];
     const useUtilityClasses$1e = ownerState => {
       const {
         classes,
@@ -46637,7 +46642,7 @@ Please use another name.` );
           // eslint-disable-next-line react/prop-types
           TransitionComponent = Fade$1
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1s);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1t);
       const ownerState = _extends({}, props, {
         component,
         invisible
@@ -46765,7 +46770,7 @@ Please use another name.` );
     'anchorOriginTopLeftCircular', 'anchorOriginTopLeftRectangular', 'anchorOriginTopRightCircular', 'anchorOriginTopRightRectangular', 'anchorOriginBottomLeftCircular', 'anchorOriginBottomLeftRectangular', 'anchorOriginBottomRightCircular', 'anchorOriginBottomRightRectangular']);
     var badgeClasses$1 = badgeClasses;
 
-    const _excluded$1r = ["anchorOrigin", "className", "component", "components", "componentsProps", "overlap", "color", "invisible", "max", "badgeContent", "slots", "slotProps", "showZero", "variant"];
+    const _excluded$1s = ["anchorOrigin", "className", "component", "components", "componentsProps", "overlap", "color", "invisible", "max", "badgeContent", "slots", "slotProps", "showZero", "variant"];
     const RADIUS_STANDARD = 10;
     const RADIUS_DOT = 4;
     const useUtilityClasses$1d = ownerState => {
@@ -46932,7 +46937,7 @@ Please use another name.` );
           showZero = false,
           variant: variantProp = 'standard'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1r);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1s);
       const prevProps = usePreviousProps$1({
         anchorOrigin: anchorOriginProp,
         color: colorProp,
@@ -47162,7 +47167,7 @@ Please use another name.` );
     }
     var ButtonGroupContext$1 = ButtonGroupContext;
 
-    const _excluded$1q = ["children", "color", "component", "className", "disabled", "disableElevation", "disableFocusRipple", "endIcon", "focusVisibleClassName", "fullWidth", "size", "startIcon", "type", "variant"];
+    const _excluded$1r = ["children", "color", "component", "className", "disabled", "disableElevation", "disableFocusRipple", "endIcon", "focusVisibleClassName", "fullWidth", "size", "startIcon", "type", "variant"];
     const useUtilityClasses$1c = ownerState => {
       const {
         color,
@@ -47388,7 +47393,7 @@ Please use another name.` );
           type,
           variant = 'text'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1q);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1r);
       const ownerState = _extends({}, props, {
         color,
         component,
@@ -47526,7 +47531,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiCard', ['root']);
 
-    const _excluded$1p = ["className", "raised"];
+    const _excluded$1q = ["className", "raised"];
     const useUtilityClasses$1b = ownerState => {
       const {
         classes
@@ -47554,7 +47559,7 @@ Please use another name.` );
           className,
           raised = false
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1p);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1q);
       const ownerState = _extends({}, props, {
         raised
       });
@@ -47605,7 +47610,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiCardContent', ['root']);
 
-    const _excluded$1o = ["className", "component"];
+    const _excluded$1p = ["className", "component"];
     const useUtilityClasses$1a = ownerState => {
       const {
         classes
@@ -47636,7 +47641,7 @@ Please use another name.` );
           className,
           component = 'div'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1o);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1p);
       const ownerState = _extends({}, props, {
         component
       });
@@ -47683,7 +47688,7 @@ Please use another name.` );
     const cardHeaderClasses = generateUtilityClasses('MuiCardHeader', ['root', 'avatar', 'action', 'content', 'title', 'subheader']);
     var cardHeaderClasses$1 = cardHeaderClasses;
 
-    const _excluded$1n = ["action", "avatar", "className", "component", "disableTypography", "subheader", "subheaderTypographyProps", "title", "titleTypographyProps"];
+    const _excluded$1o = ["action", "avatar", "className", "component", "disableTypography", "subheader", "subheaderTypographyProps", "title", "titleTypographyProps"];
     const useUtilityClasses$19 = ownerState => {
       const {
         classes
@@ -47753,7 +47758,7 @@ Please use another name.` );
           title: titleProp,
           titleTypographyProps
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1n);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1o);
       const ownerState = _extends({}, props, {
         component,
         disableTypography
@@ -47871,7 +47876,7 @@ Please use another name.` );
     }
     generateUtilityClasses('PrivateSwitchBase', ['root', 'checked', 'disabled', 'input', 'edgeStart', 'edgeEnd']);
 
-    const _excluded$1m = ["autoFocus", "checked", "checkedIcon", "className", "defaultChecked", "disabled", "disableFocusRipple", "edge", "icon", "id", "inputProps", "inputRef", "name", "onBlur", "onChange", "onFocus", "readOnly", "required", "tabIndex", "type", "value"];
+    const _excluded$1n = ["autoFocus", "checked", "checkedIcon", "className", "defaultChecked", "disabled", "disableFocusRipple", "edge", "icon", "id", "inputProps", "inputRef", "name", "onBlur", "onChange", "onFocus", "readOnly", "required", "tabIndex", "type", "value"];
     const useUtilityClasses$18 = ownerState => {
       const {
         classes,
@@ -47935,7 +47940,7 @@ Please use another name.` );
           type,
           value
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1m);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1n);
       const [checked, setCheckedState] = useControlled({
         controlled: checkedProp,
         default: Boolean(defaultChecked),
@@ -48145,7 +48150,7 @@ Please use another name.` );
     const checkboxClasses = generateUtilityClasses('MuiCheckbox', ['root', 'checked', 'disabled', 'indeterminate', 'colorPrimary', 'colorSecondary']);
     var checkboxClasses$1 = checkboxClasses;
 
-    const _excluded$1l = ["checkedIcon", "color", "icon", "indeterminate", "indeterminateIcon", "inputProps", "size", "className"];
+    const _excluded$1m = ["checkedIcon", "color", "icon", "indeterminate", "indeterminateIcon", "inputProps", "size", "className"];
     const useUtilityClasses$17 = ownerState => {
       const {
         classes,
@@ -48208,7 +48213,7 @@ Please use another name.` );
           size = 'medium',
           className
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1l);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1m);
       const icon = indeterminate ? indeterminateIconProp : iconProp;
       const indeterminateIcon = indeterminate ? indeterminateIconProp : checkedIcon;
       const ownerState = _extends({}, props, {
@@ -48429,7 +48434,7 @@ Please use another name.` );
       enableColorScheme: PropTypes.bool
     } ;
 
-    const _excluded$1k = ["BackdropComponent", "BackdropProps", "closeAfterTransition", "children", "component", "components", "componentsProps", "disableAutoFocus", "disableEnforceFocus", "disableEscapeKeyDown", "disablePortal", "disableRestoreFocus", "disableScrollLock", "hideBackdrop", "keepMounted", "slotProps", "slots", "theme"];
+    const _excluded$1l = ["BackdropComponent", "BackdropProps", "closeAfterTransition", "children", "component", "components", "componentsProps", "disableAutoFocus", "disableEnforceFocus", "disableEscapeKeyDown", "disablePortal", "disableRestoreFocus", "disableScrollLock", "hideBackdrop", "keepMounted", "slotProps", "slots", "theme"];
     const extendUtilityClasses$1 = ownerState => {
       return ownerState.classes;
     };
@@ -48505,7 +48510,7 @@ Please use another name.` );
           // eslint-disable-next-line react/prop-types
           theme
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1k);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1l);
       const [exited, setExited] = React__namespace.useState(true);
       const commonProps = {
         closeAfterTransition,
@@ -48727,7 +48732,7 @@ Please use another name.` );
     }
     var DialogContext$1 = DialogContext;
 
-    const _excluded$1j = ["aria-describedby", "aria-labelledby", "BackdropComponent", "BackdropProps", "children", "className", "disableEscapeKeyDown", "fullScreen", "fullWidth", "maxWidth", "onBackdropClick", "onClose", "open", "PaperComponent", "PaperProps", "scroll", "TransitionComponent", "transitionDuration", "TransitionProps"];
+    const _excluded$1k = ["aria-describedby", "aria-labelledby", "BackdropComponent", "BackdropProps", "children", "className", "disableEscapeKeyDown", "fullScreen", "fullWidth", "maxWidth", "onBackdropClick", "onClose", "open", "PaperComponent", "PaperProps", "scroll", "TransitionComponent", "transitionDuration", "TransitionProps"];
     const DialogBackdrop = styled$1(Backdrop$1, {
       name: 'MuiDialog',
       slot: 'Backdrop',
@@ -48889,7 +48894,7 @@ Please use another name.` );
           transitionDuration = defaultTransitionDuration,
           TransitionProps
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1j);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1k);
       const ownerState = _extends({}, props, {
         disableEscapeKeyDown,
         fullScreen,
@@ -49105,7 +49110,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiDialogActions', ['root', 'spacing']);
 
-    const _excluded$1i = ["className", "disableSpacing"];
+    const _excluded$1j = ["className", "disableSpacing"];
     const useUtilityClasses$15 = ownerState => {
       const {
         classes,
@@ -49147,7 +49152,7 @@ Please use another name.` );
           className,
           disableSpacing = false
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1i);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1j);
       const ownerState = _extends({}, props, {
         disableSpacing
       });
@@ -49198,7 +49203,7 @@ Please use another name.` );
     const dialogTitleClasses = generateUtilityClasses('MuiDialogTitle', ['root']);
     var dialogTitleClasses$1 = dialogTitleClasses;
 
-    const _excluded$1h = ["className", "dividers"];
+    const _excluded$1i = ["className", "dividers"];
     const useUtilityClasses$14 = ownerState => {
       const {
         classes,
@@ -49245,7 +49250,7 @@ Please use another name.` );
           className,
           dividers = false
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1h);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1i);
       const ownerState = _extends({}, props, {
         dividers
       });
@@ -49290,7 +49295,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiDialogContentText', ['root']);
 
-    const _excluded$1g = ["children", "className"];
+    const _excluded$1h = ["children", "className"];
     const useUtilityClasses$13 = ownerState => {
       const {
         classes
@@ -49315,7 +49320,7 @@ Please use another name.` );
       const {
           className
         } = props,
-        ownerState = _objectWithoutPropertiesLoose(props, _excluded$1g);
+        ownerState = _objectWithoutPropertiesLoose(props, _excluded$1h);
       const classes = useUtilityClasses$13(ownerState);
       return /*#__PURE__*/jsxRuntime.exports.jsx(DialogContentTextRoot, _extends({
         component: "p",
@@ -49352,7 +49357,7 @@ Please use another name.` );
     } ;
     var DialogContentText$1 = DialogContentText;
 
-    const _excluded$1f = ["className", "id"];
+    const _excluded$1g = ["className", "id"];
     const useUtilityClasses$12 = ownerState => {
       const {
         classes
@@ -49379,7 +49384,7 @@ Please use another name.` );
           className,
           id: idProp
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1f);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1g);
       const ownerState = props;
       const classes = useUtilityClasses$12(ownerState);
       const {
@@ -49425,7 +49430,7 @@ Please use another name.` );
     const dividerClasses = generateUtilityClasses('MuiDivider', ['root', 'absolute', 'fullWidth', 'inset', 'middle', 'flexItem', 'light', 'vertical', 'withChildren', 'withChildrenVertical', 'textAlignRight', 'textAlignLeft', 'wrapper', 'wrapperVertical']);
     var dividerClasses$1 = dividerClasses;
 
-    const _excluded$1e = ["disableUnderline", "components", "componentsProps", "fullWidth", "hiddenLabel", "inputComponent", "multiline", "slotProps", "slots", "type"];
+    const _excluded$1f = ["disableUnderline", "components", "componentsProps", "fullWidth", "hiddenLabel", "inputComponent", "multiline", "slotProps", "slots", "type"];
     const useUtilityClasses$11 = ownerState => {
       const {
         classes,
@@ -49609,7 +49614,7 @@ Please use another name.` );
           slots = {},
           type = 'text'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1e);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1f);
       const ownerState = _extends({}, props, {
         fullWidth,
         inputComponent,
@@ -49844,7 +49849,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiFormControl', ['root', 'marginNone', 'marginNormal', 'marginDense', 'fullWidth', 'disabled']);
 
-    const _excluded$1d = ["children", "className", "color", "component", "disabled", "error", "focused", "fullWidth", "hiddenLabel", "margin", "required", "size", "variant"];
+    const _excluded$1e = ["children", "className", "color", "component", "disabled", "error", "focused", "fullWidth", "hiddenLabel", "margin", "required", "size", "variant"];
     const useUtilityClasses$10 = ownerState => {
       const {
         classes,
@@ -49930,7 +49935,7 @@ Please use another name.` );
           size = 'medium',
           variant = 'outlined'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1d);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1e);
       const ownerState = _extends({}, props, {
         color,
         component,
@@ -50125,7 +50130,7 @@ Please use another name.` );
     const formControlLabelClasses = generateUtilityClasses('MuiFormControlLabel', ['root', 'labelPlacementStart', 'labelPlacementTop', 'labelPlacementBottom', 'disabled', 'label', 'error']);
     var formControlLabelClasses$1 = formControlLabelClasses;
 
-    const _excluded$1c = ["checked", "className", "componentsProps", "control", "disabled", "disableTypography", "inputRef", "label", "labelPlacement", "name", "onChange", "slotProps", "value"];
+    const _excluded$1d = ["checked", "className", "componentsProps", "control", "disabled", "disableTypography", "inputRef", "label", "labelPlacement", "name", "onChange", "slotProps", "value"];
     const useUtilityClasses$$ = ownerState => {
       const {
         classes,
@@ -50205,7 +50210,7 @@ Please use another name.` );
           labelPlacement = 'end',
           slotProps = {}
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1c);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1d);
       const muiFormControl = useFormControl();
       let disabled = disabledProp;
       if (typeof disabled === 'undefined' && typeof control.props.disabled !== 'undefined') {
@@ -50334,7 +50339,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiFormGroup', ['root', 'row', 'error']);
 
-    const _excluded$1b = ["className", "row"];
+    const _excluded$1c = ["className", "row"];
     const useUtilityClasses$_ = ownerState => {
       const {
         classes,
@@ -50379,7 +50384,7 @@ Please use another name.` );
           className,
           row = false
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1b);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1c);
       const muiFormControl = useFormControl();
       const fcs = formControlState({
         props,
@@ -50433,7 +50438,7 @@ Please use another name.` );
     var formHelperTextClasses$1 = formHelperTextClasses;
 
     var _span$3;
-    const _excluded$1a = ["children", "className", "component", "disabled", "error", "filled", "focused", "margin", "required", "variant"];
+    const _excluded$1b = ["children", "className", "component", "disabled", "error", "filled", "focused", "margin", "required", "variant"];
     const useUtilityClasses$Z = ownerState => {
       const {
         classes,
@@ -50492,7 +50497,7 @@ Please use another name.` );
           className,
           component = 'p'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$1a);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1b);
       const muiFormControl = useFormControl();
       const fcs = formControlState({
         props,
@@ -50590,7 +50595,7 @@ Please use another name.` );
     const formLabelClasses = generateUtilityClasses('MuiFormLabel', ['root', 'colorSecondary', 'focused', 'disabled', 'error', 'filled', 'required', 'asterisk']);
     var formLabelClasses$1 = formLabelClasses;
 
-    const _excluded$19 = ["children", "className", "color", "component", "disabled", "error", "filled", "focused", "required"];
+    const _excluded$1a = ["children", "className", "color", "component", "disabled", "error", "filled", "focused", "required"];
     const useUtilityClasses$Y = ownerState => {
       const {
         classes,
@@ -50655,7 +50660,7 @@ Please use another name.` );
           className,
           component = 'label'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$19);
+        other = _objectWithoutPropertiesLoose(props, _excluded$1a);
       const muiFormControl = useFormControl();
       const fcs = formControlState({
         props,
@@ -50767,7 +50772,7 @@ Please use another name.` );
     // grid sizes for all breakpoints
     ...GRID_SIZES.map(size => `grid-xs-${size}`), ...GRID_SIZES.map(size => `grid-sm-${size}`), ...GRID_SIZES.map(size => `grid-md-${size}`), ...GRID_SIZES.map(size => `grid-lg-${size}`), ...GRID_SIZES.map(size => `grid-xl-${size}`)]);
 
-    const _excluded$18 = ["className", "columns", "columnSpacing", "component", "container", "direction", "item", "rowSpacing", "spacing", "wrap", "zeroMinWidth"];
+    const _excluded$19 = ["className", "columns", "columnSpacing", "component", "container", "direction", "item", "rowSpacing", "spacing", "wrap", "zeroMinWidth"];
     function getOffset(val) {
       const parse = parseFloat(val);
       return `${parse}${String(val).replace(String(parse), '') || 'px'}`;
@@ -51127,7 +51132,7 @@ Please use another name.` );
           wrap = 'wrap',
           zeroMinWidth = false
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$18);
+        other = _objectWithoutPropertiesLoose(props, _excluded$19);
       const rowSpacing = rowSpacingProp || spacing;
       const columnSpacing = columnSpacingProp || spacing;
       const columnsContext = React__namespace.useContext(GridContext$1);
@@ -51310,7 +51315,7 @@ Please use another name.` );
     }
     var Grid$1 = Grid;
 
-    const _excluded$17 = ["addEndListener", "appear", "children", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "style", "timeout", "TransitionComponent"];
+    const _excluded$18 = ["addEndListener", "appear", "children", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "style", "timeout", "TransitionComponent"];
     function getScale(value) {
       return `scale(${value}, ${value ** 2})`;
     }
@@ -51354,7 +51359,7 @@ Please use another name.` );
           // eslint-disable-next-line react/prop-types
           TransitionComponent = Transition$1
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$17);
+        other = _objectWithoutPropertiesLoose(props, _excluded$18);
       const timer = React__namespace.useRef();
       const autoTimeout = React__namespace.useRef();
       const theme = useTheme();
@@ -51668,7 +51673,7 @@ Please use another name.` );
       return match;
     }
 
-    const _excluded$16 = ["initialWidth", "width"];
+    const _excluded$17 = ["initialWidth", "width"];
     const breakpointKeys = ['xs', 'sm', 'md', 'lg', 'xl'];
 
     // By default, returns true if screen width is the same or greater than the given breakpoint.
@@ -51704,7 +51709,7 @@ Please use another name.` );
             initialWidth,
             width
           } = _getThemeProps,
-          other = _objectWithoutPropertiesLoose(_getThemeProps, _excluded$16);
+          other = _objectWithoutPropertiesLoose(_getThemeProps, _excluded$17);
         const [mountedState, setMountedState] = React__namespace.useState(false);
         useEnhancedEffect$1(() => {
           setMountedState(true);
@@ -51884,7 +51889,7 @@ Please use another name.` );
     }
     generateUtilityClasses('PrivateHiddenCss', ['root', 'xlDown', 'xlUp', 'onlyXl', 'lgDown', 'lgUp', 'onlyLg', 'mdDown', 'mdUp', 'onlyMd', 'smDown', 'smUp', 'onlySm', 'xsDown', 'xsUp', 'onlyXs']);
 
-    const _excluded$15 = ["children", "className", "only"];
+    const _excluded$16 = ["children", "className", "only"];
     const useUtilityClasses$W = ownerState => {
       const {
         classes,
@@ -51941,7 +51946,7 @@ Please use another name.` );
           className,
           only
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$15);
+        other = _objectWithoutPropertiesLoose(props, _excluded$16);
       const theme = useTheme();
       {
         const unknownProps = Object.keys(other).filter(propName => {
@@ -52051,7 +52056,7 @@ Please use another name.` );
       xsUp: PropTypes.bool
     } ;
 
-    const _excluded$14 = ["implementation", "lgDown", "lgUp", "mdDown", "mdUp", "smDown", "smUp", "xlDown", "xlUp", "xsDown", "xsUp"];
+    const _excluded$15 = ["implementation", "lgDown", "lgUp", "mdDown", "mdUp", "smDown", "smUp", "xlDown", "xlUp", "xsDown", "xsUp"];
     function Hidden(props) {
       const {
           implementation = 'js',
@@ -52066,7 +52071,7 @@ Please use another name.` );
           xsDown = false,
           xsUp = false
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$14);
+        other = _objectWithoutPropertiesLoose(props, _excluded$15);
       if (implementation === 'js') {
         return /*#__PURE__*/jsxRuntime.exports.jsx(HiddenJs$1, _extends({
           lgDown: lgDown,
@@ -52177,7 +52182,7 @@ Please use another name.` );
       xsUp: PropTypes.bool
     } ;
 
-    const _excluded$13 = ["disableUnderline", "components", "componentsProps", "fullWidth", "inputComponent", "multiline", "slotProps", "slots", "type"];
+    const _excluded$14 = ["disableUnderline", "components", "componentsProps", "fullWidth", "inputComponent", "multiline", "slotProps", "slots", "type"];
     const useUtilityClasses$V = ownerState => {
       const {
         classes,
@@ -52290,7 +52295,7 @@ Please use another name.` );
           slots = {},
           type = 'text'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$13);
+        other = _objectWithoutPropertiesLoose(props, _excluded$14);
       const classes = useUtilityClasses$V(props);
       const ownerState = {
         disableUnderline
@@ -52514,7 +52519,7 @@ Please use another name.` );
     var inputAdornmentClasses$1 = inputAdornmentClasses;
 
     var _span$2;
-    const _excluded$12 = ["children", "className", "component", "disablePointerEvents", "disableTypography", "position", "variant"];
+    const _excluded$13 = ["children", "className", "component", "disablePointerEvents", "disableTypography", "position", "variant"];
     const overridesResolver$3 = (props, styles) => {
       const {
         ownerState
@@ -52579,7 +52584,7 @@ Please use another name.` );
           position,
           variant: variantProp
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$12);
+        other = _objectWithoutPropertiesLoose(props, _excluded$13);
       const muiFormControl = useFormControl() || {};
       let variant = variantProp;
       if (variantProp && muiFormControl.variant) {
@@ -52675,7 +52680,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiInputLabel', ['root', 'focused', 'disabled', 'error', 'required', 'asterisk', 'formControl', 'sizeSmall', 'shrink', 'animated', 'standard', 'filled', 'outlined']);
 
-    const _excluded$11 = ["disableAnimation", "margin", "shrink", "variant", "className"];
+    const _excluded$12 = ["disableAnimation", "margin", "shrink", "variant", "className"];
     const useUtilityClasses$T = ownerState => {
       const {
         classes,
@@ -52775,7 +52780,7 @@ Please use another name.` );
           shrink: shrinkProp,
           className
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$11);
+        other = _objectWithoutPropertiesLoose(props, _excluded$12);
       const muiFormControl = useFormControl();
       let shrink = shrinkProp;
       if (typeof shrink === 'undefined' && muiFormControl) {
@@ -52887,7 +52892,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiList', ['root', 'padding', 'dense', 'subheader']);
 
-    const _excluded$10 = ["children", "className", "component", "dense", "disablePadding", "subheader"];
+    const _excluded$11 = ["children", "className", "component", "dense", "disablePadding", "subheader"];
     const useUtilityClasses$S = ownerState => {
       const {
         classes,
@@ -52935,7 +52940,7 @@ Please use another name.` );
           disablePadding = false,
           subheader
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$10);
+        other = _objectWithoutPropertiesLoose(props, _excluded$11);
       const context = React__namespace.useMemo(() => ({
         dense
       }), [dense]);
@@ -53016,7 +53021,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiListItemSecondaryAction', ['root', 'disableGutters']);
 
-    const _excluded$$ = ["className"];
+    const _excluded$10 = ["className"];
     const useUtilityClasses$R = ownerState => {
       const {
         disableGutters,
@@ -53058,7 +53063,7 @@ Please use another name.` );
       const {
           className
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$$);
+        other = _objectWithoutPropertiesLoose(props, _excluded$10);
       const context = React__namespace.useContext(ListContext$1);
       const ownerState = _extends({}, props, {
         disableGutters: context.disableGutters
@@ -53095,7 +53100,7 @@ Please use another name.` );
     ListItemSecondaryAction.muiName = 'ListItemSecondaryAction';
     var ListItemSecondaryAction$1 = ListItemSecondaryAction;
 
-    const _excluded$_ = ["className"],
+    const _excluded$$ = ["className"],
       _excluded2$2 = ["alignItems", "autoFocus", "button", "children", "className", "component", "components", "componentsProps", "ContainerComponent", "ContainerProps", "dense", "disabled", "disableGutters", "disablePadding", "divider", "focusVisibleClassName", "secondaryAction", "selected", "slotProps", "slots"];
     const overridesResolver$2 = (props, styles) => {
       const {
@@ -53237,7 +53242,7 @@ Please use another name.` );
           slotProps = {},
           slots = {}
         } = props,
-        ContainerProps = _objectWithoutPropertiesLoose(props.ContainerProps, _excluded$_),
+        ContainerProps = _objectWithoutPropertiesLoose(props.ContainerProps, _excluded$$),
         other = _objectWithoutPropertiesLoose(props, _excluded2$2);
       const context = React__namespace.useContext(ListContext$1);
       const childContext = React__namespace.useMemo(() => ({
@@ -53499,7 +53504,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiListItemAvatar', ['root', 'alignItemsFlexStart']);
 
-    const _excluded$Z = ["className"];
+    const _excluded$_ = ["className"];
     const useUtilityClasses$P = ownerState => {
       const {
         alignItems,
@@ -53539,7 +53544,7 @@ Please use another name.` );
       const {
           className
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$Z);
+        other = _objectWithoutPropertiesLoose(props, _excluded$_);
       const context = React__namespace.useContext(ListContext$1);
       const ownerState = _extends({}, props, {
         alignItems: context.alignItems
@@ -53584,7 +53589,7 @@ Please use another name.` );
     const listItemTextClasses = generateUtilityClasses('MuiListItemText', ['root', 'multiline', 'dense', 'inset', 'primary', 'secondary']);
     var listItemTextClasses$1 = listItemTextClasses;
 
-    const _excluded$Y = ["children", "className", "disableTypography", "inset", "primary", "primaryTypographyProps", "secondary", "secondaryTypographyProps"];
+    const _excluded$Z = ["children", "className", "disableTypography", "inset", "primary", "primaryTypographyProps", "secondary", "secondaryTypographyProps"];
     const useUtilityClasses$O = ownerState => {
       const {
         classes,
@@ -53641,7 +53646,7 @@ Please use another name.` );
           secondary: secondaryProp,
           secondaryTypographyProps
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$Y);
+        other = _objectWithoutPropertiesLoose(props, _excluded$Z);
       const {
         dense
       } = React__namespace.useContext(ListContext$1);
@@ -53739,7 +53744,7 @@ Please use another name.` );
     } ;
     var ListItemText$1 = ListItemText;
 
-    const _excluded$X = ["actions", "autoFocus", "autoFocusItem", "children", "className", "disabledItemsFocusable", "disableListWrap", "onKeyDown", "variant"];
+    const _excluded$Y = ["actions", "autoFocus", "autoFocusItem", "children", "className", "disabledItemsFocusable", "disableListWrap", "onKeyDown", "variant"];
     function nextItem$1(list, item, disableListWrap) {
       if (list === item) {
         return list.firstChild;
@@ -53821,7 +53826,7 @@ Please use another name.` );
           onKeyDown,
           variant = 'selectedMenu'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$X);
+        other = _objectWithoutPropertiesLoose(props, _excluded$Y);
       const listRef = React__namespace.useRef(null);
       const textCriteriaRef = React__namespace.useRef({
         keys: [],
@@ -54000,7 +54005,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiPopover', ['root', 'paper']);
 
-    const _excluded$W = ["onEntering"],
+    const _excluded$X = ["onEntering"],
       _excluded2$1 = ["action", "anchorEl", "anchorOrigin", "anchorPosition", "anchorReference", "children", "className", "container", "elevation", "marginThreshold", "open", "PaperProps", "transformOrigin", "TransitionComponent", "transitionDuration", "TransitionProps"];
     function getOffsetTop(rect, vertical) {
       let offset = 0;
@@ -54093,7 +54098,7 @@ Please use another name.` );
             onEntering
           } = {}
         } = props,
-        TransitionProps = _objectWithoutPropertiesLoose(props.TransitionProps, _excluded$W),
+        TransitionProps = _objectWithoutPropertiesLoose(props.TransitionProps, _excluded$X),
         other = _objectWithoutPropertiesLoose(props, _excluded2$1);
       const paperRef = React__namespace.useRef();
       const handlePaperRef = useForkRef(paperRef, PaperProps.ref);
@@ -54454,7 +54459,7 @@ Please use another name.` );
     }
     generateUtilityClasses('MuiMenu', ['root', 'paper', 'list']);
 
-    const _excluded$V = ["onEntering"],
+    const _excluded$W = ["onEntering"],
       _excluded2 = ["autoFocus", "children", "disableAutoFocusItem", "MenuListProps", "onClose", "open", "PaperProps", "PopoverClasses", "transitionDuration", "TransitionProps", "variant"];
     const RTL_ORIGIN = {
       vertical: 'top',
@@ -54521,7 +54526,7 @@ Please use another name.` );
           } = {},
           variant = 'selectedMenu'
         } = props,
-        TransitionProps = _objectWithoutPropertiesLoose(props.TransitionProps, _excluded$V),
+        TransitionProps = _objectWithoutPropertiesLoose(props.TransitionProps, _excluded$W),
         other = _objectWithoutPropertiesLoose(props, _excluded2);
       const theme = useTheme();
       const isRtl = theme.direction === 'rtl';
@@ -54708,7 +54713,7 @@ Please use another name.` );
     const menuItemClasses = generateUtilityClasses('MuiMenuItem', ['root', 'focusVisible', 'dense', 'disabled', 'divider', 'gutters', 'selected']);
     var menuItemClasses$1 = menuItemClasses;
 
-    const _excluded$U = ["autoFocus", "component", "dense", "divider", "disableGutters", "focusVisibleClassName", "role", "tabIndex", "className"];
+    const _excluded$V = ["autoFocus", "component", "dense", "divider", "disableGutters", "focusVisibleClassName", "role", "tabIndex", "className"];
     const overridesResolver$1 = (props, styles) => {
       const {
         ownerState
@@ -54830,7 +54835,7 @@ Please use another name.` );
           tabIndex: tabIndexProp,
           className
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$U);
+        other = _objectWithoutPropertiesLoose(props, _excluded$V);
       const context = React__namespace.useContext(ListContext$1);
       const childContext = React__namespace.useMemo(() => ({
         dense: dense || context.dense || false,
@@ -54954,7 +54959,7 @@ Please use another name.` );
     const nativeSelectClasses = generateUtilityClasses('MuiNativeSelect', ['root', 'select', 'multiple', 'filled', 'outlined', 'standard', 'disabled', 'icon', 'iconOpen', 'iconFilled', 'iconOutlined', 'iconStandard', 'nativeInput']);
     var nativeSelectClasses$1 = nativeSelectClasses;
 
-    const _excluded$T = ["className", "disabled", "IconComponent", "inputRef", "variant"];
+    const _excluded$U = ["className", "disabled", "IconComponent", "inputRef", "variant"];
     const useUtilityClasses$K = ownerState => {
       const {
         classes,
@@ -55081,7 +55086,7 @@ Please use another name.` );
           inputRef,
           variant = 'standard'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$T);
+        other = _objectWithoutPropertiesLoose(props, _excluded$U);
       const ownerState = _extends({}, props, {
         disabled,
         variant
@@ -55155,7 +55160,7 @@ Please use another name.` );
     var NativeSelectInput$1 = NativeSelectInput;
 
     var _span$1;
-    const _excluded$S = ["children", "classes", "className", "label", "notched"];
+    const _excluded$T = ["children", "classes", "className", "label", "notched"];
     const NotchedOutlineRoot$1 = styled$1('fieldset')({
       textAlign: 'left',
       position: 'absolute',
@@ -55228,7 +55233,7 @@ Please use another name.` );
           label,
           notched
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$S);
+        other = _objectWithoutPropertiesLoose(props, _excluded$T);
       const withLabel = label != null && label !== '';
       const ownerState = _extends({}, props, {
         notched,
@@ -55279,7 +55284,7 @@ Please use another name.` );
       style: PropTypes.object
     } ;
 
-    const _excluded$R = ["components", "fullWidth", "inputComponent", "label", "multiline", "notched", "slots", "type"];
+    const _excluded$S = ["components", "fullWidth", "inputComponent", "label", "multiline", "notched", "slots", "type"];
     const useUtilityClasses$J = ownerState => {
       const {
         classes
@@ -55398,7 +55403,7 @@ Please use another name.` );
           slots = {},
           type = 'text'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$R);
+        other = _objectWithoutPropertiesLoose(props, _excluded$S);
       const classes = useUtilityClasses$J(props);
       const muiFormControl = useFormControl();
       const fcs = formControlState({
@@ -55710,7 +55715,7 @@ Please use another name.` );
     const radioClasses = generateUtilityClasses('MuiRadio', ['root', 'checked', 'disabled', 'colorPrimary', 'colorSecondary']);
     var radioClasses$1 = radioClasses;
 
-    const _excluded$Q = ["checked", "checkedIcon", "color", "icon", "name", "onChange", "size", "className"];
+    const _excluded$R = ["checked", "checkedIcon", "color", "icon", "name", "onChange", "size", "className"];
     const useUtilityClasses$I = ownerState => {
       const {
         classes,
@@ -55781,7 +55786,7 @@ Please use another name.` );
           size = 'medium',
           className
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$Q);
+        other = _objectWithoutPropertiesLoose(props, _excluded$R);
       const ownerState = _extends({}, props, {
         color,
         size
@@ -55903,7 +55908,7 @@ Please use another name.` );
     } ;
     var Radio$1 = Radio;
 
-    const _excluded$P = ["actions", "children", "defaultValue", "name", "onChange", "value"];
+    const _excluded$Q = ["actions", "children", "defaultValue", "name", "onChange", "value"];
     const RadioGroup = /*#__PURE__*/React__namespace.forwardRef(function RadioGroup(props, ref) {
       const {
           // private
@@ -55915,7 +55920,7 @@ Please use another name.` );
           onChange,
           value: valueProp
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$P);
+        other = _objectWithoutPropertiesLoose(props, _excluded$Q);
       const rootRef = React__namespace.useRef(null);
       const [value, setValueState] = useControlled({
         controlled: valueProp,
@@ -55995,7 +56000,7 @@ Please use another name.` );
     var selectClasses$1 = selectClasses;
 
     var _span;
-    const _excluded$O = ["aria-describedby", "aria-label", "autoFocus", "autoWidth", "children", "className", "defaultOpen", "defaultValue", "disabled", "displayEmpty", "IconComponent", "inputRef", "labelId", "MenuProps", "multiple", "name", "onBlur", "onChange", "onClose", "onFocus", "onOpen", "open", "readOnly", "renderValue", "SelectDisplayProps", "tabIndex", "type", "value", "variant"];
+    const _excluded$P = ["aria-describedby", "aria-label", "autoFocus", "autoWidth", "children", "className", "defaultOpen", "defaultValue", "disabled", "displayEmpty", "IconComponent", "inputRef", "labelId", "MenuProps", "multiple", "name", "onBlur", "onChange", "onClose", "onFocus", "onOpen", "open", "readOnly", "renderValue", "SelectDisplayProps", "tabIndex", "type", "value", "variant"];
     const SelectSelect = styled$1('div', {
       name: 'MuiSelect',
       slot: 'Select',
@@ -56110,7 +56115,7 @@ Please use another name.` );
           value: valueProp,
           variant = 'standard'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$O);
+        other = _objectWithoutPropertiesLoose(props, _excluded$P);
       const [value, setValueState] = useControlled({
         controlled: valueProp,
         default: defaultValue,
@@ -56627,7 +56632,7 @@ Please use another name.` );
     var SelectInput$1 = SelectInput;
 
     var _StyledInput, _StyledFilledInput;
-    const _excluded$N = ["autoWidth", "children", "classes", "className", "defaultOpen", "displayEmpty", "IconComponent", "id", "input", "inputProps", "label", "labelId", "MenuProps", "multiple", "native", "onClose", "onOpen", "open", "renderValue", "SelectDisplayProps", "variant"];
+    const _excluded$O = ["autoWidth", "children", "classes", "className", "defaultOpen", "displayEmpty", "IconComponent", "id", "input", "inputProps", "label", "labelId", "MenuProps", "multiple", "native", "onClose", "onOpen", "open", "renderValue", "SelectDisplayProps", "variant"];
     const useUtilityClasses$G = ownerState => {
       const {
         classes
@@ -56671,7 +56676,7 @@ Please use another name.` );
           SelectDisplayProps,
           variant: variantProp = 'outlined'
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$N);
+        other = _objectWithoutPropertiesLoose(props, _excluded$O);
       const inputComponent = native ? NativeSelectInput$1 : SelectInput$1;
       const muiFormControl = useFormControl();
       const fcs = formControlState({
@@ -56883,7 +56888,7 @@ Please use another name.` );
     Select.muiName = 'Select';
     var Select$1 = Select;
 
-    const _excluded$M = ["component", "components", "componentsProps", "color", "size", "slotProps", "slots"];
+    const _excluded$N = ["component", "components", "componentsProps", "color", "size", "slotProps", "slots"];
     const sliderClasses = _extends({}, sliderUnstyledClasses$1, generateUtilityClasses('MuiSlider', ['colorPrimary', 'colorSecondary', 'thumbColorPrimary', 'thumbColorSecondary', 'sizeSmall', 'thumbSizeSmall']));
     const SliderRoot = styled$1('span', {
       name: 'MuiSlider',
@@ -57291,7 +57296,7 @@ Please use another name.` );
           slotProps,
           slots
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$M);
+        other = _objectWithoutPropertiesLoose(props, _excluded$N);
       const ownerState = _extends({}, props, {
         color,
         size
@@ -57637,7 +57642,7 @@ Please use another name.` );
     const tooltipClasses = generateUtilityClasses('MuiTooltip', ['popper', 'popperInteractive', 'popperArrow', 'popperClose', 'tooltip', 'tooltipArrow', 'touch', 'tooltipPlacementLeft', 'tooltipPlacementRight', 'tooltipPlacementTop', 'tooltipPlacementBottom', 'arrow']);
     var tooltipClasses$1 = tooltipClasses;
 
-    const _excluded$L = ["arrow", "children", "classes", "components", "componentsProps", "describeChild", "disableFocusListener", "disableHoverListener", "disableInteractive", "disableTouchListener", "enterDelay", "enterNextDelay", "enterTouchDelay", "followCursor", "id", "leaveDelay", "leaveTouchDelay", "onClose", "onOpen", "open", "placement", "PopperComponent", "PopperProps", "slotProps", "slots", "title", "TransitionComponent", "TransitionProps"];
+    const _excluded$M = ["arrow", "children", "classes", "components", "componentsProps", "describeChild", "disableFocusListener", "disableHoverListener", "disableInteractive", "disableTouchListener", "enterDelay", "enterNextDelay", "enterTouchDelay", "followCursor", "id", "leaveDelay", "leaveTouchDelay", "onClose", "onOpen", "open", "placement", "PopperComponent", "PopperProps", "slotProps", "slots", "title", "TransitionComponent", "TransitionProps"];
     function round(value) {
       return Math.round(value * 1e5) / 1e5;
     }
@@ -57855,7 +57860,7 @@ Please use another name.` );
           TransitionComponent: TransitionComponentProp = Grow$1,
           TransitionProps
         } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$L);
+        other = _objectWithoutPropertiesLoose(props, _excluded$M);
       const theme = useTheme();
       const isRtl = theme.direction === 'rtl';
       const [childNode, setChildNode] = React__namespace.useState();
@@ -58386,6 +58391,151 @@ Please use another name.` );
       TransitionProps: PropTypes.object
     } ;
     var Tooltip$1 = Tooltip;
+
+    const _excluded$L = ["component", "direction", "spacing", "divider", "children"];
+    function joinChildren(children, separator) {
+      const childrenArray = React__namespace.Children.toArray(children).filter(Boolean);
+      return childrenArray.reduce((output, child, index) => {
+        output.push(child);
+        if (index < childrenArray.length - 1) {
+          output.push( /*#__PURE__*/React__namespace.cloneElement(separator, {
+            key: `separator-${index}`
+          }));
+        }
+        return output;
+      }, []);
+    }
+    const getSideFromDirection = direction => {
+      return {
+        row: 'Left',
+        'row-reverse': 'Right',
+        column: 'Top',
+        'column-reverse': 'Bottom'
+      }[direction];
+    };
+    const style$2 = ({
+      ownerState,
+      theme
+    }) => {
+      let styles = _extends({
+        display: 'flex',
+        flexDirection: 'column'
+      }, handleBreakpoints({
+        theme
+      }, resolveBreakpointValues({
+        values: ownerState.direction,
+        breakpoints: theme.breakpoints.values
+      }), propValue => ({
+        flexDirection: propValue
+      })));
+      if (ownerState.spacing) {
+        const transformer = createUnarySpacing(theme);
+        const base = Object.keys(theme.breakpoints.values).reduce((acc, breakpoint) => {
+          if (typeof ownerState.spacing === 'object' && ownerState.spacing[breakpoint] != null || typeof ownerState.direction === 'object' && ownerState.direction[breakpoint] != null) {
+            acc[breakpoint] = true;
+          }
+          return acc;
+        }, {});
+        const directionValues = resolveBreakpointValues({
+          values: ownerState.direction,
+          base
+        });
+        const spacingValues = resolveBreakpointValues({
+          values: ownerState.spacing,
+          base
+        });
+        if (typeof directionValues === 'object') {
+          Object.keys(directionValues).forEach((breakpoint, index, breakpoints) => {
+            const directionValue = directionValues[breakpoint];
+            if (!directionValue) {
+              const previousDirectionValue = index > 0 ? directionValues[breakpoints[index - 1]] : 'column';
+              directionValues[breakpoint] = previousDirectionValue;
+            }
+          });
+        }
+        const styleFromPropValue = (propValue, breakpoint) => {
+          return {
+            '& > :not(style) + :not(style)': {
+              margin: 0,
+              [`margin${getSideFromDirection(breakpoint ? directionValues[breakpoint] : ownerState.direction)}`]: getValue(transformer, propValue)
+            }
+          };
+        };
+        styles = deepmerge(styles, handleBreakpoints({
+          theme
+        }, spacingValues, styleFromPropValue));
+      }
+      styles = mergeBreakpointsInOrder(theme.breakpoints, styles);
+      return styles;
+    };
+    const StackRoot = styled$1('div', {
+      name: 'MuiStack',
+      slot: 'Root',
+      overridesResolver: (props, styles) => {
+        return [styles.root];
+      }
+    })(style$2);
+    const Stack = /*#__PURE__*/React__namespace.forwardRef(function Stack(inProps, ref) {
+      const themeProps = useThemeProps({
+        props: inProps,
+        name: 'MuiStack'
+      });
+      const props = extendSxProp(themeProps);
+      const {
+          component = 'div',
+          direction = 'column',
+          spacing = 0,
+          divider,
+          children
+        } = props,
+        other = _objectWithoutPropertiesLoose(props, _excluded$L);
+      const ownerState = {
+        direction,
+        spacing
+      };
+      return /*#__PURE__*/jsxRuntime.exports.jsx(StackRoot, _extends({
+        as: component,
+        ownerState: ownerState,
+        ref: ref
+      }, other, {
+        children: divider ? joinChildren(children, divider) : children
+      }));
+    });
+    Stack.propTypes /* remove-proptypes */ = {
+      // ----------------------------- Warning --------------------------------
+      // | These PropTypes are generated from the TypeScript type definitions |
+      // |     To update them edit the d.ts file and run "yarn proptypes"     |
+      // ----------------------------------------------------------------------
+      /**
+       * The content of the component.
+       */
+      children: PropTypes.node,
+      /**
+       * The component used for the root node.
+       * Either a string to use a HTML element or a component.
+       */
+      component: PropTypes.elementType,
+      /**
+       * Defines the `flex-direction` style property.
+       * It is applied for all screen sizes.
+       * @default 'column'
+       */
+      direction: PropTypes.oneOfType([PropTypes.oneOf(['column-reverse', 'column', 'row-reverse', 'row']), PropTypes.arrayOf(PropTypes.oneOf(['column-reverse', 'column', 'row-reverse', 'row'])), PropTypes.object]),
+      /**
+       * Add an element between each child.
+       */
+      divider: PropTypes.node,
+      /**
+       * Defines the space between immediate children.
+       * @default 0
+       */
+      spacing: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])), PropTypes.number, PropTypes.object, PropTypes.string]),
+      /**
+       * The system prop, which allows defining system overrides as well as additional CSS styles.
+       */
+      sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
+    } ;
+    var Stack$1 = Stack;
 
     /**
      * Provides information about the current step in Stepper.
@@ -61994,73 +62144,73 @@ Please use another name.` );
     var _utils = utils;
     }(createSvgIcon));
 
-    var _interopRequireDefault$f = interopRequireDefault.exports;
+    var _interopRequireDefault$h = interopRequireDefault.exports;
     Object.defineProperty(Delete, "__esModule", {
       value: true
     });
-    var default_1$f = Delete.default = void 0;
-    var _createSvgIcon$f = _interopRequireDefault$f(createSvgIcon);
-    var _jsxRuntime$f = jsxRuntime.exports;
-    var _default$f = (0, _createSvgIcon$f.default)( /*#__PURE__*/(0, _jsxRuntime$f.jsx)("path", {
+    var default_1$h = Delete.default = void 0;
+    var _createSvgIcon$h = _interopRequireDefault$h(createSvgIcon);
+    var _jsxRuntime$h = jsxRuntime.exports;
+    var _default$h = (0, _createSvgIcon$h.default)( /*#__PURE__*/(0, _jsxRuntime$h.jsx)("path", {
       d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
     }), 'Delete');
-    default_1$f = Delete.default = _default$f;
+    default_1$h = Delete.default = _default$h;
 
     var ArrowDownward = {};
 
-    var _interopRequireDefault$e = interopRequireDefault.exports;
+    var _interopRequireDefault$g = interopRequireDefault.exports;
     Object.defineProperty(ArrowDownward, "__esModule", {
       value: true
     });
-    var default_1$e = ArrowDownward.default = void 0;
-    var _createSvgIcon$e = _interopRequireDefault$e(createSvgIcon);
-    var _jsxRuntime$e = jsxRuntime.exports;
-    var _default$e = (0, _createSvgIcon$e.default)( /*#__PURE__*/(0, _jsxRuntime$e.jsx)("path", {
+    var default_1$g = ArrowDownward.default = void 0;
+    var _createSvgIcon$g = _interopRequireDefault$g(createSvgIcon);
+    var _jsxRuntime$g = jsxRuntime.exports;
+    var _default$g = (0, _createSvgIcon$g.default)( /*#__PURE__*/(0, _jsxRuntime$g.jsx)("path", {
       d: "m20 12-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
     }), 'ArrowDownward');
-    default_1$e = ArrowDownward.default = _default$e;
+    default_1$g = ArrowDownward.default = _default$g;
 
     var ArrowUpward = {};
 
-    var _interopRequireDefault$d = interopRequireDefault.exports;
+    var _interopRequireDefault$f = interopRequireDefault.exports;
     Object.defineProperty(ArrowUpward, "__esModule", {
       value: true
     });
-    var default_1$d = ArrowUpward.default = void 0;
-    var _createSvgIcon$d = _interopRequireDefault$d(createSvgIcon);
-    var _jsxRuntime$d = jsxRuntime.exports;
-    var _default$d = (0, _createSvgIcon$d.default)( /*#__PURE__*/(0, _jsxRuntime$d.jsx)("path", {
+    var default_1$f = ArrowUpward.default = void 0;
+    var _createSvgIcon$f = _interopRequireDefault$f(createSvgIcon);
+    var _jsxRuntime$f = jsxRuntime.exports;
+    var _default$f = (0, _createSvgIcon$f.default)( /*#__PURE__*/(0, _jsxRuntime$f.jsx)("path", {
       d: "m4 12 1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
     }), 'ArrowUpward');
-    default_1$d = ArrowUpward.default = _default$d;
+    default_1$f = ArrowUpward.default = _default$f;
 
     var Add = {};
 
-    var _interopRequireDefault$c = interopRequireDefault.exports;
+    var _interopRequireDefault$e = interopRequireDefault.exports;
     Object.defineProperty(Add, "__esModule", {
       value: true
     });
-    var default_1$c = Add.default = void 0;
-    var _createSvgIcon$c = _interopRequireDefault$c(createSvgIcon);
-    var _jsxRuntime$c = jsxRuntime.exports;
-    var _default$c = (0, _createSvgIcon$c.default)( /*#__PURE__*/(0, _jsxRuntime$c.jsx)("path", {
+    var default_1$e = Add.default = void 0;
+    var _createSvgIcon$e = _interopRequireDefault$e(createSvgIcon);
+    var _jsxRuntime$e = jsxRuntime.exports;
+    var _default$e = (0, _createSvgIcon$e.default)( /*#__PURE__*/(0, _jsxRuntime$e.jsx)("path", {
       d: "M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
     }), 'Add');
-    default_1$c = Add.default = _default$c;
+    default_1$e = Add.default = _default$e;
 
     var ErrorOutline = {};
 
-    var _interopRequireDefault$b = interopRequireDefault.exports;
+    var _interopRequireDefault$d = interopRequireDefault.exports;
     Object.defineProperty(ErrorOutline, "__esModule", {
       value: true
     });
-    var default_1$b = ErrorOutline.default = void 0;
-    var _createSvgIcon$b = _interopRequireDefault$b(createSvgIcon);
-    var _jsxRuntime$b = jsxRuntime.exports;
-    var _default$b = (0, _createSvgIcon$b.default)( /*#__PURE__*/(0, _jsxRuntime$b.jsx)("path", {
+    var default_1$d = ErrorOutline.default = void 0;
+    var _createSvgIcon$d = _interopRequireDefault$d(createSvgIcon);
+    var _jsxRuntime$d = jsxRuntime.exports;
+    var _default$d = (0, _createSvgIcon$d.default)( /*#__PURE__*/(0, _jsxRuntime$d.jsx)("path", {
       d: "M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
     }), 'ErrorOutline');
-    default_1$b = ErrorOutline.default = _default$b;
+    default_1$d = ErrorOutline.default = _default$d;
 
     var isPlainObject = isPlainObject_1;
 
@@ -62155,17 +62305,17 @@ Please use another name.` );
 
     var Close = {};
 
-    var _interopRequireDefault$a = interopRequireDefault.exports;
+    var _interopRequireDefault$c = interopRequireDefault.exports;
     Object.defineProperty(Close, "__esModule", {
       value: true
     });
-    var default_1$a = Close.default = void 0;
-    var _createSvgIcon$a = _interopRequireDefault$a(createSvgIcon);
-    var _jsxRuntime$a = jsxRuntime.exports;
-    var _default$a = (0, _createSvgIcon$a.default)( /*#__PURE__*/(0, _jsxRuntime$a.jsx)("path", {
+    var default_1$c = Close.default = void 0;
+    var _createSvgIcon$c = _interopRequireDefault$c(createSvgIcon);
+    var _jsxRuntime$c = jsxRuntime.exports;
+    var _default$c = (0, _createSvgIcon$c.default)( /*#__PURE__*/(0, _jsxRuntime$c.jsx)("path", {
       d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
     }), 'Close');
-    default_1$a = Close.default = _default$a;
+    default_1$c = Close.default = _default$c;
 
     var baseEach = _baseEach,
         isArrayLike = isArrayLike_1;
@@ -73225,17 +73375,17 @@ Please use another name.` );
 
     var ExpandMore = {};
 
-    var _interopRequireDefault$9 = interopRequireDefault.exports;
+    var _interopRequireDefault$b = interopRequireDefault.exports;
     Object.defineProperty(ExpandMore, "__esModule", {
       value: true
     });
-    var default_1$9 = ExpandMore.default = void 0;
-    var _createSvgIcon$9 = _interopRequireDefault$9(createSvgIcon);
-    var _jsxRuntime$9 = jsxRuntime.exports;
-    var _default$9 = (0, _createSvgIcon$9.default)( /*#__PURE__*/(0, _jsxRuntime$9.jsx)("path", {
+    var default_1$b = ExpandMore.default = void 0;
+    var _createSvgIcon$b = _interopRequireDefault$b(createSvgIcon);
+    var _jsxRuntime$b = jsxRuntime.exports;
+    var _default$b = (0, _createSvgIcon$b.default)( /*#__PURE__*/(0, _jsxRuntime$b.jsx)("path", {
       d: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
     }), 'ExpandMore');
-    default_1$9 = ExpandMore.default = _default$9;
+    default_1$b = ExpandMore.default = _default$b;
 
     const StyledTableCell = styled$1(TableCell$1)({
         borderBottom: 'none'
@@ -73248,7 +73398,7 @@ Please use another name.` );
     const ValidationIcon$1 = ({ errorMessages, id }) => {
         return (React__default["default"].createElement(Tooltip$1, { id: id, title: errorMessages },
             React__default["default"].createElement(StyledBadge$1, { badgeContent: errorMessages.split('\n').length },
-                React__default["default"].createElement(default_1$b, { color: 'inherit' }))));
+                React__default["default"].createElement(default_1$d, { color: 'inherit' }))));
     };
 
     const fixedCellSmall = {
@@ -73267,7 +73417,7 @@ Please use another name.` );
         enabled ? (React__default["default"].createElement(NoBorderTableCell, { align: 'right', style: fixedCellSmall },
             React__default["default"].createElement(Tooltip$1, { id: 'tooltip-add', title: `Add to ${label}`, placement: 'bottom' },
                 React__default["default"].createElement(IconButton$1, { "aria-label": `Add to ${label}`, onClick: addItem(path, createDefaultValue(schema)), size: 'large' },
-                    React__default["default"].createElement(default_1$c, null))))) : null)));
+                    React__default["default"].createElement(default_1$e, null))))) : null)));
 
     const styles = {
         fixedCell: {
@@ -73363,13 +73513,13 @@ Please use another name.` );
                     showSortButtons ? (React__default["default"].createElement(React.Fragment, null,
                         React__default["default"].createElement(Grid$1, { item: true },
                             React__default["default"].createElement(IconButton$1, { "aria-label": `Move up`, onClick: moveUp, disabled: !enableUp, size: 'large' },
-                                React__default["default"].createElement(default_1$d, null))),
+                                React__default["default"].createElement(default_1$f, null))),
                         React__default["default"].createElement(Grid$1, { item: true },
                             React__default["default"].createElement(IconButton$1, { "aria-label": `Move down`, onClick: moveDown, disabled: !enableDown, size: 'large' },
-                                React__default["default"].createElement(default_1$e, null))))) : null,
+                                React__default["default"].createElement(default_1$g, null))))) : null,
                     React__default["default"].createElement(Grid$1, { item: true },
                         React__default["default"].createElement(IconButton$1, { "aria-label": `Delete`, onClick: () => openDeleteDialog(childPath, rowIndex), size: 'large' },
-                            React__default["default"].createElement(default_1$f, null)))))) : null));
+                            React__default["default"].createElement(default_1$h, null)))))) : null));
     };
     const NonEmptyRow = React__default["default"].memo(NonEmptyRowComponent);
     const TableRows = ({ data, path, schema, openDeleteDialog, moveUp, moveDown, uischema, config, enabled, cells }) => {
@@ -73698,7 +73848,7 @@ Please use another name.` );
                     right: 0
                 } },
                 React__default["default"].createElement(IconButton$1, { "aria-label": 'Clear input field', onClick: onClear, size: 'large' },
-                    React__default["default"].createElement(default_1$a, { style: closeStyle }))), inputComponent: inputComponent }));
+                    React__default["default"].createElement(default_1$c, { style: closeStyle }))), inputComponent: inputComponent }));
     });
 
     const MuiInputTime = React__default["default"].memo((props) => {
@@ -73757,7 +73907,7 @@ Please use another name.` );
                         React__default["default"].createElement(Grid$1, { item: true },
                             React__default["default"].createElement(Tooltip$1, { id: 'tooltip-add', title: `Add to ${label}`, placement: 'bottom' },
                                 React__default["default"].createElement(IconButton$1, { "aria-label": `Add to ${label}`, onClick: addItem(path, createDefault()), size: 'large' },
-                                    React__default["default"].createElement(default_1$c, null)))))))));
+                                    React__default["default"].createElement(default_1$e, null)))))))));
     });
 
     const ListWithDetailMasterItem = ({ index, childLabel, selected, handleSelect, removeItem, path }) => {
@@ -73767,7 +73917,7 @@ Please use another name.` );
             React__default["default"].createElement(ListItemText$1, { primary: childLabel }),
             React__default["default"].createElement(ListItemSecondaryAction$1, null,
                 React__default["default"].createElement(IconButton$1, { "aria-label": 'Delete', onClick: removeItem(path, index), size: 'large' },
-                    React__default["default"].createElement(default_1$f, null)))));
+                    React__default["default"].createElement(default_1$h, null)))));
     };
     var ListWithDetailMasterItem$1 = withJsonFormsMasterListItemProps(ListWithDetailMasterItem);
 
@@ -74215,7 +74365,7 @@ Please use another name.` );
         const appliedUiSchemaOptions = merge_1({}, config, uischema.options);
         const showSortButtons = appliedUiSchemaOptions.showSortButtons || appliedUiSchemaOptions.showArrayLayoutSortButtons;
         return (React__default["default"].createElement(Accordion$1, { "aria-labelledby": labelHtmlId, expanded: expanded, onChange: handleExpansion(childPath) },
-            React__default["default"].createElement(AccordionSummary$1, { expandIcon: React__default["default"].createElement(default_1$9, null) },
+            React__default["default"].createElement(AccordionSummary$1, { expandIcon: React__default["default"].createElement(default_1$b, null) },
                 React__default["default"].createElement(Grid$1, { container: true, alignItems: 'center' },
                     React__default["default"].createElement(Grid$1, { item: true, xs: 7, md: 9 },
                         React__default["default"].createElement(Grid$1, { container: true, alignItems: 'center' },
@@ -74230,13 +74380,13 @@ Please use another name.` );
                                     showSortButtons ? (React__default["default"].createElement(React.Fragment, null,
                                         React__default["default"].createElement(Grid$1, { item: true },
                                             React__default["default"].createElement(IconButton$1, { onClick: moveUp(path, index), style: iconStyle$1, disabled: !enableMoveUp, "aria-label": `Move up`, size: 'large' },
-                                                React__default["default"].createElement(default_1$d, null))),
+                                                React__default["default"].createElement(default_1$f, null))),
                                         React__default["default"].createElement(Grid$1, { item: true },
                                             React__default["default"].createElement(IconButton$1, { onClick: moveDown(path, index), style: iconStyle$1, disabled: !enableMoveDown, "aria-label": `Move down`, size: 'large' },
-                                                React__default["default"].createElement(default_1$e, null))))) : (''),
+                                                React__default["default"].createElement(default_1$g, null))))) : (''),
                                     React__default["default"].createElement(Grid$1, { item: true },
                                         React__default["default"].createElement(IconButton$1, { onClick: removeItems(path, [index]), style: iconStyle$1, "aria-label": `Delete`, size: 'large' },
-                                            React__default["default"].createElement(default_1$f, null))))))))),
+                                            React__default["default"].createElement(default_1$h, null))))))))),
             React__default["default"].createElement(AccordionDetails$1, null,
                 React__default["default"].createElement(JsonFormsDispatch, { enabled: enabled, schema: schema, uischema: foundUISchema, path: childPath, key: childPath, renderers: renderers, cells: cells }))));
     };
@@ -74596,16 +74746,26 @@ Please use another name.` );
     var MuiS3FileSelect = React__default["default"].memo(function (props) {
         var data = props.data, className = props.className, id = props.id, enabled = props.enabled, schema = props.schema, uischema = props.uischema, path = props.path, handleChange = props.handleChange, options = props.options, config = props.config, t = props.t;
         var appliedUiSchemaOptions = merge_1({}, config, uischema.options);
-        var noneOptionLabel = React.useMemo(function () { return t('enum.none', i18nDefaults['enum.none'], { schema: schema, uischema: uischema, path: path }); }, [t, schema, uischema, path]);
-        return (React__default["default"].createElement(Select$1, { className: className, id: id, disabled: !enabled, autoFocus: appliedUiSchemaOptions.focus, value: data !== undefined ? data : '', onChange: function (ev) { return handleChange(path, ev.target.value || undefined); }, fullWidth: true, variant: 'standard', renderValue: function (value) {
+        var noneOptionLabel = React.useMemo(function () {
+            return t('enum.none', i18nDefaults['enum.none'], {
+                schema: schema,
+                uischema: uischema,
+                path: path,
+            });
+        }, [t, schema, uischema, path]);
+        return (React__default["default"].createElement(Select$1, { className: className, id: id, disabled: !enabled, autoFocus: appliedUiSchemaOptions.focus, value: data !== undefined ? data : '', onChange: function (ev) {
+                return handleChange(path, ev.target.value || undefined);
+            }, fullWidth: true, variant: 'standard', renderValue: function (value) {
                 var _a, _b;
-                return React__default["default"].createElement(Box$1, { sx: { display: 'flex', gap: 1, alignItems: 'center' } },
+                return (React__default["default"].createElement(Box$1, { sx: { display: 'flex', gap: 1, alignItems: 'center' } },
                     React__default["default"].createElement(Avatar$1, { variant: "rounded", alt: "S3", sx: { bgcolor: '#000' }, src: (_a = options.find(function (o) { return o.value.key == value; })) === null || _a === void 0 ? void 0 : _a.value.file }), (_b = options.find(function (o) { return o.value.key == value; })) === null || _b === void 0 ? void 0 :
-                    _b.label);
-            } }, [React__default["default"].createElement(MenuItem$1, { value: '', key: 'jsonforms.enum.none' },
-                React__default["default"].createElement("em", null, noneOptionLabel))].concat(options.map(function (optionValue) { return (React__default["default"].createElement(MenuItem$1, { sx: { gap: '15px' }, value: optionValue.value.key, key: optionValue.value.key },
+                    _b.label));
+            } }, [
+            React__default["default"].createElement(MenuItem$1, { value: '', key: "jsonforms.enum.none" },
+                React__default["default"].createElement("em", null, noneOptionLabel)),
+        ].concat(options.map(function (optionValue) { return (React__default["default"].createElement(MenuItem$1, { sx: { gap: '15px' }, value: optionValue.value.key, key: optionValue.value.key },
             React__default["default"].createElement(Avatar$1, { variant: "rounded", alt: "S3", sx: { bgcolor: '#000' }, src: optionValue.value.file }),
-            " ",
+            ' ',
             optionValue.label)); }))));
     });
 
@@ -74668,137 +74828,137 @@ Please use another name.` );
 
     var DynamicForm = {};
 
-    var _interopRequireDefault$8 = interopRequireDefault.exports;
+    var _interopRequireDefault$a = interopRequireDefault.exports;
     Object.defineProperty(DynamicForm, "__esModule", {
       value: true
     });
-    var default_1$8 = DynamicForm.default = void 0;
-    var _createSvgIcon$8 = _interopRequireDefault$8(createSvgIcon);
-    var _jsxRuntime$8 = jsxRuntime.exports;
-    var _default$8 = (0, _createSvgIcon$8.default)( /*#__PURE__*/(0, _jsxRuntime$8.jsx)("path", {
+    var default_1$a = DynamicForm.default = void 0;
+    var _createSvgIcon$a = _interopRequireDefault$a(createSvgIcon);
+    var _jsxRuntime$a = jsxRuntime.exports;
+    var _default$a = (0, _createSvgIcon$a.default)( /*#__PURE__*/(0, _jsxRuntime$a.jsx)("path", {
       d: "M17 20v-9h-2V4h7l-2 5h2l-5 11zm-2-7v7H4c-1.1 0-2-.9-2-2v-3c0-1.1.9-2 2-2h11zm-8.75 2.75h-1.5v1.5h1.5v-1.5zM13 4v7H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h9zM6.25 6.75h-1.5v1.5h1.5v-1.5z"
     }), 'DynamicForm');
-    default_1$8 = DynamicForm.default = _default$8;
+    default_1$a = DynamicForm.default = _default$a;
 
     var Assessment = {};
 
-    var _interopRequireDefault$7 = interopRequireDefault.exports;
+    var _interopRequireDefault$9 = interopRequireDefault.exports;
     Object.defineProperty(Assessment, "__esModule", {
       value: true
     });
-    var default_1$7 = Assessment.default = void 0;
-    var _createSvgIcon$7 = _interopRequireDefault$7(createSvgIcon);
-    var _jsxRuntime$7 = jsxRuntime.exports;
-    var _default$7 = (0, _createSvgIcon$7.default)( /*#__PURE__*/(0, _jsxRuntime$7.jsx)("path", {
+    var default_1$9 = Assessment.default = void 0;
+    var _createSvgIcon$9 = _interopRequireDefault$9(createSvgIcon);
+    var _jsxRuntime$9 = jsxRuntime.exports;
+    var _default$9 = (0, _createSvgIcon$9.default)( /*#__PURE__*/(0, _jsxRuntime$9.jsx)("path", {
       d: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
     }), 'Assessment');
-    default_1$7 = Assessment.default = _default$7;
+    default_1$9 = Assessment.default = _default$9;
 
     var Category = {};
 
-    var _interopRequireDefault$6 = interopRequireDefault.exports;
+    var _interopRequireDefault$8 = interopRequireDefault.exports;
     Object.defineProperty(Category, "__esModule", {
       value: true
     });
-    var default_1$6 = Category.default = void 0;
-    var _createSvgIcon$6 = _interopRequireDefault$6(createSvgIcon);
-    var _jsxRuntime$6 = jsxRuntime.exports;
-    var _default$6 = (0, _createSvgIcon$6.default)([/*#__PURE__*/(0, _jsxRuntime$6.jsx)("path", {
+    var default_1$8 = Category.default = void 0;
+    var _createSvgIcon$8 = _interopRequireDefault$8(createSvgIcon);
+    var _jsxRuntime$8 = jsxRuntime.exports;
+    var _default$8 = (0, _createSvgIcon$8.default)([/*#__PURE__*/(0, _jsxRuntime$8.jsx)("path", {
       d: "m12 2-5.5 9h11z"
-    }, "0"), /*#__PURE__*/(0, _jsxRuntime$6.jsx)("circle", {
+    }, "0"), /*#__PURE__*/(0, _jsxRuntime$8.jsx)("circle", {
       cx: "17.5",
       cy: "17.5",
       r: "4.5"
-    }, "1"), /*#__PURE__*/(0, _jsxRuntime$6.jsx)("path", {
+    }, "1"), /*#__PURE__*/(0, _jsxRuntime$8.jsx)("path", {
       d: "M3 13.5h8v8H3z"
     }, "2")], 'Category');
-    default_1$6 = Category.default = _default$6;
+    default_1$8 = Category.default = _default$8;
 
     var Score = {};
 
-    var _interopRequireDefault$5 = interopRequireDefault.exports;
+    var _interopRequireDefault$7 = interopRequireDefault.exports;
     Object.defineProperty(Score, "__esModule", {
       value: true
     });
-    var default_1$5 = Score.default = void 0;
-    var _createSvgIcon$5 = _interopRequireDefault$5(createSvgIcon);
-    var _jsxRuntime$5 = jsxRuntime.exports;
-    var _default$5 = (0, _createSvgIcon$5.default)( /*#__PURE__*/(0, _jsxRuntime$5.jsx)("path", {
+    var default_1$7 = Score.default = void 0;
+    var _createSvgIcon$7 = _interopRequireDefault$7(createSvgIcon);
+    var _jsxRuntime$7 = jsxRuntime.exports;
+    var _default$7 = (0, _createSvgIcon$7.default)( /*#__PURE__*/(0, _jsxRuntime$7.jsx)("path", {
       d: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 2h1.5v3l2-3h1.7l-2 3 2 3h-1.7l-2-3v3H12V5zM7 7.25h2.5V6.5H7V5h4v3.75H8.5v.75H11V11H7V7.25zM19 13l-6 6-4-4-4 4v-2.5l4-4 4 4 6-6V13z"
     }), 'Score');
-    default_1$5 = Score.default = _default$5;
+    default_1$7 = Score.default = _default$7;
 
     var Insights = {};
 
-    var _interopRequireDefault$4 = interopRequireDefault.exports;
+    var _interopRequireDefault$6 = interopRequireDefault.exports;
     Object.defineProperty(Insights, "__esModule", {
       value: true
     });
-    var default_1$4 = Insights.default = void 0;
-    var _createSvgIcon$4 = _interopRequireDefault$4(createSvgIcon);
-    var _jsxRuntime$4 = jsxRuntime.exports;
-    var _default$4 = (0, _createSvgIcon$4.default)([/*#__PURE__*/(0, _jsxRuntime$4.jsx)("path", {
+    var default_1$6 = Insights.default = void 0;
+    var _createSvgIcon$6 = _interopRequireDefault$6(createSvgIcon);
+    var _jsxRuntime$6 = jsxRuntime.exports;
+    var _default$6 = (0, _createSvgIcon$6.default)([/*#__PURE__*/(0, _jsxRuntime$6.jsx)("path", {
       d: "M21 8c-1.45 0-2.26 1.44-1.93 2.51l-3.55 3.56c-.3-.09-.74-.09-1.04 0l-2.55-2.55C12.27 10.45 11.46 9 10 9c-1.45 0-2.27 1.44-1.93 2.52l-4.56 4.55C2.44 15.74 1 16.55 1 18c0 1.1.9 2 2 2 1.45 0 2.26-1.44 1.93-2.51l4.55-4.56c.3.09.74.09 1.04 0l2.55 2.55C12.73 16.55 13.54 18 15 18c1.45 0 2.27-1.44 1.93-2.52l3.56-3.55c1.07.33 2.51-.48 2.51-1.93 0-1.1-.9-2-2-2z"
-    }, "0"), /*#__PURE__*/(0, _jsxRuntime$4.jsx)("path", {
+    }, "0"), /*#__PURE__*/(0, _jsxRuntime$6.jsx)("path", {
       d: "m15 9 .94-2.07L18 6l-2.06-.93L15 3l-.92 2.07L12 6l2.08.93zM3.5 11 4 9l2-.5L4 8l-.5-2L3 8l-2 .5L3 9z"
     }, "1")], 'Insights');
-    default_1$4 = Insights.default = _default$4;
+    default_1$6 = Insights.default = _default$6;
 
     var ViewCarousel = {};
 
-    var _interopRequireDefault$3 = interopRequireDefault.exports;
+    var _interopRequireDefault$5 = interopRequireDefault.exports;
     Object.defineProperty(ViewCarousel, "__esModule", {
       value: true
     });
-    var default_1$3 = ViewCarousel.default = void 0;
-    var _createSvgIcon$3 = _interopRequireDefault$3(createSvgIcon);
-    var _jsxRuntime$3 = jsxRuntime.exports;
-    var _default$3 = (0, _createSvgIcon$3.default)( /*#__PURE__*/(0, _jsxRuntime$3.jsx)("path", {
+    var default_1$5 = ViewCarousel.default = void 0;
+    var _createSvgIcon$5 = _interopRequireDefault$5(createSvgIcon);
+    var _jsxRuntime$5 = jsxRuntime.exports;
+    var _default$5 = (0, _createSvgIcon$5.default)( /*#__PURE__*/(0, _jsxRuntime$5.jsx)("path", {
       d: "M2 7h4v10H2V7zm5 12h10V5H7v14zM18 7h4v10h-4V7z"
     }), 'ViewCarousel');
-    default_1$3 = ViewCarousel.default = _default$3;
+    default_1$5 = ViewCarousel.default = _default$5;
 
     var Settings = {};
 
-    var _interopRequireDefault$2 = interopRequireDefault.exports;
+    var _interopRequireDefault$4 = interopRequireDefault.exports;
     Object.defineProperty(Settings, "__esModule", {
       value: true
     });
-    var default_1$2 = Settings.default = void 0;
-    var _createSvgIcon$2 = _interopRequireDefault$2(createSvgIcon);
-    var _jsxRuntime$2 = jsxRuntime.exports;
-    var _default$2 = (0, _createSvgIcon$2.default)( /*#__PURE__*/(0, _jsxRuntime$2.jsx)("path", {
+    var default_1$4 = Settings.default = void 0;
+    var _createSvgIcon$4 = _interopRequireDefault$4(createSvgIcon);
+    var _jsxRuntime$4 = jsxRuntime.exports;
+    var _default$4 = (0, _createSvgIcon$4.default)( /*#__PURE__*/(0, _jsxRuntime$4.jsx)("path", {
       d: "M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"
     }), 'Settings');
-    default_1$2 = Settings.default = _default$2;
+    default_1$4 = Settings.default = _default$4;
 
     var AspectRatio = {};
 
-    var _interopRequireDefault$1 = interopRequireDefault.exports;
+    var _interopRequireDefault$3 = interopRequireDefault.exports;
     Object.defineProperty(AspectRatio, "__esModule", {
       value: true
     });
-    var default_1$1 = AspectRatio.default = void 0;
-    var _createSvgIcon$1 = _interopRequireDefault$1(createSvgIcon);
-    var _jsxRuntime$1 = jsxRuntime.exports;
-    var _default$1 = (0, _createSvgIcon$1.default)( /*#__PURE__*/(0, _jsxRuntime$1.jsx)("path", {
+    var default_1$3 = AspectRatio.default = void 0;
+    var _createSvgIcon$3 = _interopRequireDefault$3(createSvgIcon);
+    var _jsxRuntime$3 = jsxRuntime.exports;
+    var _default$3 = (0, _createSvgIcon$3.default)( /*#__PURE__*/(0, _jsxRuntime$3.jsx)("path", {
       d: "M19 12h-2v3h-3v2h5v-5zM7 9h3V7H5v5h2V9zm14-6H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16.01H3V4.99h18v14.02z"
     }), 'AspectRatio');
-    default_1$1 = AspectRatio.default = _default$1;
+    default_1$3 = AspectRatio.default = _default$3;
 
     var AccountTree = {};
 
-    var _interopRequireDefault = interopRequireDefault.exports;
+    var _interopRequireDefault$2 = interopRequireDefault.exports;
     Object.defineProperty(AccountTree, "__esModule", {
       value: true
     });
-    var default_1 = AccountTree.default = void 0;
-    var _createSvgIcon = _interopRequireDefault(createSvgIcon);
-    var _jsxRuntime = jsxRuntime.exports;
-    var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+    var default_1$2 = AccountTree.default = void 0;
+    var _createSvgIcon$2 = _interopRequireDefault$2(createSvgIcon);
+    var _jsxRuntime$2 = jsxRuntime.exports;
+    var _default$2 = (0, _createSvgIcon$2.default)( /*#__PURE__*/(0, _jsxRuntime$2.jsx)("path", {
       d: "M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3z"
     }), 'AccountTree');
-    default_1 = AccountTree.default = _default;
+    default_1$2 = AccountTree.default = _default$2;
 
     /*
      this is needed to avoid bix bundle size and slow startup with
@@ -74807,23 +74967,23 @@ Please use another name.` );
     function getIcon(name) {
         switch (name) {
             case 'DynamicForm':
-                return React__default["default"].createElement(default_1$8, null);
+                return React__default["default"].createElement(default_1$a, null);
             case 'Assessment':
-                return React__default["default"].createElement(default_1$7, null);
+                return React__default["default"].createElement(default_1$9, null);
             case 'Category':
-                return React__default["default"].createElement(default_1$6, null);
+                return React__default["default"].createElement(default_1$8, null);
             case 'Score':
-                return React__default["default"].createElement(default_1$5, null);
+                return React__default["default"].createElement(default_1$7, null);
             case 'Insights':
-                return React__default["default"].createElement(default_1$4, null);
+                return React__default["default"].createElement(default_1$6, null);
             case 'ViewCarousel':
-                return React__default["default"].createElement(default_1$3, null);
+                return React__default["default"].createElement(default_1$5, null);
             case 'AspectRatio':
-                return React__default["default"].createElement(default_1$1, null);
+                return React__default["default"].createElement(default_1$3, null);
             case 'AccountTree':
-                return React__default["default"].createElement(default_1, null);
-            default:
                 return React__default["default"].createElement(default_1$2, null);
+            default:
+                return React__default["default"].createElement(default_1$4, null);
         }
     }
     function TabPanel(props) {
@@ -75021,24 +75181,23 @@ Please use another name.` );
         var errorMessages = _a.errorMessages, id = _a.id;
         return (React__default["default"].createElement(Tooltip$1, { id: id, title: errorMessages },
             React__default["default"].createElement(StyledBadge, { badgeContent: errorMessages.split('\n').length },
-                React__default["default"].createElement(default_1$b, { color: 'inherit' }))));
+                React__default["default"].createElement(default_1$d, { color: 'inherit' }))));
     };
 
     var ArrayLayoutToolbar = React__default["default"].memo(function (_a) {
         var label = _a.label, errors = _a.errors, addItem = _a.addItem, path = _a.path, createDefault = _a.createDefault;
         return (React__default["default"].createElement(Toolbar$1, { disableGutters: true },
-            React__default["default"].createElement(Grid$1, { container: true, alignItems: 'center', justifyContent: 'space-between' },
+            React__default["default"].createElement(Grid$1, { container: true, alignItems: "center", justifyContent: "space-between" },
                 React__default["default"].createElement(Grid$1, { item: true },
                     React__default["default"].createElement(Typography$1, { variant: 'h6' }, label)),
-                errors.length !== 0 &&
-                    React__default["default"].createElement(Grid$1, { item: true },
-                        React__default["default"].createElement(ValidationIcon, { id: 'tooltip-validation', errorMessages: errors })),
+                errors.length !== 0 && (React__default["default"].createElement(Grid$1, { item: true },
+                    React__default["default"].createElement(ValidationIcon, { id: "tooltip-validation", errorMessages: errors }))),
                 React__default["default"].createElement(Grid$1, { item: true },
                     React__default["default"].createElement(Grid$1, { container: true },
                         React__default["default"].createElement(Grid$1, { item: true },
-                            React__default["default"].createElement(Tooltip$1, { id: 'tooltip-add', title: "Add to ".concat(label), placement: 'bottom' },
-                                React__default["default"].createElement(IconButton$1, { "aria-label": "Add to ".concat(label), onClick: addItem(path, createDefault()), size: 'large' },
-                                    React__default["default"].createElement(default_1$c, null)))))))));
+                            React__default["default"].createElement(Tooltip$1, { id: "tooltip-add", title: "Add to ".concat(label), placement: "bottom" },
+                                React__default["default"].createElement(IconButton$1, { "aria-label": "Add to ".concat(label), onClick: addItem(path, createDefault()), size: "large" },
+                                    React__default["default"].createElement(default_1$e, null)))))))));
     });
 
     var iconStyle = { float: 'right' };
@@ -75056,7 +75215,7 @@ Please use another name.` );
         var appliedUiSchemaOptions = merge_1({}, config, uischema.options);
         var showSortButtons = appliedUiSchemaOptions.showSortButtons || appliedUiSchemaOptions.showArrayLayoutSortButtons;
         return (React__default["default"].createElement(Accordion$1, { "aria-labelledby": labelHtmlId, expanded: expanded, onChange: handleExpansion(childPath) },
-            React__default["default"].createElement(AccordionSummary$1, { expandIcon: React__default["default"].createElement(default_1$9, null) },
+            React__default["default"].createElement(AccordionSummary$1, { expandIcon: React__default["default"].createElement(default_1$b, null) },
                 React__default["default"].createElement(Grid$1, { container: true, alignItems: 'center' },
                     React__default["default"].createElement(Grid$1, { item: true, xs: 7, md: 9 },
                         React__default["default"].createElement(Grid$1, { container: true, alignItems: 'center' },
@@ -75071,13 +75230,13 @@ Please use another name.` );
                                     showSortButtons ? (React__default["default"].createElement(React.Fragment, null,
                                         React__default["default"].createElement(Grid$1, { item: true },
                                             React__default["default"].createElement(IconButton$1, { onClick: moveUp(path, index), style: iconStyle, disabled: !enableMoveUp, "aria-label": "Move up", size: 'large' },
-                                                React__default["default"].createElement(default_1$d, null))),
+                                                React__default["default"].createElement(default_1$f, null))),
                                         React__default["default"].createElement(Grid$1, { item: true },
                                             React__default["default"].createElement(IconButton$1, { onClick: moveDown(path, index), style: iconStyle, disabled: !enableMoveDown, "aria-label": "Move down", size: 'large' },
-                                                React__default["default"].createElement(default_1$e, null))))) : (''),
+                                                React__default["default"].createElement(default_1$g, null))))) : (''),
                                     React__default["default"].createElement(Grid$1, { item: true },
                                         React__default["default"].createElement(IconButton$1, { onClick: removeItems(path, [index]), style: iconStyle, "aria-label": "Delete", size: 'large' },
-                                            React__default["default"].createElement(default_1$f, null))))))))),
+                                            React__default["default"].createElement(default_1$h, null))))))))),
             React__default["default"].createElement(AccordionDetails$1, null,
                 React__default["default"].createElement(JsonFormsDispatch, { enabled: enabled, schema: schema, uischema: foundUISchema, path: childPath, key: childPath, renderers: renderers, cells: cells }))));
     };
@@ -75389,6 +75548,190 @@ Please use another name.` );
     var SelectControlTester = rankWith(100, optionIs('select', true));
     var SelectControl$1 = withJsonFormsControlProps(withTranslateProps(SelectControl));
 
+    var MuiAutocompleteTags = function (props) {
+        var description = props.description, errors = props.errors, visible = props.visible, required = props.required, label = props.label, data = props.data, className = props.className, id = props.id, enabled = props.enabled, uischema = props.uischema, path = props.path, handleChange = props.handleChange, options = props.options, config = props.config; props.getOptionLabel; var renderOption = props.renderOption, filterOptions = props.filterOptions, isValid = props.isValid, placeholder = props.placeholder, freeSolo = props.freeSolo;
+        var appliedUiSchemaOptions = merge_1({}, config, uischema.options);
+        var _a = useFocus(), focused = _a[0], onFocus = _a[1], onBlur = _a[2];
+        var showDescription = !isDescriptionHidden(visible, description, focused, appliedUiSchemaOptions.showUnfocusedDescription);
+        var firstFormHelperText = showDescription
+            ? description
+            : !isValid
+                ? errors
+                : null;
+        var secondFormHelperText = showDescription && !isValid ? errors : null;
+        // todo: remove ts-ignore / resolve types
+        return (React__default["default"].createElement(Hidden, { xsUp: !visible },
+            React__default["default"].createElement(Autocomplete$1, { multiple: true, freeSolo: freeSolo, className: className, id: id, disabled: !enabled, filterSelectedOptions: true, value: data, 
+                // defaultValue={data}
+                // @ts-ignore
+                onChange: function (_event, newValue) {
+                    newValue = newValue.map(function (v) { return (typeof v === "string" ? v : v.value); });
+                    handleChange(path, newValue);
+                }, isOptionEqualToValue: function (option, value) {
+                    return option.value === value;
+                }, 
+                // options={options.map((option) => option.label)}
+                options: options, getOptionLabel: function (option) {
+                    // console.log("option", option);
+                    return typeof option === "string" ? option : option === null || option === void 0 ? void 0 : option.label;
+                }, autoComplete: true, autoHighlight: true, autoSelect: true, renderTags: function (value, getTagProps) {
+                    return value.map(function (option, index) {
+                        var _a;
+                        return (React__default["default"].createElement(Chip$1, __assign({ label: (_a = options.find(function (o) { return o.value === option; })) === null || _a === void 0 ? void 0 : _a.label }, getTagProps({ index: index }))));
+                    });
+                }, renderInput: function (params) {
+                    return (React__default["default"].createElement(TextField$1, __assign({ className: "tag-list", label: label, variant: "standard", type: "text", inputProps: params.inputProps, inputRef: params.InputProps.ref, autoFocus: appliedUiSchemaOptions.focus, disabled: !enabled }, params, { id: id + "-input", required: required && !appliedUiSchemaOptions.hideRequiredAsterisk, error: !isValid, fullWidth: true, InputLabelProps: data ? { shrink: true } : undefined, onFocus: onFocus, onBlur: onBlur, focused: focused, placeholder: placeholder })));
+                }, renderOption: renderOption, filterOptions: filterOptions }),
+            React__default["default"].createElement(FormHelperText$1, { error: !isValid && !showDescription }, firstFormHelperText),
+            React__default["default"].createElement(FormHelperText$1, { error: !isValid }, secondFormHelperText)));
+    };
+
+    var MultiSelectTagControl = function (props) {
+        var _a;
+        var data = props.data, errors = props.errors;
+        var isValid = errors.length === 0;
+        var props_new = __assign(__assign({}, props), { options: (_a = data === null || data === void 0 ? void 0 : data.map(function (option) { return ({ label: option, value: option }); })) !== null && _a !== void 0 ? _a : [], data: data, isValid: isValid, freeSolo: true });
+        return React__default["default"].createElement(MuiAutocompleteTags, __assign({}, props_new));
+    };
+    var MultiSelectTagControlTester = rankWith(100, optionIs("multiSelectTag", true));
+    var MultiSelectTagControl$1 = withJsonFormsControlProps(withTranslateProps(MultiSelectTagControl));
+
+    var SelectKpiControl = function (props) {
+        var config = props.config, data = props.data, errors = props.errors;
+        var isValid = errors.length === 0;
+        var props_new = __assign(__assign({}, props), { options: config.kpis.map(function (kpi) { return ({ label: kpi.name, value: kpi.id }); }), data: data });
+        return React__default["default"].createElement(MuiAutocompleteTags, __assign({}, props_new, { isValid: isValid }));
+    };
+    var SelectKpiControlTester = rankWith(100, optionIs("selectKpi", true));
+    var SelectKpiControl$1 = withJsonFormsControlProps(withTranslateProps(SelectKpiControl));
+
+    var VisibilityOff = {};
+
+    var _interopRequireDefault$1 = interopRequireDefault.exports;
+    Object.defineProperty(VisibilityOff, "__esModule", {
+      value: true
+    });
+    var default_1$1 = VisibilityOff.default = void 0;
+    var _createSvgIcon$1 = _interopRequireDefault$1(createSvgIcon);
+    var _jsxRuntime$1 = jsxRuntime.exports;
+    var _default$1 = (0, _createSvgIcon$1.default)( /*#__PURE__*/(0, _jsxRuntime$1.jsx)("path", {
+      d: "M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78 3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"
+    }), 'VisibilityOff');
+    default_1$1 = VisibilityOff.default = _default$1;
+
+    var Visibility = {};
+
+    var _interopRequireDefault = interopRequireDefault.exports;
+    Object.defineProperty(Visibility, "__esModule", {
+      value: true
+    });
+    var default_1 = Visibility.default = void 0;
+    var _createSvgIcon = _interopRequireDefault(createSvgIcon);
+    var _jsxRuntime = jsxRuntime.exports;
+    var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+      d: "M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+    }), 'Visibility');
+    default_1 = Visibility.default = _default;
+
+    var KpisLayoutRenderer = function (_a) {
+        // console.log("props", props);
+        var _b, _c;
+        var props = __rest(_a, []);
+        var uischemas = props.uischemas, schema = props.schema, uischema = props.uischema, path = props.path, errors = props.errors, visible = props.visible, label = props.label, required = props.required, removeItems = props.removeItems, addItem = props.addItem, data = props.data, childData = props.childData, renderers = props.renderers, cells = props.cells, config = props.config, rootSchema = props.rootSchema;
+        var _d = React.useState(undefined), selectedIndex = _d[0], setSelectedIndex = _d[1];
+        var handleRemoveItem = React.useCallback(function (p, value) { return function () {
+            removeItems(p, [value])();
+            if (selectedIndex === value) {
+                setSelectedIndex(undefined);
+            }
+            else if (selectedIndex > value) {
+                setSelectedIndex(selectedIndex - 1);
+            }
+        }; }, [removeItems, setSelectedIndex]);
+        var handleCreateDefaultValue = React.useCallback(function () { return createDefaultValue(schema); }, [createDefaultValue]);
+        var foundUISchema = React.useMemo(function () {
+            return findUISchema(uischemas, schema, uischema.scope, path, undefined, uischema, rootSchema);
+        }, [uischemas, schema, uischema.scope, path, uischema, rootSchema]);
+        var appliedUiSchemaOptions = merge_1({}, config, uischema.options);
+        var _e = React__default["default"].useState(null), selectedOption = _e[0], setSelectedOption = _e[1];
+        React__default["default"].useEffect(function () {
+            var _a;
+            setSelectedOption((_a = options[selectedIndex]) !== null && _a !== void 0 ? _a : null);
+        }, [selectedIndex, childData]);
+        var options = childData.map(function (d) { return ({
+            label: "".concat(d.name),
+            value: d.id,
+        }); });
+        // console.log('selectedIndex', selectedIndex)
+        return (React__default["default"].createElement(Hidden, { xsUp: !visible },
+            React__default["default"].createElement(ArrayLayoutToolbar, { label: computeLabel(label, required, appliedUiSchemaOptions.hideRequiredAsterisk), errors: errors, path: path, addItem: function (path1, data1) {
+                    return function () {
+                        console.log('data', data);
+                        addItem(path, data1);
+                        setSelectedIndex(data);
+                    };
+                }, createDefault: handleCreateDefaultValue }),
+            React__default["default"].createElement(Stack$1, { spacing: 4 },
+                React__default["default"].createElement(Autocomplete$1, { value: options[selectedIndex] ? options[selectedIndex] : null, id: "kpi-select", multiple: false, options: options, 
+                    // autoHighlight
+                    // autoSelect
+                    getOptionLabel: function (option) { return option.label; }, onChange: function (ev, newValue) {
+                        setSelectedIndex(newValue !== null
+                            ? childData.findIndex(function (option) { return option.id == newValue.value; })
+                            : undefined);
+                    }, isOptionEqualToValue: function (option, value) {
+                        return option.value === value.value;
+                    }, renderOption: function (props, option) {
+                        var _a, _b, _c, _d, _e;
+                        var kpiConf = childData.find(function (data) { return data.id == option.value; });
+                        var visibilityIcon = React__default["default"].createElement(default_1, null);
+                        if (kpiConf === null || kpiConf === void 0 ? void 0 : kpiConf.hidden)
+                            visibilityIcon = React__default["default"].createElement(default_1$1, null);
+                        return (React__default["default"].createElement("li", __assign({}, props),
+                            React__default["default"].createElement(Box$1, { sx: {
+                                    width: 30,
+                                    height: 30,
+                                    mr: '5px',
+                                    ml: '-2px',
+                                } }, visibilityIcon),
+                            React__default["default"].createElement(Box$1, { sx: {
+                                    width: 30,
+                                    height: 30,
+                                    mr: '15px',
+                                    ml: '-2px',
+                                } },
+                                React__default["default"].createElement(Badge$1, { badgeContent: (_b = (_a = kpiConf === null || kpiConf === void 0 ? void 0 : kpiConf.configurations) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : 0, showZero: true, color: ((_c = kpiConf === null || kpiConf === void 0 ? void 0 : kpiConf.configurations) === null || _c === void 0 ? void 0 : _c.length) == 0
+                                        ? 'default'
+                                        : 'info' },
+                                    React__default["default"].createElement(default_1$4, { fontSize: 'medium' }))),
+                            React__default["default"].createElement("div", null,
+                                React__default["default"].createElement("strong", null, (_d = option.label) !== null && _d !== void 0 ? _d : 'no title'),
+                                React__default["default"].createElement("br", null), (_e = option.value) !== null && _e !== void 0 ? _e : 'no id')));
+                    }, renderInput: function (params) { return (React__default["default"].createElement(TextField$1, __assign({}, params, { sx: {
+                            '.MuiInput-root': {
+                                maxWidth: '600px',
+                            },
+                        }, variant: 'standard', required: true, 
+                        // helperText={"sdsdsd"}
+                        placeholder: 'please chose a KPI Config first', label: "KPI configs", inputProps: __assign({}, params.inputProps) }))); } }),
+                React__default["default"].createElement("div", null, selectedIndex !== undefined ? (React__default["default"].createElement(Card$1, null,
+                    React__default["default"].createElement(CardHeader$1, { title: (_b = selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.label) !== null && _b !== void 0 ? _b : 'New Configuration', subheader: (_c = selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value) !== null && _c !== void 0 ? _c : '', action: React__default["default"].createElement(IconButton$1, { onClick: function (ev) {
+                                handleRemoveItem(path, selectedIndex)();
+                            }, "aria-label": "settings" },
+                            React__default["default"].createElement(default_1$h, null)) }),
+                    React__default["default"].createElement(CardContent$1, null,
+                        React__default["default"].createElement(JsonFormsDispatch, { renderers: renderers, cells: cells, visible: visible, schema: schema, uischema: foundUISchema, path: compose$1(path, "".concat(selectedIndex)) })))) : (React__default["default"].createElement(Typography$1, { variant: "h6" }, "No Selection"))))));
+    };
+    var kpisLayoutTester = rankWith(140, optionIs('kpisLayout', true));
+    var withContextToListDetailItem = function (Component) {
+        return function (_a) {
+            var ctx = _a.ctx, props = _a.props;
+            var childData = Resolve.data(ctx.core.data, props.path);
+            return React__default["default"].createElement(Component, __assign({}, props, { childData: childData }));
+        };
+    };
+    var KpisLayoutRenderer$1 = withJsonFormsArrayLayoutProps(withJsonFormsContext(withContextToListDetailItem(KpisLayoutRenderer)));
+
     var renderers = __spreadArray(__spreadArray([], materialRenderers, true), [
         // register custom renderers
         {
@@ -75424,6 +75767,18 @@ Please use another name.` );
             renderer: MultiSelectControl$1,
         },
         {
+            tester: MultiSelectTagControlTester,
+            renderer: MultiSelectTagControl$1,
+        },
+        {
+            tester: SelectKpiControlTester,
+            renderer: SelectKpiControl$1,
+        },
+        {
+            tester: kpisLayoutTester,
+            renderer: KpisLayoutRenderer$1,
+        },
+        {
             tester: SelectControlTester,
             renderer: SelectControl$1,
         },
@@ -75436,8 +75791,8 @@ Please use another name.` );
                         textTransform: 'initial',
                         flexShrink: 1,
                         // wordBreak: "break-word"
-                    }
-                }
+                    },
+                },
             },
             MuiTabs: {
                 styleOverrides: {
@@ -75445,14 +75800,14 @@ Please use another name.` );
                         marginBottom: '0.8em',
                         '.MuiAppBar-root > &': {
                             marginBottom: '0',
-                        }
+                        },
                     },
                     indicator: {
                         '.MuiAppBar-root &': {
-                            backgroundColor: "#666"
-                        }
-                    }
-                }
+                            backgroundColor: '#666',
+                        },
+                    },
+                },
             },
             MuiAppBar: {
                 styleOverrides: {
@@ -75460,7 +75815,7 @@ Please use another name.` );
                         backgroundColor: '#dfdfdf',
                         marginBottom: '-7px',
                         color: '#666',
-                        boxShadow: 'none'
+                        boxShadow: 'none',
                     },
                 },
             },
@@ -75469,32 +75824,32 @@ Please use another name.` );
                     root: {
                         margin: '0.8em 0',
                     },
-                }
+                },
             },
             MuiCard: {
                 styleOverrides: {
                     root: {
                         margin: '1.8em 0',
                         '.MuiGrid-root &': {
-                            margin: "0"
-                        }
+                            margin: '0',
+                        },
                     },
-                }
+                },
             },
             MuiCardHeader: {
                 styleOverrides: {
                     root: {
                     // backgroundColor: '#283273'
-                    }
-                }
+                    },
+                },
             },
             MuiTableCell: {
                 styleOverrides: {
                     root: {
                         wordBreak: 'break-word',
-                        minWidth: '65px'
-                    }
-                }
+                        minWidth: '65px',
+                    },
+                },
             },
             MuiInput: {
                 styleOverrides: {
@@ -75502,31 +75857,37 @@ Please use another name.` );
                         maxWidth: '400px',
                         '&.MuiInputBase-multiline': {
                             maxWidth: '100%',
-                        }
-                    }
-                }
+                        },
+                        '.tag-list &': {
+                            maxWidth: 'none',
+                        },
+                    },
+                },
+            },
+            MuiSelect: {
+                styleOverrides: {},
             },
             MuiInputLabel: {
                 defaultProps: {
                     shrink: true,
                     // variant: 'filled'
-                }
+                },
             },
             MuiPaper: {
                 defaultProps: {
-                    elevation: 2
-                }
+                    elevation: 2,
+                },
             },
             MuiAccordion: {
                 defaultProps: {
-                    disableGutters: true
+                    disableGutters: true,
                 },
             },
             MuiAccordionSummary: {
                 defaultProps: {
                     sx: {
-                        backgroundColor: '#f5f5f5'
-                    }
+                        backgroundColor: '#f5f5f5',
+                    },
                 },
                 // styleOverrides: {
                 //     root: {
@@ -75535,14 +75896,14 @@ Please use another name.` );
                 //         }
                 //     }
                 // }
-            }
+            },
         },
     });
     var JsonForm = function (props) {
-        var handleDefaultsAjv = createAjv({ useDefaults: true, verbose: true, });
-        return React__default["default"].createElement(ThemeProvider, { theme: theme },
+        var handleDefaultsAjv = createAjv({ useDefaults: true, verbose: true });
+        return (React__default["default"].createElement(ThemeProvider, { theme: theme },
             React__default["default"].createElement(CssBaseline, null),
-            React__default["default"].createElement(JsonForms, { config: props.config, schema: props.schema, uischema: props.uischema, data: props.data, renderers: renderers, cells: materialCells, onChange: props.onChange, ajv: handleDefaultsAjv }));
+            React__default["default"].createElement(JsonForms, { config: props.config, schema: props.schema, uischema: props.uischema, data: props.data, renderers: renderers, cells: materialCells, onChange: props.onChange, ajv: handleDefaultsAjv })));
     };
 
     exports.JsonForm = JsonForm;
