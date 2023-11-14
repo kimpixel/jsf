@@ -5,234 +5,248 @@ import { materialCells, materialRenderers } from '@jsonforms/material-renderers'
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 
 import SelectS3FileControl, {
-    SelectS3FileControlTester,
+  SelectS3FileControlTester,
 } from './controlls/SelectS3FileControl'
 // import DebugControl, { DebugControlTester } from "./DebugControl";
 import TabsLayoutRenderer, {
-    TabsLayoutTester,
+  TabsLayoutTester,
 } from './layout/TabsLayoutRenderer'
 import MaterialOneOfRenderer, {
-    materialOneOfControlTester,
+  materialOneOfControlTester,
 } from './complex/MaterialOneOfRenderer'
 //import SelectLinearIconsControl, { SelectLinearIconsControlTester } from "./controlls/SelectLinearIconsControl";
 
 import MaterialArrayLayoutRenderer, {
-    materialArrayLayoutTester,
+  materialArrayLayoutTester,
 } from './layout/MaterialArrayLayoutRenderer'
 import MaterializedGroupLayoutRenderer, {
-    materialGroupTester,
+  materialGroupTester,
 } from './layout/MaterialGroupLayout'
 //import MaterialOneOfEnumControl, { materialOneOfEnumControlTester } from "./controlls/MaterialOneOfEnumControl";
 import MaterialEnumControl, {
-    materialEnumControlTester,
+  materialEnumControlTester,
 } from './controlls/MaterialEnumControl'
 import MultiSelectControl, {
-    MultiSelectControlTester,
+  MultiSelectControlTester,
 } from './controlls/MultiSelectControl'
 import SelectControl, { SelectControlTester } from './controlls/SelectControl'
 import MultiSelectTagControl, {
-    MultiSelectTagControlTester,
+  MultiSelectTagControlTester,
 } from './controlls/MultiSelectTagControl'
 import SelectKpiControl, {
-    SelectKpiControlTester,
+  SelectKpiControlTester,
 } from './controlls/SelectKpiControl'
 import KpisLayoutRenderer, {
-    kpisLayoutTester,
+  kpisLayoutTester,
 } from './layout/KpisLayoutRenderer'
+import MarkDownControl, {
+  MarkDownControlTester,
+} from './controlls/MarkDownControl'
+
+// declare global {
+//   interface SymbolConstructor {
+//     readonly observable: symbol
+//   }
+// }
 
 const renderers = [
-    ...materialRenderers,
-    // register custom renderers
-    {
-        tester: SelectS3FileControlTester,
-        renderer: SelectS3FileControl,
-    },
-    {
-        tester: TabsLayoutTester,
-        renderer: TabsLayoutRenderer,
-    },
-    // {
-    //     tester: SelectLinearIconsControlTester,
-    //     renderer: SelectLinearIconsControl,
-    // },
-    {
-        tester: materialArrayLayoutTester,
-        renderer: MaterialArrayLayoutRenderer,
-    },
-    {
-        tester: materialGroupTester,
-        renderer: MaterializedGroupLayoutRenderer,
-    },
-    {
-        tester: materialOneOfControlTester,
-        renderer: MaterialOneOfRenderer,
-    },
-    {
-        tester: materialEnumControlTester,
-        renderer: MaterialEnumControl,
-    },
-    {
-        tester: MultiSelectControlTester,
-        renderer: MultiSelectControl,
-    },
-    {
-        tester: MultiSelectTagControlTester,
-        renderer: MultiSelectTagControl,
-    },
-    {
-        tester: SelectKpiControlTester,
-        renderer: SelectKpiControl,
-    },
-    {
-        tester: kpisLayoutTester,
-        renderer: KpisLayoutRenderer,
-    },
-    {
-        tester: SelectControlTester,
-        renderer: SelectControl,
-    },
-    // {
-    //     tester: DebugControlTester,
-    //     renderer: DebugControl,
-    // },
+  ...materialRenderers,
+  // register custom renderers
+  {
+    tester: SelectS3FileControlTester,
+    renderer: SelectS3FileControl,
+  },
+  {
+    tester: TabsLayoutTester,
+    renderer: TabsLayoutRenderer,
+  },
+  // {
+  //     tester: SelectLinearIconsControlTester,
+  //     renderer: SelectLinearIconsControl,
+  // },
+  {
+    tester: materialArrayLayoutTester,
+    renderer: MaterialArrayLayoutRenderer,
+  },
+  {
+    tester: materialGroupTester,
+    renderer: MaterializedGroupLayoutRenderer,
+  },
+  {
+    tester: materialOneOfControlTester,
+    renderer: MaterialOneOfRenderer,
+  },
+  {
+    tester: materialEnumControlTester,
+    renderer: MaterialEnumControl,
+  },
+  {
+    tester: MultiSelectControlTester,
+    renderer: MultiSelectControl,
+  },
+  {
+    tester: MultiSelectTagControlTester,
+    renderer: MultiSelectTagControl,
+  },
+  {
+    tester: SelectKpiControlTester,
+    renderer: SelectKpiControl,
+  },
+  {
+    tester: kpisLayoutTester,
+    renderer: KpisLayoutRenderer,
+  },
+  {
+    tester: SelectControlTester,
+    renderer: SelectControl,
+  },
+  {
+    tester: MarkDownControlTester,
+    renderer: MarkDownControl,
+  },
+  // {
+  //     tester: DebugControlTester,
+  //     renderer: DebugControl,
+  // },
 ]
 
 const theme = createTheme({
-    components: {
-        MuiTab: {
-            styleOverrides: {
-                root: {
-                    textTransform: 'initial',
-                    flexShrink: 1,
-                    // wordBreak: "break-word"
-                },
-            },
+  components: {
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          textTransform: 'initial',
+          flexShrink: 1,
+          // wordBreak: "break-word"
         },
-        MuiTabs: {
-            styleOverrides: {
-                root: {
-                    marginBottom: '0.8em',
-                    '.MuiAppBar-root > &': {
-                        marginBottom: '0',
-                    },
-                },
-                indicator: {
-                    '.MuiAppBar-root &': {
-                        backgroundColor: '#666',
-                    },
-                },
-            },
-        },
-        MuiAppBar: {
-            styleOverrides: {
-                root: {
-                    backgroundColor: '#dfdfdf',
-                    marginBottom: '-7px',
-                    color: '#666',
-                    boxShadow: 'none',
-                },
-            },
-        },
-        MuiFormControl: {
-            styleOverrides: {
-                root: {
-                    margin: '0.8em 0',
-                },
-            },
-        },
-        MuiCard: {
-            styleOverrides: {
-                root: {
-                    margin: '1.8em 0',
-                    '.MuiGrid-root &': {
-                        margin: '0',
-                    },
-                },
-            },
-        },
-        MuiCardHeader: {
-            styleOverrides: {
-                root: {
-                    // backgroundColor: '#283273'
-                },
-            },
-        },
-
-        MuiTableCell: {
-            styleOverrides: {
-                root: {
-                    wordBreak: 'break-word',
-                    minWidth: '65px',
-                },
-            },
-        },
-        MuiInput: {
-            styleOverrides: {
-                root: {
-                    maxWidth: '400px',
-                    '&.MuiInputBase-multiline': {
-                        maxWidth: '100%',
-                    },
-                    '.tag-list &': {
-                        maxWidth: 'none',
-                    },
-                },
-            },
-        },
-        MuiSelect: {
-            styleOverrides: {},
-        },
-        MuiInputLabel: {
-            defaultProps: {
-                shrink: true,
-                // variant: 'filled'
-            },
-        },
-        MuiPaper: {
-            defaultProps: {
-                elevation: 2,
-            },
-        },
-        MuiAccordion: {
-            defaultProps: {
-                disableGutters: true,
-            },
-        },
-        MuiAccordionSummary: {
-            defaultProps: {
-                sx: {
-                    backgroundColor: '#f5f5f5',
-                },
-            },
-            // styleOverrides: {
-            //     root: {
-            //         "&.Mui-expanded": {
-            //             backgroundColor: "#ddd"
-            //         }
-            //     }
-            // }
-        },
+      },
     },
+    MuiTabs: {
+      styleOverrides: {
+        root: {
+          marginBottom: '0.8em',
+          '.MuiAppBar-root > &': {
+            marginBottom: '0',
+          },
+        },
+        indicator: {
+          '.MuiAppBar-root &': {
+            backgroundColor: '#666',
+          },
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#dfdfdf',
+          marginBottom: '-7px',
+          color: '#666',
+          boxShadow: 'none',
+        },
+      },
+    },
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          width: '100%',
+          margin: '0.8em 0',
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          margin: '1.8em 0',
+          '.MuiGrid-root &': {
+            margin: '0',
+          },
+        },
+      },
+    },
+    MuiCardHeader: {
+      styleOverrides: {
+        root: {
+          // backgroundColor: '#283273'
+        },
+      },
+    },
+
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          wordBreak: 'break-word',
+          minWidth: '65px',
+        },
+      },
+    },
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          maxWidth: '400px',
+          '&.MuiInputBase-multiline': {
+            maxWidth: '100%',
+          },
+          '.tag-list &': {
+            maxWidth: 'none',
+          },
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {},
+    },
+    MuiInputLabel: {
+      defaultProps: {
+        shrink: true,
+        // variant: 'filled'
+      },
+    },
+    MuiPaper: {
+      defaultProps: {
+        elevation: 2,
+      },
+    },
+    MuiAccordion: {
+      defaultProps: {
+        disableGutters: true,
+      },
+    },
+    MuiAccordionSummary: {
+      defaultProps: {
+        sx: {
+          backgroundColor: '#f5f5f5',
+        },
+      },
+      // styleOverrides: {
+      //     root: {
+      //         "&.Mui-expanded": {
+      //             backgroundColor: "#ddd"
+      //         }
+      //     }
+      // }
+    },
+  },
 })
 
 const JsonForm = (props: any) => {
-    const handleDefaultsAjv = createAjv({ useDefaults: true, verbose: true })
+  const handleDefaultsAjv = createAjv({ useDefaults: true, verbose: true })
 
-    return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <JsonForms
-                config={props.config}
-                schema={props.schema}
-                uischema={props.uischema}
-                data={props.data}
-                renderers={renderers}
-                cells={materialCells}
-                onChange={props.onChange}
-                ajv={handleDefaultsAjv}
-            />
-        </ThemeProvider>
-    )
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <JsonForms
+        config={props.config}
+        schema={props.schema}
+        uischema={props.uischema}
+        data={props.data}
+        renderers={renderers}
+        cells={materialCells}
+        onChange={props.onChange}
+        ajv={handleDefaultsAjv}
+      />
+    </ThemeProvider>
+  )
 }
 
 export default JsonForm

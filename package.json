@@ -41,7 +41,7 @@
     "rollup-plugin-dts": "^4.0.1",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-postcss": "^4.0.1",
+    "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-serve": "^2.0.2",
     "rollup-plugin-sizes": "^1.0.4",
     "rollup-plugin-visualizer": "^5.8.3",
@@ -62,6 +62,7 @@
   ],
   "types": "dist/index.d.ts",
   "dependencies": {
+    "@mdxeditor/editor": "^1.9.0",
     "@types/lodash": "^4.14.191",
     "pretty-bytes": "^6.1.0",
     "rollup-plugin-node-polyfills": "^0.2.1",
