@@ -15,7 +15,7 @@ import {
   withTranslateProps,
 } from '@jsonforms/react'
 
-import { FormControl, InputLabel } from '@mui/material'
+import { FormControl, Hidden, InputLabel } from '@mui/material'
 
 import {
   diffSourcePluginHooks,
@@ -109,14 +109,28 @@ export const MarkDownControl = (
 ) => {
   // console.log('props', props)
 
-  const { label, path, handleChange, id, config, data, errors } = props
+  const {
+    label,
+    path,
+    handleChange,
+    id,
+    config,
+    data,
+    errors,
+    required,
+    visible,
+  } = props
   const isValid = errors.length === 0
 
   const ref = React.useRef<MDXEditorMethods>(null)
   return (
-    <>
+    <Hidden xsUp={!visible}>
       <FormControl id={id} variant={'standard'} fullWidth={true}>
-        <InputLabel htmlFor={id + '-input'} error={!isValid} required>
+        <InputLabel
+          htmlFor={id + '-input'}
+          error={!isValid}
+          required={required}
+        >
           {label}
         </InputLabel>
         <MDXEditor
@@ -154,7 +168,7 @@ export const MarkDownControl = (
           onChange={(markdown) => handleChange(path, markdown)}
         />
       </FormControl>
-    </>
+    </Hidden>
   )
 }
 
