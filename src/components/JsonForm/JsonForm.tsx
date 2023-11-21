@@ -43,11 +43,14 @@ import MarkDownControl, {
   MarkDownControlTester,
 } from './controlls/MarkDownControl'
 
-// declare global {
-//   interface SymbolConstructor {
-//     readonly observable: symbol
-//   }
-// }
+import './style.css'
+import './content.css'
+
+declare global {
+  interface SymbolConstructor {
+    readonly observable: symbol
+  }
+}
 
 const renderers = [
   ...materialRenderers,

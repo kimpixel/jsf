@@ -49,8 +49,8 @@ import styles from './ui.module.css.js'
 import { $createParagraphNode, $createTextNode, ElementNode } from 'lexical'
 
 // import '@mdxeditor/editor/style.css'
-import './style.css'
-import './content.css'
+// import './style.css'
+// import './content.css'
 
 const catchAllVisitor: MdastImportVisitor<any> = {
   testNode: () => true,
