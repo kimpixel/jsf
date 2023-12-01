@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   computeLabel,
   ControlProps,
@@ -120,7 +120,11 @@ export const MarkDownControl = (
     required,
     visible,
   } = props
+
   const isValid = errors.length === 0
+
+  // const [onChangeDelay, setOnChangeDelay] = useState(undefined);
+  let onChangeDelay
 
   const ref = React.useRef<MDXEditorMethods>(null)
   return (
@@ -165,7 +169,15 @@ export const MarkDownControl = (
           ref={ref}
           markdown={data ?? ''}
           contentEditableClassName="prose"
-          onChange={(markdown) => handleChange(path, markdown)}
+          onChange={(markdown) => {
+            clearTimeout(onChangeDelay)
+            onChangeDelay = setTimeout(() => {
+              // replace some unusual syntax
+              markdown = markdown.replace(/\\&/, '&')
+
+              handleChange(path, markdown)
+            }, 1000)
+          }}
         />
       </FormControl>
     </Hidden>
