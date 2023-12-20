@@ -56,7 +56,7 @@ const catchAllVisitor: MdastImportVisitor<any> = {
   testNode: () => true,
   visitNode: ({ mdastNode, actions, lexicalParent }) => {
     const paragraph = $createParagraphNode()
-    paragraph.append($createTextNode(mdastNode.children[0].value))
+    paragraph.append($createTextNode(mdastNode.children?.at(0)?.value))
     ;(lexicalParent as ElementNode).append(paragraph)
   },
 }
