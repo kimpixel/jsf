@@ -22,49 +22,30 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
 */
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react'
 import {
   ControlProps,
   isEnumControl,
   OwnPropsOfEnum,
   RankedTester,
   rankWith,
-} from '@jsonforms/core';
-import { TranslateProps, withJsonFormsEnumProps, withTranslateProps } from '@jsonforms/react';
+} from '@jsonforms/core'
+import { withJsonFormsEnumProps, withTranslateProps } from '@jsonforms/react'
 
-import merge from 'lodash/merge';
-
-// import { MuiAutocomplete, WithOptionLabel } from '@mui/material';
-import { MuiAutocomplete, WithOptionLabel } from '../mui-controls/MuiAutocomplete';
-
-
-export const MaterialEnumControl = (props: ControlProps & OwnPropsOfEnum & WithOptionLabel & TranslateProps) => {
-  const {config, uischema, errors} = props;
-  const appliedUiSchemaOptions = merge({}, config, uischema.options);
-  const isValid = errors.length === 0;
-
-  // console.log('props', props);
+export const MaterialEnumControl = (props: ControlProps & OwnPropsOfEnum) => {
   useEffect(() => {
-    props.handleChange(props.path, props.options[0].value);
-  }, []);
-
-
-  if(props.options.length == 1) {
-    return <></>
-  }
-
-  return (
-    <MuiAutocomplete
-      {...props}
-      isValid={isValid}
-    />
-  );
-};
+    props.handleChange(props.path, props.options[0].value)
+  }, [])
+  return <></>
+}
 
 export const materialEnumControlTester: RankedTester = rankWith(
   20,
   isEnumControl
-);
+)
 
 // HOC order can be reversed with https://github.com/eclipsesource/jsonforms/issues/1987
-export default withJsonFormsEnumProps(withTranslateProps(React.memo(MaterialEnumControl)), false);
+export default withJsonFormsEnumProps(
+  withTranslateProps(React.memo(MaterialEnumControl)),
+  false
+)
